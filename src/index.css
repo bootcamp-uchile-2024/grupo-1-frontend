@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +65,90 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+} */
+* {
+  box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+header {
+
+  padding: 50px;
+  background-color: aquamarine;
+  text-align: center;
+
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  background-color: grey;
+
+}
+
+nav a {
+  color: white;
+  padding: 14px 20px;
+  text-decoration: none;
+
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+aside {
+  flex: 30px;
+  background-color: blueviolet;
+  padding: 20px;
+}
+
+section {
+  flex: 70%;
+  background-color: khaki;
+  padding: 20px;
+}
+
+footer {
+  padding: 20px;
+  background-color: palevioletred;
+  text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+
+  nav,
+  .content {
+      flex-direction: column;
+  }
+}
+
+/* nav {
+  background-color: #444;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+} */
