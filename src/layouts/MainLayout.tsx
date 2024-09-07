@@ -4,16 +4,20 @@ import Nav from '../components/Nav'
 import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
 import Content from '../components/Content'
+import { Outlet } from 'react-router-dom'
 
-export default function MainLayouts() {
+export default function MainLayout() {
   return (
     <>
         <Header />
         <Nav />
-        <div className="content">
-          <Sidebar />
-          <Content />
-        </div>
+        <main>
+          <Outlet />
+          <div className="content">
+            <Sidebar />
+            <Content />
+          </div>
+        </main>
         <Footer />
     </>
   )

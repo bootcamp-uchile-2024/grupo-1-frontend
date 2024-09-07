@@ -1,12 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Nav() {
   return (
     <nav>
-        <a href="#">Enlace navegación 1</a>
-        <a href="#">Enlace navegación 2</a>
-        <a href="#">Enlace navegación 3</a>
-        <a href="#">Enlace navegación 4</a>
+        <ul>
+            <li><Link to="/">Inicio</Link></li>
+            <li><Link to="/catalog">Catalogo</Link></li>
+            <li><Link to="/about">Quienes somos</Link></li>
+            <li><Link to="/contact">Contacto</Link></li>
+        </ul>
     </nav>
   )
 }
