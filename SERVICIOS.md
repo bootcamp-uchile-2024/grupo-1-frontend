@@ -170,7 +170,7 @@ export interface ICreateUserResponseDTO {
 }
 ```
 
-## Obtener usuaio
+## Obtener usuario
 
 __Descripción__: Obtiene los datos de un usuario. <br>
 __Ruta__: src\interfaces\IGetUserResponseDTO.ts<br>
