@@ -1,6 +1,7 @@
 export interface ICreateProductPlantasRequestDTO {
     idProducto: number; //id producto (este codigo te lo da la base de datos segun la posición en la base de datos)
     nombreProducto: string; //1
+    nombreCientifico: string;
     imagenProducto: string[]; //2 (array de urls)
     precioProducto: number; //3 (precio del producto final incluido el descuento)
     descuento?: number; //4 (descuento en el precio del producto)
@@ -23,7 +24,7 @@ export interface ICreateProductPlantasRequestDTO {
     toxicidadParaMascotas: boolean; //18 (Boleano Si o No)
     tipoDeSuelo: string; //19 (Arenoso / Arcilloso / Limoso / Turba)
     dificultadDeCuidado: string; //20 (Alta/ media/ baja)
-   
+    
 }
 
 
