@@ -1,4 +1,4 @@
-export interface ICreateProductPlantasRequestDTO {
+export interface ICreateProductPlantasResponseDTO {
     idProducto: number; //id producto (este codigo te lo da la base de datos segun la posición en la base de datos)
     nombreProducto: string; //1
     nombreCientifico: string;
