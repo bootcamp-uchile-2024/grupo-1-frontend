@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { IProducts } from '../interfaces/IProducts';
+import { Link } from 'react-router-dom';
 
 export default function CatalogPage() {
     const [products, setProducts] = useState<IProducts[]>([]);
@@ -32,7 +33,8 @@ export default function CatalogPage() {
                         <img src={product.image} alt={product.title} width="100"/>
                         <h3>{product.title}</h3>
                         <p>Price: ${product.price}</p>
-                        <button>Ver detalle</button>
+                        <Link to={`/catalogo/product/${product.id}`}><button>Ver detalle</button></Link>
+                        {/* <button>Ver detalle</button> */}
                     </div>
                 ))}
             </div>
