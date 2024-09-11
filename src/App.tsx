@@ -8,6 +8,11 @@ import HomePage from './pages/HomePage'
 import CatalogPage from './pages/CatalogPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
+import PlantasPage from './pages/PlantasPage';
+import MaceterosPage from './pages/MaceterosPage';
+import SustratosPage from './pages/SustratosPage';
+import FertilizantesPage from './pages/FertilizantesPage';
+import ControlPlagasPage from './pages/ControlPlagasPage';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -18,9 +23,14 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout/>}>
             <Route index element={<HomePage/>}/>
-            <Route path="catalog" element={<CatalogPage/>}/>
-            <Route path="about" element={<AboutPage/>}/>
-            <Route path="contact" element={<ContactPage/>}/>
+            <Route path="catalogo" element={<CatalogPage/>}/>
+            <Route path="plantas" element={<PlantasPage/>}/>
+            <Route path="maceteros" element={<MaceterosPage/>}/>
+            <Route path="fertilizantes" element={<FertilizantesPage/>}/>
+            <Route path="sustratos" element={<SustratosPage/>}/>
+            <Route path="control-de-plagas" element={<ControlPlagasPage/>}/>
+            <Route path="quienes-somos" element={<AboutPage/>}/>
+            <Route path="contacto" element={<ContactPage/>}/>
           </Route>
         </Routes>
       </Router>

@@ -13,10 +13,6 @@ export default function MainLayout() {
         <Nav />
         <main>
           <Outlet />
-          <div className="content">
-            <Sidebar />
-            <Content />
-          </div>
         </main>
         <Footer />
     </>
