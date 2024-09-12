@@ -135,6 +135,7 @@ footer {
 nav {
   background-color: #444;
   color: white;
+  width: 100%;
 }
 
 nav ul {
@@ -142,6 +143,7 @@ nav ul {
   display: flex;
   justify-content: center;
   padding: 0;
+  width: 800px;
 }
 
 nav ul li {

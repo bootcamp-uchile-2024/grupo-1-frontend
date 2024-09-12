@@ -41,7 +41,7 @@ export default function ProductDatailPage() {
           <img src={product?.image} alt=""/>
         </div>
         <div>
-          <p>price: ${product?.price}</p>
+          <p>precio: ${product?.price}</p>
           <p>{product?.description}</p>
         </div>
       </div>

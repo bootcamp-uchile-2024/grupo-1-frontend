@@ -14,6 +14,7 @@ import SustratosPage from './pages/SustratosPage';
 import FertilizantesPage from './pages/FertilizantesPage';
 import ControlPlagasPage from './pages/ControlPlagasPage';
 import ProductDatailPage from './pages/ProductDetailPage';
+import PlantasDatailPage from './pages/PlantasDetailPage';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -24,9 +25,10 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout/>}>
             <Route index element={<HomePage/>}/>
-            <Route path="catalogo" element={<CatalogPage/>}/>
-            <Route path="catalogo/product/:id" element={<ProductDatailPage/>}/>
+            {/* <Route path="catalogo" element={<CatalogPage/>}/>
+            <Route path="catalogo/product/:id" element={<ProductDatailPage/>}/> */}
             <Route path="plantas" element={<PlantasPage/>}/>
+            <Route path="/detalle-plantas" element={<PlantasDatailPage/>}/>
             <Route path="maceteros" element={<MaceterosPage/>}/>
             <Route path="fertilizantes" element={<FertilizantesPage/>}/>
             <Route path="sustratos" element={<SustratosPage/>}/>
