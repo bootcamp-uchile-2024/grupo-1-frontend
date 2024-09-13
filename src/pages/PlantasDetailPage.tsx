@@ -1,16 +1,48 @@
 import React, { useEffect, useState } from 'react'
-import { ICreateProductPlantasRequestDTO } from '../interfaces/ICreateProductPlantasRequestDTO';
-import {useParams, useLocation} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 
 export default function PlantasDatailPage() {
     const location = useLocation();
     const { plantas } = location.state || {};  
-    // const {idProducto} = useParams<{idProducto:string}>();
-    // const [planta, setPlanta] = useState<ICreateProductPlantasRequestDTO>();
+    
 
     if (!plantas) {
         return <div>No se encontró el producto.</div>;
     }
+
+    
+
+    return(
+        <>
+        <div>Detalle de Planta</div>
+        <div className='product-card-det'>
+            <div>
+                <h3>{plantas.nombreProducto}</h3>
+                <img src={plantas.imagenProducto[0]} alt=""/>
+            </div>
+            <div>
+            </div>
+            <div>
+                <p>precio: ${plantas.precioNormal}</p>
+                <p>{plantas.descripcionProducto}</p>
+            </div>
+        </div>
+        </>
+    );
+}
+
+
+
+
+
+
+
+
+
+// import { ICreateProductPlantasRequestDTO } from '../interfaces/ICreateProductPlantasRequestDTO';
+
+// const {idProducto} = useParams<{idProducto:string}>();
+    // const [planta, setPlanta] = useState<ICreateProductPlantasRequestDTO>();
 
     // useEffect(() => {
     //     async function getPlanta(){
@@ -35,22 +67,3 @@ export default function PlantasDatailPage() {
     //     }
     //     getPlanta();
     // }, []);
-
-    return(
-        <>
-        <div>Detalle de Planta</div>
-        <div className='product-card-det'>
-            <div>
-                <h3>{plantas.nombreProducto}</h3>
-                <img src={plantas.imagenProducto[0]} alt=""/>
-            </div>
-            <div>
-            </div>
-            <div>
-                <p>precio: ${plantas.precioNormal}</p>
-                <p>{plantas.descripcionProducto}</p>
-            </div>
-        </div>
-        </>
-    );
-}

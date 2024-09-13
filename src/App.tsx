@@ -29,10 +29,10 @@ function App() {
             <Route path="catalogo/product/:id" element={<ProductDatailPage/>}/> */}
             <Route path="plantas" element={<PlantasPage/>}/>
             <Route path="/detalle-plantas" element={<PlantasDatailPage/>}/>
-            <Route path="maceteros" element={<MaceterosPage/>}/>
+            {/* <Route path="maceteros" element={<MaceterosPage/>}/>
             <Route path="fertilizantes" element={<FertilizantesPage/>}/>
             <Route path="sustratos" element={<SustratosPage/>}/>
-            <Route path="control-de-plagas" element={<ControlPlagasPage/>}/>
+            <Route path="control-de-plagas" element={<ControlPlagasPage/>}/> */}
             <Route path="quienes-somos" element={<AboutPage/>}/>
             <Route path="contacto" element={<ContactPage/>}/>
           </Route>
