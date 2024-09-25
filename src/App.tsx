@@ -18,6 +18,8 @@ import PlantasDatailPage from './pages/PlantasDetailPage';
 import { AdminPage } from './pages/AdminPage';
 import { PrivateRoute } from './components/PrivateRoute';
 import { LogInPage } from './pages/LogInPage';
+import ProductForm  from './pages/ProductForm';
+import UserForm from './pages/UserForm';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -40,6 +42,8 @@ function App() {
             <Route path="control-de-plagas" element={<ControlPlagasPage/>}/> */}
             <Route path="quienes-somos" element={<AboutPage/>}/>
             <Route path="contacto" element={<ContactPage/>}/>
+            <Route path="formulario-productos" element={<ProductForm/>}/>
+            <Route path="formulario-usuario" element={<UserForm/>}/>
           </Route>
         </Routes>
       </Router>
