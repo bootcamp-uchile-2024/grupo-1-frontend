@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { UserInfo } from './UserInfo'
 
 export default function Nav() {
   return (
@@ -8,7 +9,7 @@ export default function Nav() {
             <li><Link to="/">Inicio</Link></li>
             {/* <li><Link to="/catalogo">Catalogo</Link></li> */}
             <li><Link to="/admin">Admin</Link></li>
-            <li><Link to="/login">Login</Link></li>
+            {/* <li><Link to="/login">Login</Link></li> */}
             <li><Link to="/plantas">Plantas</Link></li>
             {/* <li><Link to="/maceteros">Maceteros</Link></li>
             <li><Link to="/fertilizantes">Fertilizantes</Link></li>
