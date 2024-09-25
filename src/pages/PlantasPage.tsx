@@ -10,7 +10,7 @@ export default function PlantasPage() {
     useEffect( () => {
         async function getPlantas(){
             try{
-                const response = await fetch('http://localhost:3000/productos/catalogo/categoria?tipo=Planta');
+                const response = await fetch('https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Planta');
 
                 if(!response.ok){
                     console.log('No pudimos obtener los productos');

@@ -15,6 +15,9 @@ import FertilizantesPage from './pages/FertilizantesPage';
 import ControlPlagasPage from './pages/ControlPlagasPage';
 import ProductDatailPage from './pages/ProductDetailPage';
 import PlantasDatailPage from './pages/PlantasDetailPage';
+import { AdminPage } from './pages/AdminPage';
+import { PrivateRoute } from './components/PrivateRoute';
+import { LogInPage } from './pages/LogInPage';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -29,6 +32,8 @@ function App() {
             <Route path="catalogo/product/:id" element={<ProductDatailPage/>}/> */}
             <Route path="plantas" element={<PlantasPage/>}/>
             <Route path="/detalle-plantas" element={<PlantasDatailPage/>}/>
+            <Route path="/admin" element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
+            <Route path="/login" element={<LogInPage/>}/>
             {/* <Route path="maceteros" element={<MaceterosPage/>}/>
             <Route path="fertilizantes" element={<FertilizantesPage/>}/>
             <Route path="sustratos" element={<SustratosPage/>}/>
