@@ -1,21 +1,20 @@
 import { useState } from 'react';
 
-// Definir un tipo para los datos del formulario
-type FormData = {
-  name: string;
-  description: string;
-  price: string;
-  stock: string;
-};
-
-// Definir un tipo para los errores
-type FormErrors = {
-  name?: string;
-  price?: string;
-  stock?: string;
-};
-
 export default function ProductForm() {
+    // Definir un tipo para los datos del formulario
+  type FormData = {
+    name: string;
+    description: string;
+    price: string;
+    stock: string;
+  };
+
+  // Definir un tipo para los errores
+  type FormErrors = {
+    name?: string;
+    price?: string;
+    stock?: string;
+  };
   // Inicializar el estado con el tipo definido
   const [formData, setFormData] = useState<FormData>({
     name: '',

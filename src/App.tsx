@@ -34,7 +34,9 @@ function App() {
             <Route path="catalogo/product/:id" element={<ProductDatailPage/>}/> */}
             <Route path="plantas" element={<PlantasPage/>}/>
             <Route path="/detalle-plantas" element={<PlantasDatailPage/>}/>
-            <Route path="/admin" element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
+            <Route path="/admin" element={<PrivateRoute roles={["admin"]}><AdminPage/></PrivateRoute>}>
+              <Route index element={<ProductForm/>}/>
+            </Route>
             <Route path="/login" element={<LogInPage/>}/>
             {/* <Route path="maceteros" element={<MaceterosPage/>}/>
             <Route path="fertilizantes" element={<FertilizantesPage/>}/>
@@ -42,8 +44,8 @@ function App() {
             <Route path="control-de-plagas" element={<ControlPlagasPage/>}/> */}
             <Route path="quienes-somos" element={<AboutPage/>}/>
             <Route path="contacto" element={<ContactPage/>}/>
-            <Route path="formulario-productos" element={<ProductForm/>}/>
-            <Route path="formulario-usuario" element={<UserForm/>}/>
+            
+            {/* <Route path="formulario-usuario" element={<UserForm/>}/> */}
           </Route>
         </Routes>
       </Router>

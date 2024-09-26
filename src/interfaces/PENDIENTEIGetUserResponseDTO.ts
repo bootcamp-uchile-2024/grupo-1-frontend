@@ -1,5 +1,5 @@
 // Obtiene los datos de IGetProductsResponseDTO.ts
-import { ICreateUserResponseDTO } from './PENDIENTEICreateUserResponseDTO';
+import { ICreateUserResponseDTO } from './ICreateUserResponseDTO';
 
 export interface IGetUserResponseDTO {
   codigoRespuesta: string; // Código de respuesta ej: 200 OK
