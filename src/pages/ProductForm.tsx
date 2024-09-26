@@ -62,6 +62,7 @@ export default function ProductForm() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div><h2>Creación de Productos</h2></div>
       <div>
         <label>Nombre del Producto</label>
         <input

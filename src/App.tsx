@@ -44,8 +44,7 @@ function App() {
             <Route path="control-de-plagas" element={<ControlPlagasPage/>}/> */}
             <Route path="quienes-somos" element={<AboutPage/>}/>
             <Route path="contacto" element={<ContactPage/>}/>
-            
-            {/* <Route path="formulario-usuario" element={<UserForm/>}/> */}
+            <Route path="formulario-usuario" element={<UserForm/>}/>
           </Route>
         </Routes>
       </Router>

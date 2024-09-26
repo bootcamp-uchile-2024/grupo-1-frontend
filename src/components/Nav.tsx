@@ -18,7 +18,7 @@ export default function Nav() {
             <li><Link to="/quienes-somos">Quienes somos</Link></li>
             <li><Link to="/contacto">Contacto</Link></li>
             {/* <li><Link to="/formulario-productos">Formulario de productos</Link></li> */}
-            {/* <li><Link to="/formulario-usuario">Crear usuarios</Link></li> */}
+            <li><Link to="/formulario-usuario">Regístrate</Link></li>
         </ul>
     </nav>
   )

@@ -348,7 +348,7 @@ export interface IGetProductResponseDTO {
 }
 ```
 
-## POR DEFINIR Crear usuario
+## Crear usuario
 
 __Descripción__: Crea un usuario. <br>
 __Ruta__: src\interfaces\ICreateUserRequestDTO.ts<br>
