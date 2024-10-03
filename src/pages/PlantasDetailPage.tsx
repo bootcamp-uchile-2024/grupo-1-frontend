@@ -14,7 +14,7 @@ export default function PlantasDatailPage() {
 
     return(
         <>
-        <div>Detalle de Planta</div>
+        <h2>Detalle de Planta</h2>
         <div className='product-card-det'>
             <div>
                 <h3>{plantas.nombreProducto}</h3>

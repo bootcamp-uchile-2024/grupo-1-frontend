@@ -31,7 +31,7 @@ export default function PlantasPage() {
 
     return (
         <>
-            <div>Catalogo de productos</div>
+            <h2>Catalogo de productos</h2>
             <br/>
             <div className='product-grid'>
                 {plantas.map(plantas => (
