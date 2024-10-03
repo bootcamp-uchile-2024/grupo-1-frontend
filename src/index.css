@@ -24,7 +24,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -33,6 +32,13 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+main {
+  display: block;
+  
+  width: 100%;
+  justify-content: center;
 }
 
 button {
@@ -144,10 +150,13 @@ nav ul {
   justify-content: center;
   padding: 0;
   width: 100%;
+  height: 100px;
+  margin: 0;
 }
 
 nav ul li {
   margin: 0 1rem;
+  align-content: center;
 }
 
 nav ul li a {
@@ -157,4 +166,20 @@ nav ul li a {
 
 footer{
   margin-top: 100px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+@media(min-width:1024px){
+  nav{
+    display: flex;
+    width: 100%;
+    
+  }
+
+}
+.header{
+  margin-right: auto;
+  align-self: center;
 }

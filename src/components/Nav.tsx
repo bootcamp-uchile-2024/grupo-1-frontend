@@ -1,11 +1,15 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom'
 import { UserInfo } from './UserInfo'
+import Footer from './Footer'
+import Header from './Header'
 
 export default function Nav() {
   return (
     <nav>
         <ul>
+            <li className='header'><Header/></li>
             <li><Link to="/">Inicio</Link></li>
             {/* <li><Link to="/catalogo">Catalogo</Link></li> */}
             <li><Link to="/admin">Admin</Link></li>
@@ -19,6 +23,7 @@ export default function Nav() {
             <li><Link to="/contacto">Contacto</Link></li>
             {/* <li><Link to="/formulario-productos">Formulario de productos</Link></li> */}
             <li><Link to="/formulario-usuario">Regístrate</Link></li>
+            <li><UserInfo/></li>
         </ul>
     </nav>
   )

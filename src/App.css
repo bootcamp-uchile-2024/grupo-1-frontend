@@ -1,7 +1,7 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -53,6 +53,8 @@
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center; /* Center items horizontally */
+  margin: auto;
+  
 }
 
 .product-card-det {
@@ -61,7 +63,7 @@
   border-radius: 8px;
   padding: 0;
   text-align: center;
-  width: 100%; /* Adjusted width for consistency */
+  width: 100vh; /* Adjusted width for consistency */
   box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Added shadow for better separation */
   margin-bottom: 100px;
 }

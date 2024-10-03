@@ -10,8 +10,7 @@ import { UserInfo } from '../components/UserInfo'
 export default function MainLayout() {
   return (
     <>
-        <div><Header /></div>
-        <div><UserInfo/></div>
+        {/* <div><Header /></div> */}
         <div><Nav /></div>
         <main>
           <Outlet />
