@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 interface IForm {
     user: string;
+    roles: [];
     password:string;
     region: string;
     acepto: boolean;
@@ -14,6 +15,7 @@ export function LogInPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState<IForm>({
         user: '',
+        roles: [],
         password: '',
         region: '',
         acepto: false
