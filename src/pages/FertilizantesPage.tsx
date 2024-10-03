@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { ICreateProductFertilizantesRequestDTO } from '../interfaces/ICreateProductFertilizantesRequestDTO';
 
 export default function FertilizantesPage() {
@@ -17,6 +17,7 @@ export default function FertilizantesPage() {
                 setFertilizantes(fertilizantesJson);
             } catch (error){
                 console.log('Error al obtener los productos');
+                return error;
             }
         }
         getFertilizantes();

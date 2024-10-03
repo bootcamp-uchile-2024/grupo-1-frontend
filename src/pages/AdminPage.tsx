@@ -1,7 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Nav from "../components/Nav";
-import ProductForm from "./ProductForm";
-import MainLayout from "../layouts/MainLayout";
 
 export function AdminPage() {
   return (

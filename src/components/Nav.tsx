@@ -1,8 +1,6 @@
-import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { UserInfo } from './UserInfo'
-import Footer from './Footer'
 import Header from './Header'
 
 export default function Nav() {

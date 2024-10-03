@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { ICreateProductControlDePlagasRequestDTO } from '../interfaces/ICreateProductControlDePlagasRequestDTO';
 
 export default function ControlDePlagasPage() {
@@ -17,6 +17,7 @@ export default function ControlDePlagasPage() {
                 setControlDePlagas(controlDePlagasJson);
             } catch (error){
                 console.log('Error al obtener los productos');
+                return error;
             }
         }
         getControlDePlagas();

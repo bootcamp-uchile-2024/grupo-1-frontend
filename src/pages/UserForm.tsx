@@ -18,7 +18,7 @@ export default function UserForm() {
 
   // Función para validar el formulario
   const validateForm = () => {
-    let newErrors: { [key: string]: string } = {};
+    const newErrors: { [key: string]: string } = {};
 
     if (!formData.name || formData.name.length < 3) {
       newErrors.name = 'El nombre debe tener al menos 3 caracteres';

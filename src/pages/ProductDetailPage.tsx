@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {IProducts} from '../interfaces/IProducts'
 import {useParams} from 'react-router-dom'
 
@@ -23,14 +23,16 @@ export default function ProductDatailPage() {
           setProduct(productsJson);
         } catch (error){
           console.log('Error al obtener el producto');
+          return error;
         }
       } catch (error){
         console.log('Error al obtener el producto');
+        return error;
       }
     }
 
     getProduct();
-  }, []);
+  }, [id]);
 
   return(
     <>

@@ -12,7 +12,7 @@ export function UserInfo() {
 
   useEffect(() => {
     setIsLoggedIn(isAuth());
-  });
+  },[]);
 
     return (
         <div>

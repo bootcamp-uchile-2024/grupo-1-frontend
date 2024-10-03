@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { ICreateProductSustratosRequestDTO } from '../interfaces/ICreateProductSustratosRequestDTO';
 
 export default function SustratosPage() {
@@ -17,6 +17,7 @@ export default function SustratosPage() {
                 setSustratos(sustratosJson);
             } catch (error){
                 console.log('Error al obtener los productos');
+                return error;
             }
         }
         getSustratos();

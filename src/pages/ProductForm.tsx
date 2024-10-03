@@ -33,7 +33,7 @@ export default function ProductForm() {
 
   // Validación del formulario
   const validateForm = () => {
-    let newErrors: FormErrors = {};
+    const newErrors: FormErrors = {};
 
     if (!formData.name || formData.name.length < 3) {
       newErrors.name = 'El nombre del producto debe tener al menos 3 caracteres';

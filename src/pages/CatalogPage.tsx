@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { IProducts } from '../interfaces/IProducts';
 import { Link } from 'react-router-dom';
 
@@ -18,6 +18,7 @@ export default function CatalogPage() {
                 setProducts(productsJson);
             } catch (error){
                 console.log('Error al obtener los productos');
+                return error;
             }
         }
         getProducts();

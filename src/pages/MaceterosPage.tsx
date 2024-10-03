@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { ICreateProductMaceterosRequestDTO } from '../interfaces/ICreateProductMaceterosRequestDTO';
 
 export default function MaceterosPage() {
@@ -17,6 +17,7 @@ export default function MaceterosPage() {
                 setMaceteros(maceterosJson);
             } catch (error){
                 console.log('Error al obtener los productos');
+                return error;
             }
         }
         getMaceteros();

@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { ICreateProductPlantasRequestDTO } from '../interfaces/ICreateProductPlantasRequestDTO';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 export default function PlantasPage() {
@@ -18,8 +17,10 @@ export default function PlantasPage() {
                 const plantasJson = await response.json();
                 console.log(plantasJson);
                 setPlantas(plantasJson);
-            } catch (error){
+            } 
+            catch (error){
                 console.log('Error al obtener los productos');
+                return error;
             }
         }
         getPlantas();
