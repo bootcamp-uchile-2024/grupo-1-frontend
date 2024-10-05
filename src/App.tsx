@@ -13,6 +13,10 @@ import { PrivateRoute } from './components/PrivateRoute';
 import { LogInPage } from './pages/LogInPage';
 import ProductForm  from './pages/ProductForm';
 import UserForm from './pages/UserForm';
+import MaceterosPage from './pages/MaceterosPage';
+import FertilizantesPage from './pages/FertilizantesPage';
+import SustratosPage from './pages/SustratosPage';
+import ControlPlagasPage from './pages/ControlPlagasPage';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -31,10 +35,10 @@ function App() {
               <Route index element={<ProductForm/>}/>
             </Route>
             <Route path="/login" element={<LogInPage/>}/>
-            {/* <Route path="maceteros" element={<MaceterosPage/>}/>
+            <Route path="maceteros" element={<MaceterosPage/>}/>
             <Route path="fertilizantes" element={<FertilizantesPage/>}/>
             <Route path="sustratos" element={<SustratosPage/>}/>
-            <Route path="control-de-plagas" element={<ControlPlagasPage/>}/> */}
+            <Route path="control-de-plagas" element={<ControlPlagasPage/>}/>
             <Route path="quienes-somos" element={<AboutPage/>}/>
             <Route path="contacto" element={<ContactPage/>}/>
             <Route path="formulario-usuario" element={<UserForm/>}/>

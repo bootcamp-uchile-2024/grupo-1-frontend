@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './Navbar.css'
 import { isAuth, logout } from "../services/login/loginServices";
 
 export function UserInfo() {
@@ -8,6 +9,7 @@ export function UserInfo() {
   const handleLogout = () => {
     logout();
     navigate("/");
+    location.reload();
   }
 
   useEffect(() => {

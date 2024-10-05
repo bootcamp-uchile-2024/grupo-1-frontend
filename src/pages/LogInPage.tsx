@@ -37,6 +37,7 @@ export function LogInPage() {
         //validación de credenciales
         if(Login(form)){
             navigate("/");
+            location.reload();
         } else {
             setValidCredential(false);
         }

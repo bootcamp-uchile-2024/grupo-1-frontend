@@ -7,7 +7,7 @@ export default function MaceterosPage() {
     useEffect( () => {
         async function getMaceteros(){
             try{
-                const response = await fetch('https://fakestoreapi.com/products');
+                const response = await fetch('https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Macetero');
 
                 if(!response.ok){
                     console.log('No pudimos obtener los productos');
@@ -29,10 +29,10 @@ export default function MaceterosPage() {
             <br/>
             <div className='product-grid'>
                 {maceteros.map(macetero => (
-                    <div key={macetero.idProducto}>
+                    <div key={macetero.idProducto} className='product-card'>
                         <img src={macetero.imagenProducto[0]} alt={macetero.nombreProducto} width="100"/>
                         <h3>{macetero.nombreProducto}</h3>
-                        <p>Price: ${macetero.precioProducto}</p>
+                        <p>Price: ${macetero.precioNormal}</p>
                         <button>Ver detalle</button>
                     </div>
                 ))}

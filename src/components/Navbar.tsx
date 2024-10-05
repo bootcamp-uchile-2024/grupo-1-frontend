@@ -50,8 +50,11 @@ export default function Navbar() {
                 <li className='nav-item'>
                     <Link to='/admin' className='nav-links' onClick={closeMobileMenu}>Administrador</Link>
                 </li>
+                <li className='nav-item'>
+                    <div className='nav-links' onClick={closeMobileMenu}><UserInfo /></div>
+                </li>
             </ul>
-            <UserInfo />
+            
         </nav>
     </>
   );

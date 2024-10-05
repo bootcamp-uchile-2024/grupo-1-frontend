@@ -171,14 +171,14 @@ footer{
   justify-content: center;
 }
 
-@media(min-width:1024px){
+/* @media(min-width:1024px){
   nav{
     display: flex;
     width: 100%;
     
   }
 
-}
+} */
 .header{
   margin-right: auto;
   align-self: center;
