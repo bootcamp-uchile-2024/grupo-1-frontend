@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import '../styles/Forms.css';
 
-
 export default function ProductForm() {
   // Definir un tipo para los datos del formulario
   type FormData = {
@@ -60,16 +59,19 @@ export default function ProductForm() {
 
   // Función para manejar los cambios en el formulario
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    if (e.target.name === 'imagenProducto' && e.target.files) {
-      const file = e.target.files[0];
-      if (file && ['image/jpeg', 'image/png'].includes(file.type)) {
-        setFormData({ ...formData, imagenProducto: file });
-      } else {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          imagenProducto: 'El archivo debe ser una imagen válida (JPEG o PNG)',
-        }));
-        setFormData({ ...formData, imagenProducto: null });
+    if (e.target.name === 'imagenProducto') {
+      const target = e.target as HTMLInputElement;
+      if (target.files) {
+        const file = target.files[0];
+        if (file && ['image/jpeg', 'image/png'].includes(file.type)) {
+          setFormData({ ...formData, imagenProducto: file });
+        } else {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            imagenProducto: 'El archivo debe ser una imagen válida (JPEG o PNG)',
+          }));
+          setFormData({ ...formData, imagenProducto: null });
+        }
       }
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
