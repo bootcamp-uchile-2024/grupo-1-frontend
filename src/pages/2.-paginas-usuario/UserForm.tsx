@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles/Forms.css';
+import './Forms.css'
 
 export default function UserForm() {
   // Estado para almacenar los datos del formulario

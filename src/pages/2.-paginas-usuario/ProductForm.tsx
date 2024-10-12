@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles/Forms.css';
+import './Forms.css'
 
 export default function ProductForm() {
   // Definir un tipo para los datos del formulario
