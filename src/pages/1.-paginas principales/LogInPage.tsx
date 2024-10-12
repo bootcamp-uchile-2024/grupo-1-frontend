@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Login } from "../services/login/loginServices";
-import { useNavigate } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
+import { Login } from "../../services/login/loginServices";
 
 interface IForm {
     user: string;
@@ -37,6 +38,7 @@ export function LogInPage() {
         //validación de credenciales
         if(Login(form)){
             navigate("/");
+            location.reload();
         } else {
             setValidCredential(false);
         }
@@ -56,23 +58,31 @@ export function LogInPage() {
     }
 
     return (
-    <div>
-        <h1>Login Page</h1>
-        <p>Esta es la página de login</p>
-        <form>
-            <input type="text" placeholder="Usuario" name="user" onChange={handleChange} value={form.user}/>
-            <input type="password" placeholder="Contraseña" name="password" onChange={handleChange} value={form.password}/>
-            <input type="checkbox" name="acepto" onChange={handleChange} checked={form.acepto}/>
-            <select name="region" id="region" onChange={handleChange} value={form.region}>
-                <option value="">Seleccione...</option>
-                <option value="stgo">Santiago</option>
-                <option value="ptovr">Puerto Varas</option>
-                <option value="ptoay">Puerto Aysen</option>
-            </select>
-            <button type="submit" onClick={handleSubmit}>Iniciar Sesión</button>
-        </form>
-        {error && <div>Falta llenar algunos campos</div>}
-        {!validCredential && <div>Nombre de usuario o contraseña incorrecta</div>}
-    </div>
+    <>
+        <div>
+            <h1>Login Page</h1>
+            <p>Esta es la página de login</p>
+            <form>
+                <input type="text" placeholder="Usuario" name="user" onChange={handleChange} value={form.user} />
+                <input type="password" placeholder="Contraseña" name="password" onChange={handleChange} value={form.password} />
+                <input type="checkbox" name="acepto" onChange={handleChange} checked={form.acepto} />
+                <select name="region" id="region" onChange={handleChange} value={form.region}>
+                    <option value="">Seleccione...</option>
+                    <option value="stgo">Santiago</option>
+                    <option value="ptovr">Puerto Varas</option>
+                    <option value="ptoay">Puerto Aysen</option>
+                </select>
+                <button type="submit" onClick={handleSubmit}>Iniciar Sesión</button>
+            </form>
+            {error && <div>Falta llenar algunos campos</div>}
+            {!validCredential && <div>Nombre de usuario o contraseña incorrecta</div>}
+        </div>
+        <div>
+            <p>¿No tienes cuenta? </p>
+            <Link to='/formulario-usuario'>
+                <button className='btn'>Subscribirse</button>
+            </Link>
+        </div>
+    </>
   );
 }

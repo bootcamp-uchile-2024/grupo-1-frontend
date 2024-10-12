@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { ICreateProductSustratosRequestDTO } from '../interfaces/ICreateProductSustratosRequestDTO';
+import { ICreateProductSustratosRequestDTO } from '../../interfaces/ICreateProductSustratosRequestDTO';
 
 export default function SustratosPage() {
     const [sustratos, setSustratos] = useState<ICreateProductSustratosRequestDTO[]>([]);
@@ -7,7 +7,7 @@ export default function SustratosPage() {
     useEffect( () => {
         async function getSustratos(){
             try{
-                const response = await fetch('https://fakestoreapi.com/products');
+                const response = await fetch('https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Sustrato');
 
                 if(!response.ok){
                     console.log('No pudimos obtener los productos');
@@ -29,10 +29,10 @@ export default function SustratosPage() {
             <br/>
             <div className='product-grid'>
                 {sustratos.map(sustrato => (
-                    <div key={sustrato.idProducto}>
+                    <div key={sustrato.idProducto} className='product-card'>
                         <img src={sustrato.imagenProducto[0]} alt={sustrato.nombreProducto} width="100"/>
                         <h3>{sustrato.nombreProducto}</h3>
-                        <p>Price: ${sustrato.precioProducto}</p>
+                        <p>Price: ${sustrato.precioNormal}</p>
                         <button>Ver detalle</button>
                     </div>
                 ))}

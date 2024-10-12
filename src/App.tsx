@@ -3,16 +3,20 @@
 import './App.css'
 import MainLayout from './layouts/MainLayout'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage'
-import AboutPage from './pages/AboutPage'
-import ContactPage from './pages/ContactPage'
-import PlantasPage from './pages/PlantasPage';
-import PlantasDatailPage from './pages/PlantasDetailPage';
-import { AdminPage } from './pages/AdminPage';
+import HomePage from './pages/1.-paginas principales/HomePage'
+import AboutPage from './pages/1.-paginas principales/AboutPage'
+import ContactPage from './pages/1.-paginas principales/ContactPage'
+import PlantasDatailPage from './pages/4.-detalle-productos/PlantasDetailPage';
+import { AdminPage } from './pages/2.-paginas-usuario/AdminPage';
 import { PrivateRoute } from './components/PrivateRoute';
-import { LogInPage } from './pages/LogInPage';
-import ProductForm  from './pages/ProductForm';
-import UserForm from './pages/UserForm';
+import ProductForm  from './pages/2.-paginas-usuario/ProductForm';
+import UserForm from './pages/2.-paginas-usuario/UserForm';
+import MaceterosPage from './pages/3.-productos/MaceterosPage';
+import SustratosPage from './pages/3.-productos/SustratosPage';
+import { LogInPage } from './pages/1.-paginas principales/LogInPage';
+import ControlPlagasPage from './pages/3.-productos/ControlPlagasPage';
+import FertilizantesPage from './pages/3.-productos/FertilizantesPage';
+import PlantasPage from './pages/3.-productos/PlantasPage';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -31,10 +35,10 @@ function App() {
               <Route index element={<ProductForm/>}/>
             </Route>
             <Route path="/login" element={<LogInPage/>}/>
-            {/* <Route path="maceteros" element={<MaceterosPage/>}/>
+            <Route path="maceteros" element={<MaceterosPage/>}/>
             <Route path="fertilizantes" element={<FertilizantesPage/>}/>
             <Route path="sustratos" element={<SustratosPage/>}/>
-            <Route path="control-de-plagas" element={<ControlPlagasPage/>}/> */}
+            <Route path="control-de-plagas" element={<ControlPlagasPage/>}/>
             <Route path="quienes-somos" element={<AboutPage/>}/>
             <Route path="contacto" element={<ContactPage/>}/>
             <Route path="formulario-usuario" element={<UserForm/>}/>

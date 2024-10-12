@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {IProducts} from '../interfaces/IProducts'
+import {IProducts} from '../../interfaces/IProducts'
 import {useParams} from 'react-router-dom'
 
 export default function ProductDatailPage() {
