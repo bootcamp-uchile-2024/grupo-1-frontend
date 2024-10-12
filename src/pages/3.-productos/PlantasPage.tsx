@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import { ICreateProductPlantasRequestDTO } from '../interfaces/ICreateProductPlantasRequestDTO';
 import { useNavigate } from 'react-router-dom';
+import { ICreateProductPlantasRequestDTO } from '../../interfaces/ICreateProductPlantasRequestDTO';
 
 export default function PlantasPage() {
     const navigate = useNavigate();

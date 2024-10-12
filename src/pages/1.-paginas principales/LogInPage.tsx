@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Login } from "../services/login/loginServices";
+
 import { Link, useNavigate } from "react-router-dom";
+import { Login } from "../../services/login/loginServices";
 
 interface IForm {
     user: string;

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { ICreateProductSustratosRequestDTO } from '../interfaces/ICreateProductSustratosRequestDTO';
+import { ICreateProductSustratosRequestDTO } from '../../interfaces/ICreateProductSustratosRequestDTO';
 
 export default function SustratosPage() {
     const [sustratos, setSustratos] = useState<ICreateProductSustratosRequestDTO[]>([]);

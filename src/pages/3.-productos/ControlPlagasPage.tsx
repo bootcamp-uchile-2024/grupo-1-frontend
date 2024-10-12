@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
-import { ICreateProductControlDePlagasRequestDTO } from '../interfaces/ICreateProductControlDePlagasRequestDTO';
+import { ICreateProductControlDePlagasRequestDTO } from '../../interfaces/ICreateProductControlDePlagasRequestDTO';
+
 
 export default function ControlDePlagasPage() {
     const [controlDePlagas, setControlDePlagas] = useState<ICreateProductControlDePlagasRequestDTO[]>([]);

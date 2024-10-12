@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
-import { ICreateProductFertilizantesRequestDTO } from '../interfaces/ICreateProductFertilizantesRequestDTO';
+import { ICreateProductFertilizantesRequestDTO } from '../../interfaces/ICreateProductFertilizantesRequestDTO';
+
 
 export default function FertilizantesPage() {
     const [fertilizantes, setFertilizantes] = useState<ICreateProductFertilizantesRequestDTO[]>([]);

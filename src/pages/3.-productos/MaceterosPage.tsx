@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { ICreateProductMaceterosRequestDTO } from '../interfaces/ICreateProductMaceterosRequestDTO';
+import { ICreateProductMaceterosRequestDTO } from '../../interfaces/ICreateProductMaceterosRequestDTO';
 
 export default function MaceterosPage() {
     const [maceteros, setMaceteros] = useState<ICreateProductMaceterosRequestDTO[]>([]);

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import { IProducts } from '../interfaces/IProducts';
 import { Link } from 'react-router-dom';
+import { IProducts } from '../../interfaces/IProducts';
 
 export default function CatalogPage() {
     const [products, setProducts] = useState<IProducts[]>([]);
