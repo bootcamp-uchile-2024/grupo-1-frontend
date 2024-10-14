@@ -22,7 +22,7 @@
 }
   
 .nav-menu {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(6, auto);
     grid-gap: 10px;
     list-style: none;
@@ -60,6 +60,17 @@
   
 .menu-icon {
     display: none;
+}
+
+.cart-notification {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  position:relative;
+  top: -8px;
+  right: -8px;
 }
   
 @media screen and (max-width: 960px) {
@@ -143,4 +154,5 @@
     button {
       display: none;
     }
+
 }
