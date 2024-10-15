@@ -65,16 +65,14 @@ export default function Navbar() {
                 </li>
                 
                 <li className='nav-item'>
-                    <Link to  className='nav-links cart-link' onClick={closeMobileMenu}>
+                    <Link className='nav-links cart-link' onClick={closeMobileMenu} to={''}>
                         <CartIcon />
                         {cartItems > 0 && (
                             <span className="cart-notification">{cartItems}</span>
                         )}
                     </Link>
                 </li>
-
             </ul>
-            
         </nav>
     </>
   );
