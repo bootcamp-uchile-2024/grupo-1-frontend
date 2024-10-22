@@ -1,7 +1,9 @@
 import {useEffect, useState} from 'react'
 import { ICreateProductMaceterosRequestDTO } from '../../interfaces/ICreateProductMaceterosRequestDTO';
+import { useNavigate } from 'react-router-dom';
 
 export default function MaceterosPage() {
+    const navigate = useNavigate();
     const [maceteros, setMaceteros] = useState<ICreateProductMaceterosRequestDTO[]>([]);
 
     useEffect( () => {
@@ -23,6 +25,10 @@ export default function MaceterosPage() {
         getMaceteros();
     }, []);
 
+    const handleViewDetails = (maceteros: any) => {
+        navigate('/detalle-maceteros', { state: { maceteros } });
+      };
+
     return (
         <>
             <div>Catalogo de productos</div>
@@ -33,7 +39,7 @@ export default function MaceterosPage() {
                         <img src={macetero.imagenProducto[0]} alt={macetero.nombreProducto} width="100"/>
                         <h3>{macetero.nombreProducto}</h3>
                         <p>Price: ${macetero.precioNormal}</p>
-                        <button>Ver detalle</button>
+                        <button onClick={() => handleViewDetails(maceteros)}>Ver detalle</button>
                     </div>
                 ))}
             </div>

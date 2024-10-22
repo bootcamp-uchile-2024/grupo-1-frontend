@@ -18,6 +18,9 @@ import PlantasPage from './pages/3.-productos/PlantasPage';
 import DataFetcher from './components/DataFetcher';
 import { CartProvider } from './CartContext';
 import CartPage from './pages/1.-paginas principales/CartPage';
+import MaceterosDetailPage from './pages/4.-detalle-productos/MaceterosDetailPage';
+import FertilizantesDetailPage from './pages/4.-detalle-productos/FertilizantesDetailPage';
+import ControlPlagasDetailPage from './pages/4.-detalle-productos/ControlPlagasDetailPage';
 
 
 function App() {
@@ -34,9 +37,12 @@ function App() {
             </Route>
             <Route path="/login" element={<LogInPage />} />
             <Route path="maceteros" element={<MaceterosPage />} />
+            <Route path="/detalle-maceteros" element={<MaceterosDetailPage />} />
             <Route path="fertilizantes" element={<FertilizantesPage />} />
+            <Route path="/detalle-fertilizantes" element={<FertilizantesDetailPage />} />
             <Route path="sustratos" element={<SustratosPage />} />
             <Route path="control-de-plagas" element={<ControlPlagasPage />} />
+            <Route path="/detalle-plagas" element={<ControlPlagasDetailPage />} />
             <Route path="quienes-somos" element={<AboutPage />} />
             <Route path="contacto" element={<ContactPage />} />
             <Route path="formulario-usuario" element={<UserForm />} />

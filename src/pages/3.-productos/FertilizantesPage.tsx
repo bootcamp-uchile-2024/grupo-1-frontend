@@ -1,8 +1,10 @@
 import {useEffect, useState} from 'react'
 import { ICreateProductFertilizantesRequestDTO } from '../../interfaces/ICreateProductFertilizantesRequestDTO';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function FertilizantesPage() {
+    const navigate = useNavigate();
     const [fertilizantes, setFertilizantes] = useState<ICreateProductFertilizantesRequestDTO[]>([]);
 
     useEffect( () => {
@@ -24,6 +26,10 @@ export default function FertilizantesPage() {
         getFertilizantes();
     }, []);
 
+    const handleViewDetails = (fertilizantes: any) => {
+        navigate('/detalle-fertilizantes', { state: { fertilizantes } });
+      };
+
     return (
         <>
             <div>Catalogo de productos</div>
@@ -34,7 +40,7 @@ export default function FertilizantesPage() {
                         <img src={fertilizante.imagenProducto[0]} alt={fertilizante.nombreProducto} width="100"/>
                         <h3>{fertilizante.nombreProducto}</h3>
                         <p>Price: ${fertilizante.precioProducto}</p>
-                        <button>Ver detalle</button>
+                        <button onClick={() => handleViewDetails(fertilizantes)}>Ver detalle</button>
                     </div>
                 ))}
             </div>

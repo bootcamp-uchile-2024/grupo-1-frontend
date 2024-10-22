@@ -1,8 +1,10 @@
 import {useEffect, useState} from 'react'
 import { ICreateProductControlDePlagasRequestDTO } from '../../interfaces/ICreateProductControlDePlagasRequestDTO';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function ControlDePlagasPage() {
+    const navigate = useNavigate();
     const [controlDePlagas, setControlDePlagas] = useState<ICreateProductControlDePlagasRequestDTO[]>([]);
 
     useEffect( () => {
@@ -24,6 +26,10 @@ export default function ControlDePlagasPage() {
         getControlDePlagas();
     }, []);
 
+    const handleViewDetails = (controlDePlagas: any) => {
+        navigate('/detalle-plagas', { state: { controlDePlagas } });
+      };
+
     return (
         <>
             <div>Catalogo de productos</div>
@@ -34,7 +40,7 @@ export default function ControlDePlagasPage() {
                         <img src={controlDePlaga.imagenProducto[0]} alt={controlDePlaga.nombreProducto} width="100"/>
                         <h3>{controlDePlaga.nombreProducto}</h3>
                         <p>Price: ${controlDePlaga.precioNormal}</p>
-                        <button>Ver detalle</button>
+                        <button onClick={() => handleViewDetails(controlDePlagas)}>Ver detalle</button>
                     </div>
                 ))}
             </div>
