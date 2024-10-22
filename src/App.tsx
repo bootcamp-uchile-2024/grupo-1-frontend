@@ -19,7 +19,7 @@ import FertilizantesPage from './pages/3.-productos/FertilizantesPage';
 import PlantasPage from './pages/3.-productos/PlantasPage';
 
 function App() {
-  // const [count, setCount] = useState(0)
+  
 
   return (
     <>
