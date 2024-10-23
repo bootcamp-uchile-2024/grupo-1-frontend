@@ -1,13 +1,13 @@
- import React from 'react';
+import React from 'react';
 import DataFetcher from '../../components/DataFetcher';
 
-const Catalog: React.FC = () => {
+const SustratosPage: React.FC = () => {
   return (
     <div>
-      <h1>Catálogo de Productos</h1>
-      <DataFetcher />
+      <h1>Catálogo de Sustratos</h1>
+      <DataFetcher tipo="sustratos" /> {}
     </div>
   );
 };
 
-export default Catalog;
+export default SustratosPage;

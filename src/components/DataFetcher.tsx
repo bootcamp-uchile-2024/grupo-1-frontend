@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useCart } from '../CartContext'; // Importar el contexto del carrito
+import { useCart } from '../CartContext'; 
 
 interface Product {
   nombreProducto: string;
   nombreCientifico?: string;
-  imagenProducto: string | null;
-  descuento?: string;
-  precioNormal: string;
+  imagenProducto: string[];
+  descuento?: number;
+  precio: number;
   coberturaDeDespacho?: string;
-  stock: number; // Stock debe ser de tipo número
+  stock: number; 
   descripcionProducto: string;
   categoria: string;
   habitat?: string;
@@ -16,46 +16,59 @@ interface Product {
   frecuenciaDeRiego?: string;
   fertilizanteSugerido?: string;
   humedadIdeal?: string;
-  temperaturaIdeal?: string;
-  toxicidadParaMascotas?: string;
+  temperaturaIdeal?: number;
+  toxicidadParaMascotas?: boolean;
   tipoDeSuelo?: string;
   dificultadDeCuidado?: string;
 }
 
-const DataFetcher: React.FC = () => {
+interface DataFetcherProps {
+  tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas';
+}
+
+const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { addToCart, cartItems, incrementProduct, decrementProduct, removeFromCart } = useCart();
+  const { addToCart, cartItems, removeFromCart } = useCart();
+
+  // Definir la URL de la API según el tipo
+  const API_URLS: Record<DataFetcherProps['tipo'], string> = {
+    plantas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Planta',
+    maceteros: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Macetero',
+    fertilizantes: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Fertilizante',
+    sustratos: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Sustrato',
+    controlPlagas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=ControlPlagas',
+  };
 
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const response = await fetch('https://fakestoreapi.com/products');
+        const response = await fetch(API_URLS[tipo]); 
         if (!response.ok) {
-          throw new Error('Error en la red');
+          throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
         }
         const result: any[] = await response.json();
 
         const mappedProducts = result.map((item) => ({
-          nombreProducto: item.title,
-          nombreCientifico: undefined,
-          imagenProducto: item.image || null,
-          descuento: undefined,
-          precioNormal: item.price !== undefined ? item.price.toString() : '0',
-          coberturaDeDespacho: undefined,
-          stock: 10, // Inicialmente asignar un stock; puedes cambiarlo a stock real si está disponible
-          descripcionProducto: item.description,
-          categoria: item.category,
-          habitat: undefined,
-          luz: undefined,
-          frecuenciaDeRiego: undefined,
-          fertilizanteSugerido: undefined,
-          humedadIdeal: undefined,
-          temperaturaIdeal: undefined,
-          toxicidadParaMascotas: undefined,
-          tipoDeSuelo: undefined,
-          dificultadDeCuidado: undefined,
+          nombreProducto: item.nombreProducto,
+          nombreCientifico: item.nombreCientifico || undefined,
+          imagenProducto: item.imagenProducto || [],
+          descuento: item.descuento,
+          precio: item.precioNormal, 
+          coberturaDeDespacho: item.coberturaDeDespacho ? item.coberturaDeDespacho[0] : undefined,
+          stock: item.stock,
+          descripcionProducto: item.descripcionProducto,
+          categoria: item.categoria,
+          habitat: item.habitat,
+          luz: item.luz,
+          frecuenciaDeRiego: item.frecuenciaDeRiego,
+          fertilizanteSugerido: item.fertilizantesSugeridos ? item.fertilizantesSugeridos[0] : undefined,
+          humedadIdeal: item.humedadIdeal,
+          temperaturaIdeal: item.temperaturaIdeal,
+          toxicidadParaMascotas: item.toxicidadMascotas,
+          tipoDeSuelo: item.tipoSuelo,
+          dificultadDeCuidado: item.dificultadDeCuidado,
         }));
 
         setProducts(mappedProducts);
@@ -71,7 +84,7 @@ const DataFetcher: React.FC = () => {
     };
 
     fetchProductsData();
-  }, []);
+  }, [tipo]); // Dependencia del tipo
 
   // Función para manejar la compra
   const handlePurchase = (product: Product) => {
@@ -80,13 +93,11 @@ const DataFetcher: React.FC = () => {
 
     // Verificar si hay suficiente stock disponible
     if (product.stock > currentQuantity) {
-      addToCart(product); // Agregar al carrito
-
-      // Actualizar el stock en el estado de productos
+      addToCart(product);
       setProducts(prevProducts =>
         prevProducts.map(p =>
           p.nombreProducto === product.nombreProducto 
-            ? { ...p, stock: p.stock - 1 } // Reducir el stock en 1
+            ? { ...p, stock: p.stock - 1 } 
             : p
         )
       );
@@ -108,21 +119,22 @@ const DataFetcher: React.FC = () => {
           return (
             <li key={index}>
               <h3>{product.nombreProducto}</h3>
-              {product.imagenProducto && (
-                <img src={product.imagenProducto} alt={product.nombreProducto} style={{ width: '100px', height: '100px' }} />
+              {product.imagenProducto.length > 0 && (
+                <img 
+                  src={product.imagenProducto[0]} 
+                  alt={product.nombreProducto} 
+                  style={{ width: '100px', height: '100px' }} 
+                />
               )}
               <p><strong>Descripción:</strong> {product.descripcionProducto}</p>
-              <p><strong>Precio:</strong> ${product.precioNormal}</p>
+              <p><strong>Precio:</strong> ${product.precio.toFixed(2)}</p>
               <p><strong>Categoría:</strong> {product.categoria}</p>
               <p><strong>Stock:</strong> {product.stock}</p>
               <button onClick={() => handlePurchase(product)}>Agregar al carrito</button>
 
-              {/* Botones para incrementar y disminuir cantidad */}
               {quantityInCart > 0 && (
                 <div>
-                  <button onClick={() => incrementProduct(product)} disabled={quantityInCart >= product.stock}>+</button>
-                  <button onClick={() => decrementProduct(product)} disabled={quantityInCart <= 1}>-</button>
-                  <span>Cantidad: {quantityInCart}</span>
+                  <span>Cantidad en el carrito: {quantityInCart}</span>
                   <button onClick={() => removeFromCart(product)}>Eliminar del carrito</button>
                 </div>
               )}
@@ -135,3 +147,4 @@ const DataFetcher: React.FC = () => {
 };
 
 export default DataFetcher;
+
