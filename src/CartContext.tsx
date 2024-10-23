@@ -5,7 +5,7 @@ interface Product {
   nombreProducto: string;
   cantidad?: number; // Campo para manejar la cantidad
   stock: number; // Agregar stock para verificar al agregar
-  // Otros campos según tu definición de producto...
+  precio: number// Otros campos según tu definición de producto...
 }
 
 interface CartContextType {

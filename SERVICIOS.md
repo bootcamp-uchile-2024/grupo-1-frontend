@@ -1,13 +1,55 @@
-# Servicios
+# Servicios del proyecto
 
-## Crear producto Plantas
+## Servicio Catálogo Plantas
 
-__Descripción__: Crea un producto de categoría Plantas. <br>
-__Ruta__: src\interfaces\ICreateProductPlantasRequestDTO.ts<br>
-__Ruta__: src\interfaces\ICrICreateProductPlantasResponseDTO.ts<br>
-__Url__: https://github.com/bootcamp-uchile-2024/grupo-1-frontend.git<br>
+**Descripción**: Muestra el catálogo de plantas disponibles. <br>
+**Método HTTP**: GET<br>
+**End Point**: https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Planta<br>
+**Url**: http://localhost:5173/plantas<br>
 
-### RequestDTO
+## Servicio Catálogo Maceteros
+
+**Descripción**: Muestra el catálogo de maceteros disponibles. <br>
+**Método HTTP**: GET<br>
+**End Point**: https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Macetero<br>
+**Url**: http://localhost:5173/maceteros<br>
+
+## Servicio Catálogo Fertilizantes
+
+**Descripción**: Muestra el catálogo de fertilizantes disponibles. <br>
+**Método HTTP**: GET<br>
+**End Point**: https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Fertilizantes<br>
+**Url**: http://localhost:5173/fertilizantes<br>
+
+## Servicio Catálogo Sustratos
+
+**Descripción**: Muestra el catálogo de sustratos disponibles. <br>
+**Método HTTP**: GET<br>
+**End Point**: https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Sustrato<br>
+**Url**: http://localhost:5173/sustratos<br>
+
+## Servicio Catálogo Control de Plagas
+
+**Descripción**: Muestra el catálogo de productos de control de plagas disponibles. <br>
+**Método HTTP**: GET<br>
+**End Point**: https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Control%20Plagas<br>
+**Url**: http://localhost:5173/control-de-plagas<br>
+
+## Creación de Productos
+
+**Descripción**: Permite la creación de nevos productos a través de formulario. <br>
+**Método HTTP**: POST<br>
+**End Point**: -<br>
+**Url**: http://localhost:5173/admin<br>
+
+## Servicio de Autenticación de usuarios
+
+**Descripción**: Permite la autenticación de usuarios a través de formulario. <br>
+**Método HTTP**: POST<br>
+**End Point**: -<br>
+**Url**: http://localhost:5173/login<br>
+
+## Interfaces
 
 ```typescript
 export interface ICreateProductPlantasRequestDTO {

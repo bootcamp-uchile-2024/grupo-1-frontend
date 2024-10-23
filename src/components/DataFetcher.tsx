@@ -36,9 +36,9 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
     plantas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Planta',
     maceteros: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Macetero',
-    fertilizantes: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Fertilizante',
+    fertilizantes: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Fertilizantes',
     sustratos: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Sustrato',
-    controlPlagas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=ControlPlagas',
+    controlPlagas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Control%20Plagas',
   };
 
   useEffect(() => {
@@ -130,6 +130,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
               <p><strong>Precio:</strong> ${product.precio.toFixed(2)}</p>
               <p><strong>Categoría:</strong> {product.categoria}</p>
               <p><strong>Stock:</strong> {product.stock}</p>
+
               <button onClick={() => handlePurchase(product)}>Agregar al carrito</button>
 
               {quantityInCart > 0 && (
