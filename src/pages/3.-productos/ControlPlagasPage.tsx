@@ -40,7 +40,7 @@ export default function ControlDePlagasPage() {
                         <img src={controlDePlaga.imagenProducto[0]} alt={controlDePlaga.nombreProducto} width="100"/>
                         <h3>{controlDePlaga.nombreProducto}</h3>
                         <p>Price: ${controlDePlaga.precioNormal}</p>
-                        <button onClick={() => handleViewDetails(controlDePlagas)}>Ver detalle</button>
+                        <button onClick={() => handleViewDetails(controlDePlaga)}>Ver detalle</button>
                     </div>
                 ))}
             </div>

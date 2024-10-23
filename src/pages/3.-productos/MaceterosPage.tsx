@@ -39,7 +39,7 @@ export default function MaceterosPage() {
                         <img src={macetero.imagenProducto[0]} alt={macetero.nombreProducto} width="100"/>
                         <h3>{macetero.nombreProducto}</h3>
                         <p>Price: ${macetero.precioNormal}</p>
-                        <button onClick={() => handleViewDetails(maceteros)}>Ver detalle</button>
+                        <button onClick={() => handleViewDetails(macetero)}>Ver detalle</button>
                     </div>
                 ))}
             </div>

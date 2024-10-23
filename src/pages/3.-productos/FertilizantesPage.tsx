@@ -40,7 +40,7 @@ export default function FertilizantesPage() {
                         <img src={fertilizante.imagenProducto[0]} alt={fertilizante.nombreProducto} width="100"/>
                         <h3>{fertilizante.nombreProducto}</h3>
                         <p>Price: ${fertilizante.precioProducto}</p>
-                        <button onClick={() => handleViewDetails(fertilizantes)}>Ver detalle</button>
+                        <button onClick={() => handleViewDetails(fertilizante)}>Ver detalle</button>
                     </div>
                 ))}
             </div>
