@@ -4,8 +4,8 @@ import { useCart } from '../../CartContext';
 const CartPage: React.FC = () => {
   const { cartItems, removeFromCart, incrementProduct, decrementProduct } = useCart();
 
-  // Calcular el total
-  const totalAmount = cartItems.reduce((total, item) => total + (parseFloat(item.precioNormal) * (item.cantidad || 1)), 0);
+
+  const totalAmount = cartItems.reduce((total, item) => total + (item.precio * (item.cantidad || 1)), 0);
 
   return (
     <div>
@@ -18,7 +18,14 @@ const CartPage: React.FC = () => {
             {cartItems.map((item, index) => (
               <li key={index}>
                 <h3>{item.nombreProducto}</h3>
-                <p><strong>Precio:</strong> ${item.precioNormal}</p>
+                {item.imagenProducto && (
+                  <img 
+                    src={item.imagenProducto} 
+                    alt={item.nombreProducto} 
+                    style={{ width: '100px', height: '100px' }} 
+                  />
+                )}
+                <p><strong>Precio:</strong> ${item.precio.toFixed(2)}</p>
                 <p><strong>Cantidad:</strong> {item.cantidad}</p>
                 <button onClick={() => incrementProduct(item)}>+</button>
                 <button onClick={() => decrementProduct(item)} disabled={item.cantidad <= 1}>-</button>
@@ -26,7 +33,7 @@ const CartPage: React.FC = () => {
               </li>
             ))}
           </ul>
-          <h3>Total: ${totalAmount.toFixed(2)}</h3>
+          <h3>Total: ${totalAmount.toFixed(2)}</h3> {}
         </div>
       )}
     </div>
@@ -34,3 +41,4 @@ const CartPage: React.FC = () => {
 };
 
 export default CartPage;
+
