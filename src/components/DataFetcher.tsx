@@ -4,7 +4,7 @@ import { useCart } from '../CartContext';
 interface Product {
   nombreProducto: string;
   nombreCientifico?: string;
-  imagenProducto: string[];
+  imagenProducto: string;
   descuento?: number;
   precio: number;
   coberturaDeDespacho?: string;
@@ -32,7 +32,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
   const [error, setError] = useState<string | null>(null);
   const { addToCart, cartItems, removeFromCart } = useCart();
 
-  // Definir la URL de la API según el tipo
+  // Definir la URL de la API según el tipo de productos
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
     plantas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Planta',
     maceteros: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Macetero',
@@ -89,7 +89,8 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
   // Función para manejar la compra
   const handlePurchase = (product: Product) => {
     const existingProduct = cartItems.find(item => item.nombreProducto === product.nombreProducto);
-    const currentQuantity = existingProduct ? existingProduct.cantidad : 0;
+    const currentQuantity = existingProduct ? existingProduct.cantidad ?? 0 : 0;
+
 
     // Verificar si hay suficiente stock disponible
     if (product.stock > currentQuantity) {
@@ -114,7 +115,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
       <ul>
         {products.map((product, index) => {
           const currentItem = cartItems.find(item => item.nombreProducto === product.nombreProducto);
-          const quantityInCart = currentItem ? currentItem.cantidad : 0;
+          const quantityInCart = currentItem ? currentItem.cantidad ?? 0 : 0;
 
           return (
             <li key={index}>
@@ -148,4 +149,3 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
 };
 
 export default DataFetcher;
-
