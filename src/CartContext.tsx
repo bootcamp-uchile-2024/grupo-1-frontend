@@ -1,19 +1,20 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-// Definir el tipo para los productos
+
 interface Product {
   nombreProducto: string;
-  cantidad?: number; // Campo para manejar la cantidad
-  stock: number; // Agregar stock para verificar al agregar
-  precio: number// Otros campos según tu definición de producto...
+  cantidad?: number; 
+  stock: number; 
+  precio: number;
+  imagenProducto:string;
 }
 
 interface CartContextType {
   cartItems: Product[];
   addToCart: (product: Product) => void;
   removeFromCart: (product: Product) => void;
-  incrementProduct: (product: Product) => void; // Nueva función
-  decrementProduct: (product: Product) => void; // Nueva función
+  incrementProduct: (product: Product) => void; 
+  decrementProduct: (product: Product) => void; 
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -26,9 +27,9 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const existingProduct = prevItems.find(item => item.nombreProducto === product.nombreProducto);
       
       if (existingProduct) {
-        // Verificar stock antes de incrementar
+
         const newQuantity = (existingProduct.cantidad || 0) + 1;
-        if (newQuantity <= product.stock) { // Solo permitir agregar si hay stock disponible
+        if (newQuantity <= product.stock) { 
           return prevItems.map(item =>
             item.nombreProducto === product.nombreProducto
               ? { ...item, cantidad: newQuantity }
@@ -36,16 +37,16 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           );
         } else {
           alert('No hay suficiente stock disponible para agregar más de este producto.');
-          return prevItems; // No modificar el carrito si no hay suficiente stock
+          return prevItems; 
         }
       }
       
-      // Si no existe en el carrito y hay stock, agregarlo
+
       if (product.stock > 0) {
         return [...prevItems, { ...product, cantidad: 1 }];
       } else {
         alert('No hay suficiente stock disponible para agregar este producto.');
-        return prevItems; // No agregar si no hay stock
+        return prevItems; 
       }
     });
   };
