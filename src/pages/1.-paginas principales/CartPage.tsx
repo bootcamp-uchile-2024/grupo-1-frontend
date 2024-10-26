@@ -5,7 +5,7 @@ const CartPage: React.FC = () => {
   const { cartItems, removeFromCart, incrementProduct, decrementProduct } = useCart();
 
 
-  const totalAmount = cartItems.reduce((total, item) => total + (item.precio * (item.cantidad || 1)), 0);
+  const totalAmount = cartItems.reduce((total, item) => total + (item.precio * (item.cantidad ?? 1)), 0);
 
   return (
     <div>
@@ -28,7 +28,7 @@ const CartPage: React.FC = () => {
                 <p><strong>Precio:</strong> ${item.precio.toFixed(2)}</p>
                 <p><strong>Cantidad:</strong> {item.cantidad}</p>
                 <button onClick={() => incrementProduct(item)}>+</button>
-                <button onClick={() => decrementProduct(item)} disabled={item.cantidad <= 1}>-</button>
+                <button onClick={() => decrementProduct(item)} disabled={(item.cantidad ?? 1) <= 1}>-</button>
                 <button onClick={() => removeFromCart(item)}>Eliminar</button>
               </li>
             ))}
