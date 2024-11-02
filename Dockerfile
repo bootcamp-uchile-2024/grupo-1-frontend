@@ -14,10 +14,10 @@ COPY . .
 RUN npm run build
 
 # # Etapa 2 “empaquetado”
-# FROM nginx:alpine
+FROM nginx:alpine
 
-# COPY --from=build ./usr/app/dist /usr/share/nginx/html
+COPY --from=build ./usr/app/dist /usr/share/nginx/html
 
-# WORKDIR /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
 
-# EXPOSE 80
+EXPOSE 80
