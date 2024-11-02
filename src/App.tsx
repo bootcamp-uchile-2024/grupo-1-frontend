@@ -15,7 +15,6 @@ import { LogInPage } from './pages/1.-paginas principales/LogInPage';
 import ControlPlagasPage from './pages/3.-productos/ControlPlagasPage';
 import FertilizantesPage from './pages/3.-productos/FertilizantesPage';
 import PlantasPage from './pages/3.-productos/PlantasPage';
-import DataFetcher from './components/DataFetcher';
 import { CartProvider } from './CartContext';
 import CartPage from './pages/1.-paginas principales/CartPage';
 import MaceterosDetailPage from './pages/4.-detalle-productos/MaceterosDetailPage';
