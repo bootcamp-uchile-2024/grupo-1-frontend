@@ -5,7 +5,7 @@ import HomePage from './pages/1.-paginas principales/HomePage';
 import AboutPage from './pages/1.-paginas principales/AboutPage';
 import ContactPage from './pages/1.-paginas principales/ContactPage';
 import PlantasDetailPage from './pages/4.-detalle-productos/PlantasDetailPage';
-import { AdminPage } from './pages/2.-paginas-usuario/AdminPage';
+import AdminPage  from './pages/2.-paginas-usuario/AdminPage';
 import { PrivateRoute } from './components/PrivateRoute';
 import ProductForm from './pages/2.-paginas-usuario/ProductForm';
 import UserForm from './pages/2.-paginas-usuario/UserForm';
@@ -20,7 +20,9 @@ import CartPage from './pages/1.-paginas principales/CartPage';
 import MaceterosDetailPage from './pages/4.-detalle-productos/MaceterosDetailPage';
 import FertilizantesDetailPage from './pages/4.-detalle-productos/FertilizantesDetailPage';
 import ControlPlagasDetailPage from './pages/4.-detalle-productos/ControlPlagasDetailPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import UserManagement from './pages/2.-paginas-usuario/UserManagement';
+import ProductManagement from './pages/2.-paginas-usuario/ProductManagement';
+import CreateProduct from './pages/3.-productos/CreateProduct';import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -47,6 +49,13 @@ function App() {
             <Route path="contacto" element={<ContactPage />} />
             <Route path="formulario-usuario" element={<UserForm />} />
             <Route path="carrito" element={<CartPage />} />
+            <Route path="/gestion-usuarios" element={<UserManagement />} />
+            <Route path="/gestion-productos" element={<ProductManagement />} />
+            <Route path="/create-product" element={<CreateProduct />} />
+            <Route path="/admin" element={<AdminPage />} />
+        <Route path="/gestion-usuarios" element={<UserManagement />} />
+        <Route path="/gestion-productos" element={<ProductManagement />} />
+        <Route path="/create-product" element={<CreateProduct />} />
           </Route>
         </Routes>
       </Router>

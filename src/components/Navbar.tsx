@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import Dropdown from './Dropdown';
 import { UserInfo } from './UserInfo';
-import { useCart } from '../CartContext'; // Importar el contexto del carrito
+import { useCart } from '../CartContext'; 
 
 // SVG para el ícono del carrito
 const CartIcon = () => (
@@ -12,7 +12,11 @@ const CartIcon = () => (
   </svg>
 );
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onToggleSidebar: () => void; 
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const { cartItems } = useCart();
@@ -38,49 +42,51 @@ const Navbar: React.FC = () => {
 
   const totalItems = cartItems.reduce((total, item) => total + (item.cantidad || 0), 0);
 
-
   return (
     <>
-      <nav className='navbar'>
-        <Link to='/' className='navbar-logo'>
+      <nav className="navbar">
+        <Link to="/" className="navbar-logo">
           PLANTOPIA
         </Link>
-        <div className='menu-icon' onClick={handleClick}>
+        {}
+        <button onClick={onToggleSidebar} className="sidebar-toggle">Abrir Carrito</button>
+        <div className="menu-icon" onClick={handleClick}>
           <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
         </div>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-          <li className='nav-item'>
-            <Link to='/' className='nav-links' onClick={closeMobileMenu}>Home</Link>
+          <li className="nav-item">
+            <Link to="/" className="nav-links" onClick={closeMobileMenu}>Home</Link>
           </li>
-          <li className='nav-item' onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Link to='/services' className='nav-links' onClick={closeMobileMenu}>Productos <i className='fas fa-caret-down' /></Link>
+          <li className="nav-item" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <Link to="/services" className="nav-links" onClick={closeMobileMenu}>Productos <i className="fas fa-caret-down" /></Link>
             {dropdown && <Dropdown />}
           </li>
-          <li className='nav-item'>
-            <Link to='/contacto' className='nav-links' onClick={closeMobileMenu}>Contáctanos</Link>
+          <li className="nav-item">
+            <Link to="/contacto" className="nav-links" onClick={closeMobileMenu}>Contáctanos</Link>
           </li>
-          <li className='nav-item'>
-            <Link to='/quienes-somos' className='nav-links' onClick={closeMobileMenu}>Quienes Somos</Link>
+          <li className="nav-item">
+            <Link to="/quienes-somos" className="nav-links" onClick={closeMobileMenu}>Quienes Somos</Link>
           </li>
-          <li className='nav-item'>
-            <Link to='/admin' className='nav-links' onClick={closeMobileMenu}>Administrador</Link>
+          <li className="nav-item">
+            <Link to="/admin" className="nav-links" onClick={closeMobileMenu}>Administrador</Link>
           </li>
-          <li className='nav-item'>
-            <div className='nav-links' onClick={closeMobileMenu}><UserInfo /></div>
+          <li className="nav-item">
+            <div className="nav-links" onClick={closeMobileMenu}><UserInfo /></div>
           </li>
-          <li className='nav-item'>
-            <Link className='nav-links cart-link' onClick={closeMobileMenu} to='/carrito'>
+          <li className="nav-item">
+            <Link className="nav-links cart-link" onClick={closeMobileMenu} to="/carrito">
               <CartIcon />
               {totalItems > 0 && (
-                <span className="cart-notification">{totalItems}</span> // Mostrar total de productos
+                <span className="cart-notification">{totalItems}</span>
               )}
             </Link>
-              </li>
+          </li>
         </ul>
       </nav>
+      {}
+      {}
     </>
   );
-}
+};
 
 export default Navbar;
-  

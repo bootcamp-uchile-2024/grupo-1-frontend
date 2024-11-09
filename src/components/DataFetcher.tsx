@@ -24,19 +24,19 @@ interface Product {
 
 interface DataFetcherProps {
   tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas';
+  toggleSidebar: () => void; // Prop para abrir el sidebar
 }
 
-const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
+const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { addToCart, cartItems, removeFromCart } = useCart();
+  const { addToCart, cartItems } = useCart();
 
-  // Definir la URL de la API según el tipo de productos
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
     plantas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Planta',
     maceteros: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Macetero',
-    fertilizantes: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Fertilizantes',
+    fertilizantes: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Fertilizante',
     sustratos: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Sustrato',
     controlPlagas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Control%20Plagas',
   };
@@ -91,7 +91,6 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
     const existingProduct = cartItems.find(item => item.nombreProducto === product.nombreProducto);
     const currentQuantity = existingProduct ? existingProduct.cantidad ?? 0 : 0;
 
-
     // Verificar si hay suficiente stock disponible
     if (product.stock > currentQuantity) {
       addToCart(product);
@@ -102,6 +101,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo }) => {
             : p
         )
       );
+      toggleSidebar(); // Abre el sidebar después de agregar el producto
     } else {
       alert('No hay suficiente stock disponible para este producto.');
     }

@@ -1,14 +1,20 @@
-import { Outlet } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export function AdminPage() {
+const AdminPage: React.FC = () => {
   return (
-    <>
-        <h1>Admin Page</h1>
-        <p>Esta es la página de administración. Aquí puedes crear tus productos</p>
-        <main>
-          <Outlet/>
-        </main>
-    </>
-    
+    <div>
+      <h2>Administración</h2>
+      <ul>
+        <li>
+          <Link to="/gestion-usuarios">Gestionar Usuarios</Link>
+        </li>
+        <li>
+          <Link to="/gestion-productos">Gestionar Productos</Link>
+        </li>
+      </ul>
+    </div>
   );
-}
+};
+
+export default AdminPage; 
