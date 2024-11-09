@@ -1,0 +1,46 @@
+.sidebar-cart {
+    position: fixed;
+    top: 0; /* Asegúrate de que esté alineado con la parte superior */
+    right: -300px; 
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    z-index: 1000;
+    overflow-y: auto; /* Permite el scroll si hay muchos elementos */
+}
+
+.sidebar-cart.open {
+    right: 0;
+}
+
+.cart-item {
+    padding: 10px; /* Espaciado interno */
+    border-bottom: 1px solid #ddd; /* Línea de separación entre items */
+    margin-bottom: 10px; /* Espacio entre los items */
+}
+
+.cart-item-image {
+    width: 50px; /* Tamaño de la imagen */
+    height: 50px;
+    margin-right: 10px;
+}
+
+.close-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px 0; /* Margen superior e inferior */
+}
+
+.go-to-cart-button {
+    margin: 10px; /* Espacio alrededor del botón */
+    background-color: blue; /* Color del botón */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 10px; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar */
+}
