@@ -20,6 +20,7 @@ import CartPage from './pages/1.-paginas principales/CartPage';
 import MaceterosDetailPage from './pages/4.-detalle-productos/MaceterosDetailPage';
 import FertilizantesDetailPage from './pages/4.-detalle-productos/FertilizantesDetailPage';
 import ControlPlagasDetailPage from './pages/4.-detalle-productos/ControlPlagasDetailPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
