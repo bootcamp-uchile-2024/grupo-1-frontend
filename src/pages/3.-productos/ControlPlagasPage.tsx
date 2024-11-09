@@ -5,7 +5,9 @@ const ControlPlagasPage: React.FC = () => {
   return (
     <div>
       <h1>Catálogo de Control de Plagas</h1>
-      <DataFetcher tipo="controlPlagas" /> {}
+      <DataFetcher tipo="controlPlagas" toggleSidebar={function (): void {
+        throw new Error('Function not implemented.');
+      } } /> {}
     </div>
   );
 };

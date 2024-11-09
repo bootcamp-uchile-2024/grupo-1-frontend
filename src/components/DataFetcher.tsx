@@ -117,6 +117,10 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
           const currentItem = cartItems.find(item => item.nombreProducto === product.nombreProducto);
           const quantityInCart = currentItem ? currentItem.cantidad ?? 0 : 0;
 
+          function removeFromCart(_product: Product): void {
+            throw new Error('Function not implemented.');
+          }
+
           return (
             <li key={index}>
               <h3>{product.nombreProducto}</h3>

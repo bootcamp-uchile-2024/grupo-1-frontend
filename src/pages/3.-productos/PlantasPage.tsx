@@ -5,7 +5,9 @@ const PlantasPage: React.FC = () => {
   return (
     <div>
       <h1>Catálogo de Plantas</h1>
-      <DataFetcher tipo="plantas" /> {}
+      <DataFetcher tipo="plantas" toggleSidebar={function (): void {
+        throw new Error('Function not implemented.');
+      } } /> {}
     </div>
   );
 };
