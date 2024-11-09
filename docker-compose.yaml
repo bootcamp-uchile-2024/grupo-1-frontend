@@ -1,0 +1,10 @@
+name: grupo-1-frontend
+services:
+  frontend:
+    image: cleviobecerra/grupo-1-frontend:entrega-9
+    ports:
+      - 80:80
+  backend:
+    image:
+    ports:
+      - 3000:3000
