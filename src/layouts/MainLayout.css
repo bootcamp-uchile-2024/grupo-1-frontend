@@ -1,34 +1,34 @@
 .layout-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que el contenedor ocupa toda la altura de la ventana */
+    min-height: 100vh; 
   }
   
   .content {
-    flex: 1; /* Permite que el main ocupe el espacio restante */
-    padding: 20px; /* Espaciado alrededor del contenido */
-    margin-right: 300px; /* Espacio reservado para la barra lateral */
+    flex: 1; 
+    padding: 20px; 
+    margin-right: 300px; 
   }
   
   .footer {
-    background-color: #333; /* Color de fondo del footer */
-    color: white; /* Color del texto del footer */
-    text-align: center; /* Centrar texto */
-    padding: 10px 0; /* Espaciado vertical */
-    position: relative; /* Posicionamiento relativo para evitar problemas */
-    z-index: 1; /* Asegura que el footer esté por encima del contenido */
+    background-color: #333; 
+    color: white; 
+    text-align: center; 
+    padding: 10px 0; 
+    position: relative; 
+    z-index: 1; 
   }
   
-  /* Si necesitas estilos adicionales para la barra lateral */
+ 
   .sidebar {
-    width: 300px; /* Ancho de la barra lateral */
-    background: white; /* Color de fondo de la barra lateral */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra para dar un efecto de profundidad */
-    transition: transform 0.3s ease; /* Animación al abrir/cerrar */
-    transform: translateX(-100%); /* Ocultar barra lateral por defecto */
+    width: 300px; 
+    background: white; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s ease; 
+    transform: translateX(-100%); 
   }
   
   .sidebar.show {
-    transform: translateX(0); /* Mostrar barra lateral */
+    transform: translateX(0); 
   }
   
