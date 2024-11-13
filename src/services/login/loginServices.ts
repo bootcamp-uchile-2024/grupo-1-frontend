@@ -32,6 +32,7 @@ export function Login(user: ILogin):boolean {
 
 export function logout() {
     localStorage.removeItem('user');
+    location.reload();
 }
 
 //forma mas corta
