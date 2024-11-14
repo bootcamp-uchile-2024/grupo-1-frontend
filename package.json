@@ -8,7 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "json-server": "json-server src/data/data.json --port 4000"
+    "json-server": "json-server src/data/data.json --port 4000",
+    "docker-compose-up": "docker compose -f 'docker-compose.yaml' up -d",
+    "docker-compose-down": "docker compose -f 'docker-compose.yaml' down",
+    "delete-db": "sudo rm -r db"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
