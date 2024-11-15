@@ -24,24 +24,23 @@ Para configurar el proyecto en tu máquina, debes hacer lo siguiente:
     cd grupo-1-frontend
   ```
 ### 3.  Instala las dependencias:
-
+  ```bash
     npm install
-
-### 4.  Uso:
-
-    Para iniciar la aplicación en modo de desarrollo, ejecuta:
+  ```
+### 4.  Para iniciar la aplicación en modo de desarrollo, ejecuta:
+  ```bash
     npm run dev
-
-### 5. Para levantar la imagen docker:
-
-    Asegúrate de que docker desktop esté activo en tu máquina
+  ```
+### 5. Para levantar la imagen docker, asegúrate de que docker desktop esté activo en tu máquina:
     
-    Para iniciar el compose de docker, ejecuta:
+####   Para iniciar el compose de docker, ejecuta:
+  ```bash
     npm run docker-compose-up
-
-    Para finalizar el compose de docker, ejecuta:
+  ```
+####   Para finalizar el compose de docker, ejecuta:
+  ```bash
     npm run docker-compose-down
-
+  ```
 
 ## Credenciales de Acceso
 
