@@ -11,7 +11,10 @@
     "json-server": "json-server src/data/data.json --port 4000",
     "docker-compose-up": "docker compose -f 'docker-compose.yaml' up -d",
     "docker-compose-down": "docker compose -f 'docker-compose.yaml' down",
-    "delete-db": "sudo rm -r db"
+    "delete-db": "sudo rm -r db",
+    "docker-push": "docker push cleviobecerra/grupo-1-frontend:entrega-9",
+    "docker-build": "docker build -t cleviobecerra/grupo-1-frontend:entrega-9 .",
+    "docker-run": "docker run cleviobecerra/grupo-1-frontend:entrega-9"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
