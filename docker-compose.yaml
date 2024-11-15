@@ -5,14 +5,16 @@ services:
     ports:
       - "80:80"
   plantopia:
-    image: cnicolas86/plantopia:1.2.0
+    image: cnicolas86/plantopia:1.2.1
+    platform: linux/amd64
     container_name: plantopia-prod
     ports:
       - "4000:4000"
     env_file:
-      - ./.env.productivo # Carga las variables de entorno desde el archivo .env.productivo
+      - ./.env.productivo
     depends_on:
-      - mysql  # Asegúrate de que MySQL esté listo antes de levantar la app
+      - mysql
+      - flyway
     networks:
       - plantopia-network
 
@@ -27,10 +29,25 @@ services:
       MYSQL_USER: user_prod
       MYSQL_PASSWORD: password_prod
     volumes:
-      - ./db:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     networks:
       - plantopia-network
+
+  flyway:
+    image: flyway/flyway:latest
+    container_name: flyway-migrator
+    depends_on:
+      - mysql
+    command: -url=jdbc:mysql://mysql:3306/PlantopiaDB?allowPublicKeyRetrieval=true&useSSL=false -user=user_prod -password=password_prod -locations=filesystem:/flyway/sql migrate
+    volumes:
+      - ./db/migrations:/flyway/sql  # Mapea la carpeta de migraciones
+    networks:
+      - plantopia-network
+    restart: on-failure  # Reinicia Flyway si falla
 
 networks:
   plantopia-network:
     driver: bridge
+
+volumes:
+  mysql-data:
