@@ -6,24 +6,32 @@ import { isAuth, logout } from "../services/login/loginServices";
 export function UserInfo() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  // Función para hacer logout
   const handleLogout = () => {
-    logout();
-    navigate("/");
-    location.reload();
-  }
+    logout();  // Asume que logout limpia la sesión de usuario
+    navigate("/");  // Redirige al inicio
+  };
 
+  // useEffect para comprobar si el usuario está autenticado
   useEffect(() => {
-    setIsLoggedIn(isAuth());
-  },[]);
+    const checkAuth = () => {
+      const loggedIn = isAuth();  // Llama a la función isAuth para saber si está logueado
+      setIsLoggedIn(loggedIn);
+    };
 
-    return (
-        <div>
-            {   
-                isLoggedIn ?
-                    <button type="button" onClick={handleLogout}>Logout</button>
-                    :
-                    <button type="button" onClick={() => navigate("/login")}>Login</button>
-            }
-        </div>
-    );
+    checkAuth();
+  }, []);  // Solo se ejecuta una vez al montar el componente
+
+  return (
+    <div>
+      {isLoggedIn ? (
+        // Si está logueado, muestra el botón de logout
+        <button type="button" onClick={handleLogout}>Logout</button>
+      ) : (
+        // Si no está logueado, muestra el botón de login
+        <button type="button" onClick={() => navigate("/login")}>Login</button>
+      )}
+    </div>
+  );
 }
