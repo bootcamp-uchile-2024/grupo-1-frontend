@@ -1,89 +1,49 @@
+/* Estilos para la barra de navegación */
 .navbar {
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
+  background-color: #ffffff;      /* Fondo blanco para la barra */
+  padding: 10px 20px;             /* Espaciado interno */
 }
 
-.navbar-logo {
-  color: #fff;
-  justify-self: start;
-  margin-left: 20px;
-  cursor: pointer;
-  text-decoration: none;
+.navbar-brand {
   font-size: 2rem;
+  font-weight: bold;
+  color: #576B20;                 /* Color verde para el logo */
 }
 
-.nav-menu {
-  display: flex;
-  list-style: none;
-  text-align: center;
-  width: 70vw;
-  justify-content: end;
-  margin-right: 2rem;
-}
-
-.nav-item {
+.navbar-nav {
   display: flex;
   align-items: center;
-  height: 80px;
+  gap: 20px;                      /* Espaciado entre los enlaces */
 }
 
-.nav-links {
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
+.navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
 }
 
-.nav-links:hover {
-  border-radius: 4px;
-  transition: all 0.2s ease-out;
+.nav-link {
+  color: #46561E;                 /* Color de los enlaces */
+  font-weight: 500;
+  text-decoration: none;          /* Elimina el subrayado */
 }
 
-
-.nav-item.dropdown {
-  position: relative;
+.nav-link:hover {
+  color: #576B20;                 /* Color verde al pasar el mouse */
 }
 
-.nav-item .dropdown-toggle {
-  color: white;
-  text-decoration: none;
+.navbar-toggler-icon {
+  background-color: #576B20;      /* Color del icono de menú hamburguesa */
 }
 
-.dropdown-menu {
-  background-color: #333;
-  border-radius: 4px;
-  width: 200px;
-  position: absolute;
-  top: 80px;  
-  left: 0;
-  display: none; 
+.cart-link {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #46561E;
 }
 
-.nav-item:hover .dropdown-menu {
-  display: block; 
+.cart-link:hover {
+  color: #576B20;
 }
 
-.dropdown-item {
-  color: white; 
-  text-decoration: none;
-  padding: 8px 16px;
-  display: block;
-}
-
-.dropdown-item:hover {
-  background-color: #444;
-}
-
-
-.cart-notification {
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 4px 8px;
-  font-size: 12px;
-  position: relative;
-  top: -8px;
-  right: -8px;
-}
+.car

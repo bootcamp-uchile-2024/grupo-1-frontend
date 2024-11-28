@@ -26,8 +26,6 @@ import CreateProduct from './pages/3.-productos/CreateProduct';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
     <CartProvider>
       <Router>

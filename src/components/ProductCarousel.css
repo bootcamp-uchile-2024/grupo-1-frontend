@@ -1,0 +1,31 @@
+.product-carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px; /* Espacio entre los productos */
+    padding: 32px; /* Padding alrededor del slider */
+    width: 100%;
+  }
+  
+  .product-carousel-inner {
+    display: flex;
+    gap: 24px; /* Espaciado entre los productos */
+  }
+  
+  .product-carousel-item {
+    flex: 0 0 auto; /* Hace que cada item tenga un tamaño fijo y no se expanda */
+    width: calc(12.5% - 24px); /* 8 productos, con 24px entre ellos (100% / 8 - 24px) */
+    padding: 0;
+  }
+  
+  .product-carousel-item img {
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
+  @media (max-width: 768px) {
+    .product-carousel-item {
+      width: calc(50% - 24px); /* Muestra 2 productos en pantallas pequeñas */
+    }
+  }
+  

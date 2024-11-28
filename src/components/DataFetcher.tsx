@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useCart } from '../CartContext'; 
+import { useCart } from '../CartContext';
 
 interface Product {
   nombreProducto: string;
   nombreCientifico?: string;
-  imagenProducto: string;
+  imagenProducto: string[];
   descuento?: number;
   precio: number;
   coberturaDeDespacho?: string;
-  stock: number; 
+  stock: number;
   descripcionProducto: string;
   categoria: string;
   habitat?: string;
@@ -31,47 +31,84 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { addToCart, cartItems } = useCart();
+  const { addToCart, cartItems, removeFromCart } = useCart();
 
+  // Nuevos endpoints basados en la URL proporcionada
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
-    plantas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Planta',
-    maceteros: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Macetero',
-    fertilizantes: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Fertilizante',
-    sustratos: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Sustrato',
-    controlPlagas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Control%20Plagas',
+    plantas: 'http://16.171.43.137:4000/productos/plantas/get?page=1&size=200',
+    maceteros: 'http://16.171.43.137:4000/productos/maceteros/get?page=1&size=200',
+    fertilizantes: 'http://16.171.43.137:4000/productos/fertilizantes/get?page=1&size=200',
+    sustratos: 'http://16.171.43.137:4000/productos/sustratos/get?page=1&size=200',
+    controlPlagas: 'http://16.171.43.137:4000/productos/catalogo?page=1&size=200', // Usamos el endpoint genérico para el catálogo
   };
 
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const response = await fetch(API_URLS[tipo]); 
+        const response = await fetch(API_URLS[tipo]);
         if (!response.ok) {
           throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
         }
-        const result: any[] = await response.json();
+        const result = await response.json();
 
-        const mappedProducts = result.map((item) => ({
-          nombreProducto: item.nombreProducto,
-          nombreCientifico: item.nombreCientifico || undefined,
-          imagenProducto: item.imagenProducto || [],
-          descuento: item.descuento,
-          precio: item.precioNormal, 
-          coberturaDeDespacho: item.coberturaDeDespacho ? item.coberturaDeDespacho[0] : undefined,
-          stock: item.stock,
-          descripcionProducto: item.descripcionProducto,
-          categoria: item.categoria,
-          habitat: item.habitat,
-          luz: item.luz,
-          frecuenciaDeRiego: item.frecuenciaDeRiego,
-          fertilizanteSugerido: item.fertilizantesSugeridos ? item.fertilizantesSugeridos[0] : undefined,
-          humedadIdeal: item.humedadIdeal,
-          temperaturaIdeal: item.temperaturaIdeal,
-          toxicidadParaMascotas: item.toxicidadMascotas,
-          tipoDeSuelo: item.tipoSuelo,
-          dificultadDeCuidado: item.dificultadDeCuidado,
-        }));
+        console.log('Respuesta de la API:', result); // Verificar la respuesta completa
 
-        setProducts(mappedProducts);
+        // Verificar si result es un array o si está contenido en una propiedad del objeto
+        if (Array.isArray(result)) {
+          const mappedProducts = result.map((item: Product) => ({
+            nombreProducto: item.nombreProducto,
+            nombreCientifico: item.nombreCientifico || undefined,
+            // Asegurarse de que 'imagenProducto' sea siempre un array de cadenas
+            imagenProducto: Array.isArray(item.imagenProducto) ? item.imagenProducto : [item.imagenProducto || ''],
+            descuento: item.descuento,
+            // Verificar que el precio esté definido y sea un número
+            precio: typeof item.precio === 'number' && !isNaN(item.precio) ? item.precio : 0,
+            coberturaDeDespacho: item.coberturaDeDespacho ? item.coberturaDeDespacho[0] : undefined,
+            stock: item.stock,
+            descripcionProducto: item.descripcionProducto,
+            categoria: item.categoria,
+            habitat: item.habitat,
+            luz: item.luz,
+            frecuenciaDeRiego: item.frecuenciaDeRiego,
+            fertilizanteSugerido: item.fertilizantesSugeridos ? item.fertilizantesSugeridos[0] : undefined,
+            humedadIdeal: item.humedadIdeal,
+            temperaturaIdeal: item.temperaturaIdeal,
+            toxicidadParaMascotas: item.toxicidadMascotas,
+            tipoDeSuelo: item.tipoSuelo,
+            dificultadDeCuidado: item.dificultadDeCuidado,
+          }));
+
+          setProducts(mappedProducts);
+        } else if (result.data && Array.isArray(result.data)) {
+          // Si la respuesta tiene una clave 'data' que contiene el array
+          const mappedProducts = result.data.map((item: Product) => ({
+            nombreProducto: item.nombreProducto,
+            nombreCientifico: item.nombreCientifico || undefined,
+            // Asegurarse de que 'imagenProducto' sea siempre un array de cadenas
+            imagenProducto: Array.isArray(item.imagenProducto) ? item.imagenProducto : [item.imagenProducto || ''],
+            descuento: item.descuento,
+            // Verificar que el precio esté definido y sea un número
+            precio: typeof item.precio === 'number' && !isNaN(item.precio) ? item.precio : 0,
+            coberturaDeDespacho: item.coberturaDeDespacho ? item.coberturaDeDespacho[0] : undefined,
+            stock: item.stock,
+            descripcionProducto: item.descripcionProducto,
+            categoria: item.categoria,
+            habitat: item.habitat,
+            luz: item.luz,
+            frecuenciaDeRiego: item.frecuenciaDeRiego,
+            fertilizanteSugerido: item.fertilizantesSugeridos ? item.fertilizantesSugeridos[0] : undefined,
+            humedadIdeal: item.humedadIdeal,
+            temperaturaIdeal: item.temperaturaIdeal,
+            toxicidadParaMascotas: item.toxicidadMascotas,
+            tipoDeSuelo: item.tipoSuelo,
+            dificultadDeCuidado: item.dificultadDeCuidado,
+          }));
+
+          setProducts(mappedProducts);
+        } else {
+          console.error('La respuesta de la API no contiene un array de productos');
+          setError('La respuesta de la API no es válida');
+        }
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -84,26 +121,38 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
     };
 
     fetchProductsData();
-  }, [tipo]); // Dependencia del tipo
+  }, [tipo]);
 
-  // Función para manejar la compra
   const handlePurchase = (product: Product) => {
     const existingProduct = cartItems.find(item => item.nombreProducto === product.nombreProducto);
     const currentQuantity = existingProduct ? existingProduct.cantidad ?? 0 : 0;
 
-    // Verificar si hay suficiente stock disponible
     if (product.stock > currentQuantity) {
       addToCart(product);
       setProducts(prevProducts =>
         prevProducts.map(p =>
-          p.nombreProducto === product.nombreProducto 
-            ? { ...p, stock: p.stock - 1 } 
+          p.nombreProducto === product.nombreProducto
+            ? { ...p, stock: p.stock - 1 }
             : p
         )
       );
-      toggleSidebar(); // Abre el sidebar después de agregar el producto
+      toggleSidebar();
     } else {
       alert('No hay suficiente stock disponible para este producto.');
+    }
+  };
+
+  const handleRemove = (product: Product) => {
+    const existingProduct = cartItems.find(item => item.nombreProducto === product.nombreProducto);
+    if (existingProduct && existingProduct.cantidad) {
+      removeFromCart(product);
+      setProducts(prevProducts =>
+        prevProducts.map(p =>
+          p.nombreProducto === product.nombreProducto
+            ? { ...p, stock: p.stock + 1 }
+            : p
+        )
+      );
     }
   };
 
@@ -117,22 +166,18 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
           const currentItem = cartItems.find(item => item.nombreProducto === product.nombreProducto);
           const quantityInCart = currentItem ? currentItem.cantidad ?? 0 : 0;
 
-          function removeFromCart(_product: Product): void {
-            throw new Error('Function not implemented.');
-          }
-
           return (
             <li key={index}>
               <h3>{product.nombreProducto}</h3>
               {product.imagenProducto.length > 0 && (
-                <img 
-                  src={product.imagenProducto[0]} 
-                  alt={product.nombreProducto} 
-                  style={{ width: '100px', height: '100px' }} 
+                <img
+                  src={product.imagenProducto[0]}
+                  alt={product.nombreProducto}
+                  style={{ width: '100px', height: '100px' }}
                 />
               )}
               <p><strong>Descripción:</strong> {product.descripcionProducto}</p>
-              <p><strong>Precio:</strong> ${product.precio.toFixed(2)}</p>
+              <p><strong>Precio:</strong> ${product.precio ? product.precio.toFixed(2) : 'No disponible'}</p> {/* Si precio es 0 o undefined, muestra "No disponible" */}
               <p><strong>Categoría:</strong> {product.categoria}</p>
               <p><strong>Stock:</strong> {product.stock}</p>
 
@@ -141,7 +186,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
               {quantityInCart > 0 && (
                 <div>
                   <span>Cantidad en el carrito: {quantityInCart}</span>
-                  <button onClick={() => removeFromCart(product)}>Eliminar del carrito</button>
+                  <button onClick={() => handleRemove(product)}>Eliminar del carrito</button>
                 </div>
               )}
             </li>
