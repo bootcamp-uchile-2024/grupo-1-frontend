@@ -70,11 +70,11 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
             habitat: item.habitat,
             luz: item.luz,
             frecuenciaDeRiego: item.frecuenciaDeRiego,
-            fertilizanteSugerido: item.fertilizantesSugeridos ? item.fertilizantesSugeridos[0] : undefined,
+            fertilizanteSugerido: item.fertilizanteSugerido ? item.fertilizanteSugerido[0] : undefined,
             humedadIdeal: item.humedadIdeal,
             temperaturaIdeal: item.temperaturaIdeal,
-            toxicidadParaMascotas: item.toxicidadMascotas,
-            tipoDeSuelo: item.tipoSuelo,
+            toxicidadParaMascotas: item.toxicidadParaMascotas,
+            tipoDeSuelo: item.tipoDeSuelo,
             dificultadDeCuidado: item.dificultadDeCuidado,
           }));
 
@@ -96,11 +96,11 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
             habitat: item.habitat,
             luz: item.luz,
             frecuenciaDeRiego: item.frecuenciaDeRiego,
-            fertilizanteSugerido: item.fertilizantesSugeridos ? item.fertilizantesSugeridos[0] : undefined,
+            fertilizanteSugerido: item.fertilizanteSugerido ? item.fertilizanteSugerido[0] : undefined,
             humedadIdeal: item.humedadIdeal,
             temperaturaIdeal: item.temperaturaIdeal,
-            toxicidadParaMascotas: item.toxicidadMascotas,
-            tipoDeSuelo: item.tipoSuelo,
+            toxicidadParaMascotas: item.toxicidadParaMascotas,
+            tipoDeSuelo: item.tipoDeSuelo,
             dificultadDeCuidado: item.dificultadDeCuidado,
           }));
 

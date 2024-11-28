@@ -1,41 +1,65 @@
-import React from 'react';
-import { Carousel } from 'react-bootstrap';
-import './ProductCarousel.css'; // Asegúrate de que el archivo CSS esté correctamente importado
+import React, { useRef } from 'react';
+import './ProductCarousel.css';
 
-// Definir el tipo para los props del componente
 interface ProductCarouselProps {
   products: string[];
   prices: string[];
-  images: string[]; // El prop images es obligatorio
+  images: string[];
 }
 
 const ProductCarousel: React.FC<ProductCarouselProps> = ({ products, prices, images }) => {
-  if (!products || !prices || !images || products.length === 0 || prices.length === 0 || images.length === 0) {
-    return <div>Cargando productos...</div>;
-  }
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Función para desplazar hacia la izquierda
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
+
+  // Función para desplazar hacia la derecha
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <div className="product-carousel-container">
-      <Carousel>
-        <Carousel.Item>
-          <div className="product-carousel-inner">
-            {products.slice(0, 8).map((product, index) => (
-              <div className="product-carousel-item" key={index}>
-                {/* Usar las URLs de las imágenes de Google Drive */}
-                {images[index] ? (
-                  <img src={images[index]} alt={product} />
-                ) : (
-                  <div>No disponible</div>
-                )}
-                <div className="product-info">
-                  <h5>{product}</h5>
-                  <p>{prices[index]}</p>
-                </div>
-              </div>
-            ))}
+    <div className="carousel-container">
+      {/* Botón de navegación izquierda */}
+      <button
+        className="carousel-button left"
+        onClick={scrollLeft}
+        aria-label="Scroll Left"
+      >
+        &#8249;
+      </button>
+
+      <div className="carousel-content" ref={carouselRef}>
+        {products.map((product, index) => (
+          <div className="product-card" key={index}>
+            <div className="product-image">
+              <img src={images[index]} alt={product} />
+              <div className="product-tag">Pet-friendly</div> {/* Etiqueta opcional */}
+            </div>
+            <div className="product-info">
+              <h5 className="product-name">{product}</h5>
+              <p className="product-price">{prices[index]}</p>
+              
+            </div>
+            <button className="product-button">Ver Producto</button>
           </div>
-        </Carousel.Item>
-      </Carousel>
+        ))}
+      </div>
+
+      {/* Botón de navegación derecha */}
+      <button
+        className="carousel-button right"
+        onClick={scrollRight}
+        aria-label="Scroll Right"
+      >
+        &#8250;
+      </button>
     </div>
   );
 };

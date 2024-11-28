@@ -8,6 +8,7 @@
   font-size: 2rem;
   font-weight: bold;
   color: #576B20;                 /* Color verde para el logo */
+  text-decoration: none;
 }
 
 .navbar-nav {
@@ -16,7 +17,7 @@
   gap: 20px;                      /* Espaciado entre los enlaces */
 }
 
-.navbar-nav .nav-item {
+.nav-item {
   display: flex;
   align-items: center;
 }
@@ -25,25 +26,56 @@
   color: #46561E;                 /* Color de los enlaces */
   font-weight: 500;
   text-decoration: none;          /* Elimina el subrayado */
+  transition: color 0.3s ease;
 }
 
 .nav-link:hover {
   color: #576B20;                 /* Color verde al pasar el mouse */
 }
 
-.navbar-toggler-icon {
-  background-color: #576B20;      /* Color del icono de menú hamburguesa */
-}
-
+/* Botón de carrito con ícono de Material UI */
 .cart-link {
   background: transparent;
   border: none;
+  color: #46561E;                 /* Color consistente con el tema general */
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
   cursor: pointer;
-  color: #46561E;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
 .cart-link:hover {
   color: #576B20;
 }
 
-.car
+/* Notificación del carrito (contador) */
+.cart-notification {
+  background-color: #dc3545;      /* Rojo para destacar el contador */
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+/* Dropdown de productos */
+.dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.dropdown-item {
+  color: #46561E;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+  color: #576B20;
+}
