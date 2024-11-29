@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '../CartContext';
 
 interface Product {
+  id: number; // Agregamos la variable id
   nombreProducto: string;
   nombreCientifico?: string;
   imagenProducto: string;
@@ -24,7 +25,7 @@ interface Product {
 
 interface DataFetcherProps {
   tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas';
-  toggleSidebar: () => void; // Prop para abrir el sidebar
+  toggleSidebar: () => void;
 }
 
 const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
@@ -51,6 +52,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
         const result = await response.json();
 
         const mappedProducts = result.data.map((item: any) => ({
+          id: item.producto.id, // Extraemos el id del producto
           nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
           imagenProducto: item.producto.imagenes.map((img: any) => img.urlImagen),
@@ -79,16 +81,14 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
   }, [tipo]);
 
   const handlePurchase = (product: Product) => {
-    const existingProduct = cartItems.find(item => item.nombreProducto === product.nombreProducto);
+    const existingProduct = cartItems.find(item => item.id === product.id); // Usamos id en lugar de nombreProducto
     const currentQuantity = existingProduct ? existingProduct.cantidad ?? 0 : 0;
 
     if (product.stock > currentQuantity) {
       addToCart(product);
       setProducts(prevProducts =>
         prevProducts.map(p =>
-          p.nombreProducto === product.nombreProducto
-            ? { ...p, stock: p.stock - 1 }
-            : p
+          p.id === product.id ? { ...p, stock: p.stock - 1 } : p
         )
       );
       toggleSidebar();
@@ -98,14 +98,12 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
   };
 
   const handleRemove = (product: Product) => {
-    const existingProduct = cartItems.find(item => item.nombreProducto === product.nombreProducto);
+    const existingProduct = cartItems.find(item => item.id === product.id); // Usamos id en lugar de nombreProducto
     if (existingProduct && existingProduct.cantidad) {
       removeFromCart(product);
       setProducts(prevProducts =>
         prevProducts.map(p =>
-          p.nombreProducto === product.nombreProducto
-            ? { ...p, stock: p.stock + 1 }
-            : p
+          p.id === product.id ? { ...p, stock: p.stock + 1 } : p
         )
       );
     }
@@ -117,12 +115,12 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
       {loading && <p>Cargando...</p>}
       {error && <p>Error: {error}</p>}
       <ul>
-        {products.map((product, index) => {
-          const currentItem = cartItems.find(item => item.nombreProducto === product.nombreProducto);
+        {products.map((product) => {
+          const currentItem = cartItems.find(item => item.id === product.id); // Usamos id en lugar de nombreProducto
           const quantityInCart = currentItem ? currentItem.cantidad ?? 0 : 0;
 
           return (
-            <li key={index}>
+            <li key={product.id}>
               <h3>{product.nombreProducto}</h3>
               {product.imagenProducto.length > 0 && (
                 <img
