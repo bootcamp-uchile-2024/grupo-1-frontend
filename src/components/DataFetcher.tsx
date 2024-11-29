@@ -4,7 +4,7 @@ import { useCart } from '../CartContext';
 interface Product {
   nombreProducto: string;
   nombreCientifico?: string;
-  imagenProducto: string[];
+  imagenProducto: string;
   descuento?: number;
   precio: number;
   coberturaDeDespacho?: string;
@@ -33,13 +33,12 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
   const [error, setError] = useState<string | null>(null);
   const { addToCart, cartItems, removeFromCart } = useCart();
 
-  // Nuevos endpoints basados en la URL proporcionada
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
-    plantas: 'http://16.171.43.137:4000/productos/plantas/get?page=1&size=200',
-    maceteros: 'http://16.171.43.137:4000/productos/maceteros/get?page=1&size=200',
-    fertilizantes: 'http://16.171.43.137:4000/productos/fertilizantes/get?page=1&size=200',
-    sustratos: 'http://16.171.43.137:4000/productos/sustratos/get?page=1&size=200',
-    controlPlagas: 'http://16.171.43.137:4000/productos/catalogo?page=1&size=200', // Usamos el endpoint genérico para el catálogo
+    plantas: 'http://16.171.43.137:4000/productos/plantas/get?page=1&size=10',
+    maceteros: 'http://16.171.43.137:4000/productos/maceteros/get?page=1&size=10',
+    fertilizantes: 'http://16.171.43.137:4000/productos/fertilizantes/get?page=1&size=10',
+    sustratos: 'http://16.171.43.137:4000/productos/sustratos/get?page=1&size=10',
+    controlPlagas: 'http://16.171.43.137:4000/productos/catalogo?page=1&size=10',
   };
 
   useEffect(() => {
@@ -51,64 +50,20 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
         }
         const result = await response.json();
 
-        console.log('Respuesta de la API:', result); // Verificar la respuesta completa
+        const mappedProducts = result.data.map((item: any) => ({
+          nombreProducto: item.producto.nombreProducto,
+          nombreCientifico: item.nombreCientifico || undefined,
+          imagenProducto: item.producto.imagenes.map((img: any) => img.urlImagen),
+          descuento: item.producto.descuento,
+          precio: item.producto.precioNormal,
+          stock: item.producto.stock,
+          descripcionProducto: item.producto.descripcionProducto,
+          categoria: item.producto.categoria.nombreCategoria,
+          temperaturaIdeal: parseFloat(item.temperaturaIdeal),
+          toxicidadParaMascotas: Boolean(item.toxicidadMascotas),
+        }));
 
-        // Verificar si result es un array o si está contenido en una propiedad del objeto
-        if (Array.isArray(result)) {
-          const mappedProducts = result.map((item: Product) => ({
-            nombreProducto: item.nombreProducto,
-            nombreCientifico: item.nombreCientifico || undefined,
-            // Asegurarse de que 'imagenProducto' sea siempre un array de cadenas
-            imagenProducto: Array.isArray(item.imagenProducto) ? item.imagenProducto : [item.imagenProducto || ''],
-            descuento: item.descuento,
-            // Verificar que el precio esté definido y sea un número
-            precio: typeof item.precio === 'number' && !isNaN(item.precio) ? item.precio : 0,
-            coberturaDeDespacho: item.coberturaDeDespacho ? item.coberturaDeDespacho[0] : undefined,
-            stock: item.stock,
-            descripcionProducto: item.descripcionProducto,
-            categoria: item.categoria,
-            habitat: item.habitat,
-            luz: item.luz,
-            frecuenciaDeRiego: item.frecuenciaDeRiego,
-            fertilizanteSugerido: item.fertilizanteSugerido ? item.fertilizanteSugerido[0] : undefined,
-            humedadIdeal: item.humedadIdeal,
-            temperaturaIdeal: item.temperaturaIdeal,
-            toxicidadParaMascotas: item.toxicidadParaMascotas,
-            tipoDeSuelo: item.tipoDeSuelo,
-            dificultadDeCuidado: item.dificultadDeCuidado,
-          }));
-
-          setProducts(mappedProducts);
-        } else if (result.data && Array.isArray(result.data)) {
-          // Si la respuesta tiene una clave 'data' que contiene el array
-          const mappedProducts = result.data.map((item: Product) => ({
-            nombreProducto: item.nombreProducto,
-            nombreCientifico: item.nombreCientifico || undefined,
-            // Asegurarse de que 'imagenProducto' sea siempre un array de cadenas
-            imagenProducto: Array.isArray(item.imagenProducto) ? item.imagenProducto : [item.imagenProducto || ''],
-            descuento: item.descuento,
-            // Verificar que el precio esté definido y sea un número
-            precio: typeof item.precio === 'number' && !isNaN(item.precio) ? item.precio : 0,
-            coberturaDeDespacho: item.coberturaDeDespacho ? item.coberturaDeDespacho[0] : undefined,
-            stock: item.stock,
-            descripcionProducto: item.descripcionProducto,
-            categoria: item.categoria,
-            habitat: item.habitat,
-            luz: item.luz,
-            frecuenciaDeRiego: item.frecuenciaDeRiego,
-            fertilizanteSugerido: item.fertilizanteSugerido ? item.fertilizanteSugerido[0] : undefined,
-            humedadIdeal: item.humedadIdeal,
-            temperaturaIdeal: item.temperaturaIdeal,
-            toxicidadParaMascotas: item.toxicidadParaMascotas,
-            tipoDeSuelo: item.tipoDeSuelo,
-            dificultadDeCuidado: item.dificultadDeCuidado,
-          }));
-
-          setProducts(mappedProducts);
-        } else {
-          console.error('La respuesta de la API no contiene un array de productos');
-          setError('La respuesta de la API no es válida');
-        }
+        setProducts(mappedProducts);
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -177,7 +132,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
                 />
               )}
               <p><strong>Descripción:</strong> {product.descripcionProducto}</p>
-              <p><strong>Precio:</strong> ${product.precio ? product.precio.toFixed(2) : 'No disponible'}</p> {/* Si precio es 0 o undefined, muestra "No disponible" */}
+              <p><strong>Precio:</strong> ${product.precio.toFixed(2)}</p>
               <p><strong>Categoría:</strong> {product.categoria}</p>
               <p><strong>Stock:</strong> {product.stock}</p>
 
