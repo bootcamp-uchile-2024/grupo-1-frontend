@@ -13,6 +13,7 @@ interface Product {
 const HomePage: React.FC = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
+  const [sliderImages, setSliderImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,24 +27,22 @@ const HomePage: React.FC = () => {
 
         const result = await response.json();
 
-        console.log('Respuesta de la API:', result); // Para depuración
-
         const products = result.data.map((item: any) => ({
           nombreProducto: item.nombreProducto,
           precioNormal: item.precioNormal,
-          imagenProducto: item.imagenes.map((img: any) => img.urlImagen),
-          categoria: item.categoria.nombreCategoria,
+          imagenProducto: item.imagenes?.map((img: any) => img.urlImagen) || [],
+          categoria: item.categoria?.nombreCategoria || 'Sin categoría',
         }));
 
-        // Lógica para separar los productos en destacados y recomendados
+        // Extraer las imágenes para el slider principal
+        const sliderImgs = products.slice(0, 3).map((product) => product.imagenProducto[0] || '/default-image.png');
+        setSliderImages(sliderImgs);
+
+        // Separar productos destacados y recomendados
         setFeaturedProducts(products.slice(0, 8));
-        setRecommendedProducts(products.slice(8, 16)); 
+        setRecommendedProducts(products.slice(8, 16));
       } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('Error desconocido al cargar el catálogo');
-        }
+        setError(err instanceof Error ? err.message : 'Error desconocido');
       } finally {
         setLoading(false);
       }
@@ -52,16 +51,23 @@ const HomePage: React.FC = () => {
     fetchCatalog();
   }, []);
 
-  if (loading) return <p>Cargando...</p>;
-  if (error) return <p>Error: {error}</p>;
+  // Mostrar loading o error antes de renderizar
+  if (loading) {
+    return <p>Cargando...</p>;
+  }
 
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  // Renderizar el contenido principal
   return (
     <div>
       <header></header>
 
       <Container>
         {/* Carrusel de imágenes */}
-        <ImageCarousel />
+        <ImageCarousel images={sliderImages} /> {/* Pasamos las imágenes del slider */}
 
         {/* Productos Destacados */}
         <h2 className="my-4">Productos destacados</h2>
@@ -87,4 +93,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-

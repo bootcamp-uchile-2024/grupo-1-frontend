@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useCart } from '../CartContext';
-import './ProductCard.css';
+import ProductCard from './ProductCard';
 
 interface Product {
   id: number;
@@ -17,14 +16,12 @@ interface Product {
 interface DataFetcherProps {
   tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas';
   filters: Record<string, string | boolean>;
-  toggleSidebar: () => void;
 }
 
-const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, toggleSidebar }) => {
+const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { addToCart, cartItems, removeFromCart } = useCart();
 
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
     plantas: 'http://16.171.43.137:4000/productos/plantas/get',
@@ -34,7 +31,6 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, toggleSidebar 
     controlPlagas: 'http://16.171.43.137:4000/productos/catalogo',
   };
 
-  // Construir la URL con filtros dinámicos
   const buildUrlWithFilters = () => {
     const baseUrl = API_URLS[tipo];
     const params = new URLSearchParams();
@@ -81,44 +77,13 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, toggleSidebar 
     fetchProducts();
   }, [tipo, filters]);
 
-  const handlePurchase = (product: Product) => {
-    const existingProduct = cartItems.find((item) => item.id === product.id);
-    const currentQuantity = existingProduct ? existingProduct.cantidad ?? 0 : 0;
-
-    if (product.stock > currentQuantity) {
-      addToCart(product);
-      setProducts((prevProducts) =>
-        prevProducts.map((p) =>
-          p.id === product.id ? { ...p, stock: p.stock - 1 } : p
-        )
-      );
-      toggleSidebar();
-    } else {
-      alert('No hay suficiente stock disponible para este producto.');
-    }
-  };
+  if (loading) return <p>Cargando productos...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="product-grid">
-      {loading && <p>Cargando productos...</p>}
-      {error && <p>{error}</p>}
-      {!loading && !error && products.length === 0 && <p>No se encontraron productos.</p>}
       {products.map((product) => (
-        <div key={product.id} className="product-card">
-          <img
-            src={product.imagenProducto}
-            alt={product.nombreProducto}
-            className="product-image"
-          />
-          <div className="product-info">
-            <h3>{product.nombreProducto}</h3>
-            <p>${product.precio.toLocaleString()}</p>
-            <p>{product.categoria}</p>
-            <button onClick={() => handlePurchase(product)} className="product-button">
-              Agregar al carrito
-            </button>
-          </div>
-        </div>
+        <ProductCard key={product.id} {...product} />
       ))}
     </div>
   );
