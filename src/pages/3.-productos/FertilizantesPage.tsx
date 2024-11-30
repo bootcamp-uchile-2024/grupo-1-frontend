@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import DataFetcher from '../../components/DataFetcher';
+import SidebarFilters from './SidebarFilter'; 
 
 const FertilizantesPage: React.FC = () => {
   const [filters, setFilters] = useState<Record<string, string | boolean>>({});
 
-  const toggleSidebar = () => {
-    console.log('Sidebar toggled'); // Aquí puedes implementar la funcionalidad del sidebar si lo necesitas
+  const handleFilterChange = (filterName: string, value: string | boolean) => {
+    setFilters((prevFilters) => ({ ...prevFilters, [filterName]: value }));
   };
 
   return (
-    <div>
-      <h1>Catálogo de Fertilizantes</h1>
-      <DataFetcher tipo="fertilizantes" filters={filters} toggleSidebar={toggleSidebar} />
+    <div style={{ display: 'flex' }}>
+      {/* Barra lateral de filtros */}
+      <SidebarFilters onFilterChange={handleFilterChange} />
+
+      {/* Contenido principal */}
+      <div style={{ marginLeft: '20px', flex: 1 }}>
+        <h1>Catálogo de Fertilizantes</h1>
+        <DataFetcher tipo="fertilizantes" filters={filters} />
+      </div>
     </div>
   );
 };
