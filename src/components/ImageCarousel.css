@@ -42,12 +42,14 @@
     height: 100%;                  
     display: flex;
     justify-content: center;
-    align-items: center;           
+    align-items: center;  
+    border-radius: 0 32px 0 32px;         
   }
   
   .carousel-images {
-    width: 100%;
+    width: 400px;
     height: 400px;
+    aspect-ratio: 16/9;
     display: flex;
     justify-content: center;
     padding-left: 0px;
