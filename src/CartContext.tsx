@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface Product {
+  id: number;
   nombreProducto: string;
   cantidad?: number;
   stock: number;

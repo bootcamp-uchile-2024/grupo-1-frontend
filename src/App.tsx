@@ -32,8 +32,9 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<HomePage />} />
+            {/* <Route path="detalle-plantas" element={<PlantasDetailPage />} /> */}
             <Route path="plantas" element={<PlantasPage />} />
-            <Route path="detalle-plantas" element={<PlantasDetailPage />} />
+            <Route path="/productos/plantas/getbyid/:id" element={<PlantasDetailPage/>} />
             <Route path="maceteros" element={<MaceterosPage />} />
             <Route path="detalle-maceteros" element={<MaceterosDetailPage />} />
             <Route path="fertilizantes" element={<FertilizantesPage />} />
