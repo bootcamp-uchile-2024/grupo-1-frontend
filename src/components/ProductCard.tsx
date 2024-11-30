@@ -28,6 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       precio,
       stock,
       imagenProducto,
+      
       categoria,
     });
   };

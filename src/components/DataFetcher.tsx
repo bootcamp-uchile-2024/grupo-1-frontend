@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useCart } from '../CartContext';
+import ProductCard from './ProductCard';
 
 interface Product {
   id: number;
@@ -51,13 +51,15 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(API_URLS[tipo]);
-        if (!response.ok) {
-          throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
-        }
-        const result = await response.json();
+        setLoading(true);
+        const urlWithFilters = buildUrlWithFilters();
+        const response = await fetch(urlWithFilters);
 
-        const mappedProducts = result.data.map((item: any) => ({
+        if (!response.ok) throw new Error('Error al obtener los productos');
+
+        const data = await response.json();
+
+        const mappedProducts = data.data.map((item: any) => ({
           id: item.producto.id,
           nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
@@ -98,49 +100,32 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
 
   return (
     <div>
-      <h2>Productos</h2>
-      {loading && <p>Cargando...</p>}
-      {error && <p>Error: {error}</p>}
-      <ul>
-        {products.map((product) => {
-          const currentItem = cartItems.find(item => item.id === product.id); // Usamos id en lugar de nombreProducto
-          const quantityInCart = currentItem ? currentItem.cantidad ?? 0 : 0;
+      <div className="product-grid">
+        {products.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </div>
 
-          function handlePurchase(product: Product): void {
-            throw new Error('Function not implemented.');
-          }
-
-          function handleRemove(product: Product): void {
-            throw new Error('Function not implemented.');
-          }
-
-          return (
-            <li key={product.id}>
-              <h3>{product.nombreProducto}</h3>
-              {product.imagenProducto.length > 0 && (
-                <img
-                  src={product.imagenProducto[0]}
-                  alt={product.nombreProducto}
-                  style={{ width: '100px', height: '100px' }}
-                />
-              )}
-              <p><strong>Descripción:</strong> {product.descripcionProducto}</p>
-              <p><strong>Precio:</strong> ${product.precio.toFixed(2)}</p>
-              <p><strong>Categoría:</strong> {product.categoria}</p>
-              <p><strong>Stock:</strong> {product.stock}</p>
-
-              <button onClick={() => handlePurchase(product)}>Agregar al carrito</button>
-
-              {quantityInCart > 0 && (
-                <div>
-                  <span>Cantidad en el carrito: {quantityInCart}</span>
-                  <button onClick={() => handleRemove(product)}>Eliminar del carrito</button>
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+      {/* Controles de Paginación */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          style={{ margin: '0 10px', padding: '10px 20px' }}
+        >
+          Anterior
+        </button>
+        <span style={{ margin: '0 10px' }}>
+          Página {currentPage} de {totalPages}
+        </span>
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          style={{ margin: '0 10px', padding: '10px 20px' }}
+        >
+          Siguiente
+        </button>
+      </div>
     </div>
   );
 };
