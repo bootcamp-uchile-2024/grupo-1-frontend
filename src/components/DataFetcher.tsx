@@ -55,8 +55,10 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
         if (!response.ok) throw new Error('Error al obtener los productos');
 
         const data = await response.json();
-
+        const mappedProducts = data.data.map((item: any) => ({
+=======
         const mappedProducts = result.data.map((item: any) => ({
+>>>>>>> origin/entrega-10
           id: item.producto.id,
           nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
@@ -82,7 +84,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
   if (loading) return <p>Cargando productos...</p>;
   if (error) return <p>{error}</p>;
 
-
+<<<<<<< HEAD
   // Usar renderItem si está disponible, de lo contrario mostrar productos predeterminados
   return renderItem ? (
     renderItem(products)
@@ -91,7 +93,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
       {products.map((product) => (
         <ProductCard key={product.id} {...product} />
       ))}
-
+=======
   return (
     <div>
       <h2>Productos</h2>
@@ -137,6 +139,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
           );
         })}
       </ul>
+>>>>>>> origin/entrega-10
     </div>
   );
 };
