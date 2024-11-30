@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './ProductCarousel.css';
 
 interface ProductCarouselProps {
@@ -9,57 +9,55 @@ interface ProductCarouselProps {
 
 const ProductCarousel: React.FC<ProductCarouselProps> = ({ products, prices, images }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
-  // Función para desplazar hacia la izquierda
-  const scrollLeft = () => {
+  const startDragging = (e: React.MouseEvent | React.TouchEvent) => {
+    setIsDragging(true);
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    setStartX(clientX);
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+      setScrollLeft(carouselRef.current.scrollLeft);
     }
   };
 
-  // Función para desplazar hacia la derecha
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-    }
+  const stopDragging = () => {
+    setIsDragging(false);
+  };
+
+  const handleDragging = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isDragging || !carouselRef.current) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const walk = (clientX - startX) * 1.5; // Ajuste de sensibilidad
+    carouselRef.current.scrollLeft = scrollLeft - walk;
   };
 
   return (
-    <div className="carousel-container">
-      {/* Botón de navegación izquierda */}
-      <button
-        className="carousel-button left"
-        onClick={scrollLeft}
-        aria-label="Scroll Left"
-      >
-        &#8249;
-      </button>
-
+    <div
+      className="carousel-container"
+      onMouseDown={startDragging}
+      onMouseUp={stopDragging}
+      onMouseLeave={stopDragging}
+      onMouseMove={handleDragging}
+      onTouchStart={startDragging}
+      onTouchEnd={stopDragging}
+      onTouchMove={handleDragging}
+    >
       <div className="carousel-content" ref={carouselRef}>
         {products.map((product, index) => (
           <div className="product-card" key={index}>
             <div className="product-image">
               <img src={images[index]} alt={product} />
-              <div className="product-tag">Pet-friendly</div> {/* Etiqueta opcional */}
             </div>
             <div className="product-info">
-              <h5 className="product-name">{product}</h5>
               <p className="product-price">{prices[index]}</p>
-              
+              <p className="product-name">{product}</p>
+              <button className="view-product-button">Ver Producto</button>
             </div>
-            <button className="product-button">Ver Producto</button>
           </div>
         ))}
       </div>
-
-      {/* Botón de navegación derecha */}
-      <button
-        className="carousel-button right"
-        onClick={scrollRight}
-        aria-label="Scroll Right"
-      >
-        &#8250;
-      </button>
     </div>
   );
 };

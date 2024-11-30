@@ -1,115 +1,100 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../CartContext';
-import { Link } from 'react-router-dom';
 
 interface Product {
-  id: number; // Agregamos la variable id
+  id: number;
   nombreProducto: string;
   nombreCientifico?: string;
   imagenProducto: string;
   descuento?: number;
   precio: number;
-  coberturaDeDespacho?: string;
   stock: number;
   descripcionProducto: string;
   categoria: string;
-  habitat?: string;
-  luz?: string;
-  frecuenciaDeRiego?: string;
-  fertilizanteSugerido?: string;
-  humedadIdeal?: string;
-  temperaturaIdeal?: number;
-  toxicidadParaMascotas?: boolean;
-  tipoDeSuelo?: string;
-  dificultadDeCuidado?: string;
 }
 
 interface DataFetcherProps {
   tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas';
-  toggleSidebar: () => void;
+  filters: Record<string, string | boolean>;
 }
 
-const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
+const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { addToCart, cartItems, removeFromCart } = useCart();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+
+  const itemsPerPage = 10;
 
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
-    plantas: 'http://16.171.43.137:4000/productos/plantas/get?page=1&size=10',
-    maceteros: 'http://16.171.43.137:4000/productos/maceteros/get?page=1&size=10',
-    fertilizantes: 'http://16.171.43.137:4000/productos/fertilizantes/get?page=1&size=10',
-    sustratos: 'http://16.171.43.137:4000/productos/sustratos/get?page=1&size=10',
-    controlPlagas: 'http://16.171.43.137:4000/productos/catalogo?page=1&size=10',
+    plantas: 'http://16.171.43.137:4000/productos/plantas/get',
+    maceteros: 'http://16.171.43.137:4000/productos/maceteros/get',
+    fertilizantes: 'http://16.171.43.137:4000/productos/fertilizantes/get',
+    sustratos: 'http://16.171.43.137:4000/productos/sustratos/get',
+    controlPlagas: 'http://16.171.43.137:4000/productos/catalogo',
+  };
+
+  const buildUrlWithFilters = () => {
+    const baseUrl = API_URLS[tipo];
+    const params = new URLSearchParams();
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== '') params.append(key, String(value));
+    });
+
+    params.append('page', String(currentPage));
+    params.append('size', String(itemsPerPage));
+    return `${baseUrl}?${params.toString()}`;
   };
 
   useEffect(() => {
-    const fetchProductsData = async () => {
+    const fetchProducts = async () => {
       try {
         const response = await fetch(API_URLS[tipo]);
         if (!response.ok) {
           throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
         }
         const result = await response.json();
-        console.log('este es el producto: ', result);
 
-        const mappedProducts = result.data.map((item: any) => ({
-          id: item.producto.id, // Extraemos el id del producto
+        const mappedProducts = data.data.map((item: any) => ({
+          id: item.producto.id,
           nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
-          imagenProducto: item.producto.imagenes.map((img: any) => img.urlImagen),
+          imagenProducto: item.producto.imagenes[0]?.urlImagen || '',
           descuento: item.producto.descuento,
           precio: item.producto.precioNormal,
           stock: item.producto.stock,
           descripcionProducto: item.producto.descripcionProducto,
           categoria: item.producto.categoria.nombreCategoria,
-          temperaturaIdeal: parseFloat(item.temperaturaIdeal),
-          toxicidadParaMascotas: Boolean(item.toxicidadMascotas),
         }));
 
         setProducts(mappedProducts);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('Ocurrió un error desconocido');
-        }
+        setTotalPages(Math.ceil(data.total / itemsPerPage)); // Total de páginas basado en la respuesta
+      } catch (error) {
+        setError('No se pudieron cargar los productos.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProductsData();
-  }, [tipo]);
+    fetchProducts();
+  }, [tipo, filters, currentPage]);
 
-  const handlePurchase = (product: Product) => {
-    const existingProduct = cartItems.find(item => item.id === product.id); // Usamos id en lugar de nombreProducto
-    const currentQuantity = existingProduct ? existingProduct.cantidad ?? 0 : 0;
-
-    if (product.stock > currentQuantity) {
-      addToCart(product);
-      setProducts(prevProducts =>
-        prevProducts.map(p =>
-          p.id === product.id ? { ...p, stock: p.stock - 1 } : p
-        )
-      );
-      toggleSidebar();
-    } else {
-      alert('No hay suficiente stock disponible para este producto.');
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
-  const handleRemove = (product: Product) => {
-    const existingProduct = cartItems.find(item => item.id === product.id); // Usamos id en lugar de nombreProducto
-    if (existingProduct && existingProduct.cantidad) {
-      removeFromCart(product);
-      setProducts(prevProducts =>
-        prevProducts.map(p =>
-          p.id === product.id ? { ...p, stock: p.stock + 1 } : p
-        )
-      );
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
     }
   };
+
+  if (loading) return <p>Cargando productos...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div>
@@ -136,7 +121,6 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
               <p><strong>Categoría:</strong> {product.categoria}</p>
               <p><strong>Stock:</strong> {product.stock}</p>
 
-              <Link to={`/productos/plantas/getbyid/${product.id}`}><button>Ver Detalles</button></Link>
               <button onClick={() => handlePurchase(product)}>Agregar al carrito</button>
 
               {quantityInCart > 0 && (

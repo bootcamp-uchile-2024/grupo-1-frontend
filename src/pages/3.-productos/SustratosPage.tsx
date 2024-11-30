@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DataFetcher from '../../components/DataFetcher';
 
 const SustratosPage: React.FC = () => {
+  const [filters, setFilters] = useState<Record<string, string | boolean>>({});
+
+  const toggleSidebar = () => {
+    console.log('Sidebar toggled'); // Aquí puedes implementar la funcionalidad del sidebar si lo necesitas
+  };
+
   return (
     <div>
       <h1>Catálogo de Sustratos</h1>
-      <DataFetcher tipo="sustratos" toggleSidebar={function (): void {
-        throw new Error('Function not implemented.');
-      } } /> {}
+      <DataFetcher tipo="sustratos" filters={filters} toggleSidebar={toggleSidebar} />
     </div>
   );
 };

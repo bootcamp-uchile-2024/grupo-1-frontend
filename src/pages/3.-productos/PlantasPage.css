@@ -1,0 +1,17 @@
+.plantas-page {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .plantas-page .content {
+    flex: 1;
+  }
+  
+  .plantas-page h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #46561e;
+    margin-bottom: 20px;
+  }
+  
