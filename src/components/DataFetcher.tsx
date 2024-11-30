@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../CartContext';
+import { Link } from 'react-router-dom';
 
 interface Product {
   id: number; // Agregamos la variable id
@@ -50,6 +51,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
           throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
         }
         const result = await response.json();
+        console.log('este es el producto: ', result);
 
         const mappedProducts = result.data.map((item: any) => ({
           id: item.producto.id, // Extraemos el id del producto
@@ -134,6 +136,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
               <p><strong>Categoría:</strong> {product.categoria}</p>
               <p><strong>Stock:</strong> {product.stock}</p>
 
+              <Link to={`/productos/plantas/getbyid/${product.id}`}><button>Ver Detalles</button></Link>
               <button onClick={() => handlePurchase(product)}>Agregar al carrito</button>
 
               {quantityInCart > 0 && (
