@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
   const [sliderImages, setSliderImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] =useState<string | null>(null);
 
   useEffect(() => {
     const fetchCatalog = async () => {
@@ -27,10 +27,11 @@ const HomePage: React.FC = () => {
 
         const result = await response.json();
 
-        const products = result.data.map((item: any) => ({
+        // Tipar explícitamente el `map` y el objeto `item`
+        const products: Product[] = result.data.map((item: any) => ({
           nombreProducto: item.nombreProducto,
           precioNormal: item.precioNormal,
-          imagenProducto: item.imagenes?.map((img: any) => img.urlImagen) || [],
+          imagenProducto: item.imagenes?.map((img: { urlImagen: string }) => img.urlImagen) || [],
           categoria: item.categoria?.nombreCategoria || 'Sin categoría',
         }));
 
@@ -72,17 +73,17 @@ const HomePage: React.FC = () => {
         {/* Productos Destacados */}
         <h2 className="my-4">Productos destacados</h2>
         <ProductCarousel
-          products={featuredProducts.map((product) => product.nombreProducto)}
-          prices={featuredProducts.map((product) => `$${product.precioNormal.toFixed(2)}`)}
-          images={featuredProducts.map((product) => product.imagenProducto[0])}
+          products={featuredProducts.map((product: Product) => product.nombreProducto)}
+          prices={featuredProducts.map((product: Product) => `$${product.precioNormal.toFixed(2)}`)}
+          images={featuredProducts.map((product: Product) => product.imagenProducto[0])}
         />
 
         {/* Productos Recomendados */}
         <h2 className="my-4">Recomendados para ti</h2>
         <ProductCarousel
-          products={recommendedProducts.map((product) => product.nombreProducto)}
-          prices={recommendedProducts.map((product) => `$${product.precioNormal.toFixed(2)}`)}
-          images={recommendedProducts.map((product) => product.imagenProducto[0])}
+          products={recommendedProducts.map((product: Product) => product.nombreProducto)}
+          prices={recommendedProducts.map((product: Product) => `$${product.precioNormal.toFixed(2)}`)}
+          images={recommendedProducts.map((product: Product) => product.imagenProducto[0])}
         />
       </Container>
 

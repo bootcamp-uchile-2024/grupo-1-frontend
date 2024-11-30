@@ -13,7 +13,7 @@ interface Product {
 }
 
 const ProductDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>(); // Obtiene el ID del producto desde la URL
+  const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,18 +21,20 @@ const ProductDetail: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(
-          `http://16.171.43.137:4000/productos/catalogo?page=1&size=200`
-        );
-        if (!response.ok) {
-          throw new Error('Error al obtener los productos del catálogo');
-        }
+        const response = await fetch(`http://16.171.43.137:4000/productos/catalogo?page=1&size=200`);
+        if (!response.ok) throw new Error('Error al obtener los productos del catálogo');
         const data = await response.json();
-        const foundProduct = data.productos.find((p: Product) => p.id === id);
-        if (!foundProduct) {
-          throw new Error('Producto no encontrado');
-        }
-        setProduct(foundProduct);
+        const foundProduct = data.data.find((p: any) => String(p.producto.id) === id);
+        if (!foundProduct) throw new Error('Producto no encontrado');
+        setProduct({
+          id: foundProduct.producto.id,
+          nombreProducto: foundProduct.producto.nombreProducto,
+          descripcionProducto: foundProduct.producto.descripcionProducto,
+          precio: foundProduct.producto.precioNormal,
+          stock: foundProduct.producto.stock,
+          imagenes: foundProduct.producto.imagenes,
+          categoria: foundProduct.producto.categoria.nombreCategoria,
+        });
       } catch (err) {
         setError((err as Error).message);
       } finally {
@@ -47,14 +49,7 @@ const ProductDetail: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
   if (!product) return <p>No se encontró el producto.</p>;
 
-  const {
-    nombreProducto,
-    descripcionProducto,
-    precio,
-    stock,
-    imagenes,
-    categoria,
-  } = product;
+  const { nombreProducto, descripcionProducto, precio, stock, imagenes, categoria } = product;
 
   return (
     <div className="product-detail-container">

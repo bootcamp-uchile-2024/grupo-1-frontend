@@ -16,16 +16,13 @@ interface Product {
 interface DataFetcherProps {
   tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas';
   filters: Record<string, string | boolean>;
+  renderItem?: (products: Product[]) => JSX.Element; // Nueva propiedad para render personalizado
 }
 
-const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
+const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
-
-  const itemsPerPage = 10;
 
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
     plantas: 'http://16.171.43.137:4000/productos/plantas/get',
@@ -43,8 +40,8 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
       if (value !== '') params.append(key, String(value));
     });
 
-    params.append('page', String(currentPage));
-    params.append('size', String(itemsPerPage));
+    params.append('page', '1'); // Paginación básica
+    params.append('size', '200'); // Tamaño máximo de elementos
     return `${baseUrl}?${params.toString()}`;
   };
 
@@ -58,7 +55,6 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
         if (!response.ok) throw new Error('Error al obtener los productos');
 
         const data = await response.json();
-
         const mappedProducts = data.data.map((item: any) => ({
           id: item.producto.id,
           nombreProducto: item.producto.nombreProducto,
@@ -72,7 +68,6 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
         }));
 
         setProducts(mappedProducts);
-        setTotalPages(Math.ceil(data.total / itemsPerPage)); // Total de páginas basado en la respuesta
       } catch (error) {
         setError('No se pudieron cargar los productos.');
       } finally {
@@ -81,51 +76,19 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
     };
 
     fetchProducts();
-  }, [tipo, filters, currentPage]);
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
+  }, [tipo, filters]);
 
   if (loading) return <p>Cargando productos...</p>;
   if (error) return <p>{error}</p>;
 
-  return (
-    <div>
-      <div className="product-grid">
-        {products.map((product) => (
-          <ProductCard key={product.id} {...product} />
-        ))}
-      </div>
-
-      {/* Controles de Paginación */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <button
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-          style={{ margin: '0 10px', padding: '10px 20px' }}
-        >
-          Anterior
-        </button>
-        <span style={{ margin: '0 10px' }}>
-          Página {currentPage} de {totalPages}
-        </span>
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          style={{ margin: '0 10px', padding: '10px 20px' }}
-        >
-          Siguiente
-        </button>
-      </div>
+  // Usar renderItem si está disponible, de lo contrario mostrar productos predeterminados
+  return renderItem ? (
+    renderItem(products)
+  ) : (
+    <div className="product-grid">
+      {products.map((product) => (
+        <ProductCard key={product.id} {...product} />
+      ))}
     </div>
   );
 };

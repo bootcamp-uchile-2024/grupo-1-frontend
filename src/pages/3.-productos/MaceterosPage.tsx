@@ -11,10 +11,14 @@ const MaceterosPage: React.FC = () => {
 
   return (
     <div style={{ display: 'flex' }}>
+      {/* Barra lateral de filtros */}
       <SidebarFilters onFilterChange={handleFilterChange} />
+      
       <div style={{ marginLeft: '20px', flex: 1 }}>
         <h1>Catálogo de Maceteros</h1>
-        <DataFetcher tipo="maceteros" filters={filters} toggleSidebar={() => console.log('Toggle sidebar')} />
+        
+        {/* DataFetcher */}
+        <DataFetcher tipo="maceteros" filters={filters} />
       </div>
     </div>
   );

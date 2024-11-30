@@ -23,16 +23,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleAddToCart = () => {
     addToCart({
-      id,
       nombreProducto,
-      precio,
       stock,
+      precio,
       imagenProducto,
-      categoria,
     });
   };
 
-  const isPetFriendly = stock > 13;
+  const isPetFriendly = stock > 13; 
 
   return (
     <div className="product-card">
@@ -48,7 +46,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <h3>{nombreProducto}</h3>
         <p>${precio.toLocaleString()}</p>
         <p>{categoria}</p>
-        <button onClick={handleAddToCart}>Agregar al carrito</button>
+        <button className="view-product-button" onClick={handleAddToCart}>
+          Agregar al carrito
+        </button>
       </div>
     </div>
   );
