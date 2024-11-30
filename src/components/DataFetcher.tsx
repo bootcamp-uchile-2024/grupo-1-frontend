@@ -56,9 +56,6 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
 
         const data = await response.json();
         const mappedProducts = data.data.map((item: any) => ({
-=======
-        const mappedProducts = result.data.map((item: any) => ({
->>>>>>> origin/entrega-10
           id: item.producto.id,
           nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
@@ -84,7 +81,6 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
   if (loading) return <p>Cargando productos...</p>;
   if (error) return <p>{error}</p>;
 
-<<<<<<< HEAD
   // Usar renderItem si está disponible, de lo contrario mostrar productos predeterminados
   return renderItem ? (
     renderItem(products)
@@ -93,53 +89,6 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
       {products.map((product) => (
         <ProductCard key={product.id} {...product} />
       ))}
-=======
-  return (
-    <div>
-      <h2>Productos</h2>
-      {loading && <p>Cargando...</p>}
-      {error && <p>Error: {error}</p>}
-      <ul>
-        {products.map((product) => {
-          const currentItem = cartItems.find(item => item.id === product.id); // Usamos id en lugar de nombreProducto
-          const quantityInCart = currentItem ? currentItem.cantidad ?? 0 : 0;
-
-          function handlePurchase(product: Product): void {
-            throw new Error('Function not implemented.');
-          }
-
-          function handleRemove(product: Product): void {
-            throw new Error('Function not implemented.');
-          }
-
-          return (
-            <li key={product.id}>
-              <h3>{product.nombreProducto}</h3>
-              {product.imagenProducto.length > 0 && (
-                <img
-                  src={product.imagenProducto[0]}
-                  alt={product.nombreProducto}
-                  style={{ width: '100px', height: '100px' }}
-                />
-              )}
-              <p><strong>Descripción:</strong> {product.descripcionProducto}</p>
-              <p><strong>Precio:</strong> ${product.precio.toFixed(2)}</p>
-              <p><strong>Categoría:</strong> {product.categoria}</p>
-              <p><strong>Stock:</strong> {product.stock}</p>
-
-              <button onClick={() => handlePurchase(product)}>Agregar al carrito</button>
-
-              {quantityInCart > 0 && (
-                <div>
-                  <span>Cantidad en el carrito: {quantityInCart}</span>
-                  <button onClick={() => handleRemove(product)}>Eliminar del carrito</button>
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ul>
->>>>>>> origin/entrega-10
     </div>
   );
 };
