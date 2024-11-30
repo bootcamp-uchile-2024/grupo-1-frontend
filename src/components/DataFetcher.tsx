@@ -57,7 +57,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
         }
         const result = await response.json();
 
-        const mappedProducts = data.data.map((item: any) => ({
+        const mappedProducts = result.data.map((item: any) => ({
           id: item.producto.id,
           nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
@@ -105,6 +105,14 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters }) => {
         {products.map((product) => {
           const currentItem = cartItems.find(item => item.id === product.id); // Usamos id en lugar de nombreProducto
           const quantityInCart = currentItem ? currentItem.cantidad ?? 0 : 0;
+
+          function handlePurchase(product: Product): void {
+            throw new Error('Function not implemented.');
+          }
+
+          function handleRemove(product: Product): void {
+            throw new Error('Function not implemented.');
+          }
 
           return (
             <li key={product.id}>

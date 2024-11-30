@@ -34,9 +34,7 @@ function App() {
             <Route index element={<HomePage />} />
             {/* <Route path="detalle-plantas" element={<PlantasDetailPage />} /> */}
             <Route path="plantas" element={<PlantasPage />} />
-            <Route path="/productos/plantas/getbyid/:id" element={<PlantasDetailPage toggleSidebar={function (): void {
-              throw new Error('Function not implemented.');
-            } } />} />
+            <Route path="/productos/plantas/getbyid/:id" element={<PlantasDetailPage/>} />
             <Route path="maceteros" element={<MaceterosPage />} />
             <Route path="detalle-maceteros" element={<MaceterosDetailPage />} />
             <Route path="fertilizantes" element={<FertilizantesPage />} />
