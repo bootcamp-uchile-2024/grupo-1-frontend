@@ -1,52 +1,56 @@
-import { useEffect, useState } from 'react'
-import {IProducts} from '../../interfaces/IProducts'
-import {useParams} from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import ProductDetail from './ProductDetail';
 
-export default function ProductDatailPage() {
+interface Product {
+  nombreProducto: string;
+  descripcionProducto: string;
+  precio: number;
+  stock: number;
+  imagenes: { id: number; urlImagen: string }[];
+  categoria: { nombreCategoria: string };
+}
 
-  const {id} = useParams<{id:string}>();
-  const [product, setProduct] = useState<IProducts | null>(null);
+const ProductDetailPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>(); // Asegúrate de definir un parámetro dinámico en tus rutas
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function getProduct(){
-      try{
-        if(!id) return;
-
-        try{
-          const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-          if(!response.ok){
-            console.log('No pudimos obtener el producto');
-          }
-
-          const productsJson = await response.json();
-          console.log('este es el producto: ', productsJson);
-          setProduct(productsJson);
-        } catch (error){
-          console.log('Error al obtener el producto');
-          return error;
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://16.171.43.137:4000/productos/${id}`);
+        const data = await response.json();
+        if (data && data.producto) {
+          setProduct(data.producto);
+        } else {
+          setError('Producto no encontrado');
         }
-      } catch (error){
-        console.log('Error al obtener el producto');
-        return error;
+      } catch (err) {
+        setError('Error al cargar el producto');
+      } finally {
+        setLoading(false);
       }
-    }
+    };
 
-    getProduct();
+    fetchProduct();
   }, [id]);
 
-  return(
-    <>
-      <div>ProductDetailPage</div>
-      <div className='product-card-det'>
-        <div>
-          <h3>{product?.title}</h3>
-          <img src={product?.image} alt=""/>
-        </div>
-        <div>
-          <p>precio: ${product?.price}</p>
-          <p>{product?.description}</p>
-        </div>
-      </div>
-    </>
-  )
-}
+  if (loading) return <p>Cargando producto...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!product) return <p>Producto no encontrado</p>;
+
+  return (
+    <ProductDetail
+      nombreProducto={product.nombreProducto}
+      descripcionProducto={product.descripcionProducto}
+      precio={product.precio}
+      stock={product.stock}
+      imagenes={product.imagenes}
+      categoria={product.categoria.nombreCategoria}
+    />
+  );
+};
+
+export default ProductDetailPage;

@@ -1,62 +1,59 @@
-import React from 'react';
-import { Button, Container } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
 import ProductCarousel from '../../components/ProductCarousel';
 import ImageCarousel from '../../components/ImageCarousel';
 
-const HomePage: React.FC = () => {
-  const featuredProducts = [
-    'Hierba Gatera',
-    'Pachira Trenzada',
-    'Orquidea Fucsia XL',
-    'Monstera Deliciosa',
-    'Planta 5',
-    'Planta 6',
-    'Planta 7',
-    'Planta 8',
-  ];
-  const recommendedProducts = [
-    'Kit nivel Intermedio',
-    'Kit nivel avanzado',
-    'Humus de lombriz',
-    'Sustrato Orgánico',
-    'Producto 5',
-    'Producto 6',
-    'Producto 7',
-    'Producto 8',
-  ];
-  const productPrices = [
-    '$8.990',
-    '$8.990',
-    '$34.990',
-    '$24.990',
-    '$25.990',
-    '$35.990',
-    '$5.990',
-    '$20.990',
-  ];
+interface Product {
+  nombreProducto: string;
+  precioNormal: number;
+  imagenProducto: string[];
+  categoria: string;
+}
 
-  // Agregar imágenes para productos destacados y recomendados
-  const featuredImages = [
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    
-  ];
-  const recommendedImages = [
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-    'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/WMDB7LVFBRFSXFLDBQHESOFM3A.png',
-  ];
+const HomePage: React.FC = () => {
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCatalog = async () => {
+      try {
+        const response = await fetch('http://16.171.43.137:4000/productos/catalogo?page=1&size=200');
+        if (!response.ok) {
+          throw new Error(`Error al obtener el catálogo: ${response.statusText}`);
+        }
+
+        const result = await response.json();
+
+        console.log('Respuesta de la API:', result); // Para depuración
+
+        const products = result.data.map((item: any) => ({
+          nombreProducto: item.nombreProducto,
+          precioNormal: item.precioNormal,
+          imagenProducto: item.imagenes.map((img: any) => img.urlImagen),
+          categoria: item.categoria.nombreCategoria,
+        }));
+
+        // Lógica para separar los productos en destacados y recomendados
+        setFeaturedProducts(products.slice(0, 8));
+        setRecommendedProducts(products.slice(8, 16)); 
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Error desconocido al cargar el catálogo');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCatalog();
+  }, []);
+
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
@@ -69,17 +66,17 @@ const HomePage: React.FC = () => {
         {/* Productos Destacados */}
         <h2 className="my-4">Productos destacados</h2>
         <ProductCarousel
-          products={featuredProducts.slice(0, 8)}
-          prices={productPrices.slice(0, 8)}
-          images={featuredImages}
+          products={featuredProducts.map((product) => product.nombreProducto)}
+          prices={featuredProducts.map((product) => `$${product.precioNormal.toFixed(2)}`)}
+          images={featuredProducts.map((product) => product.imagenProducto[0])}
         />
 
         {/* Productos Recomendados */}
         <h2 className="my-4">Recomendados para ti</h2>
         <ProductCarousel
-          products={recommendedProducts.slice(0, 8)}
-          prices={productPrices.slice(8)}
-          images={recommendedImages}
+          products={recommendedProducts.map((product) => product.nombreProducto)}
+          prices={recommendedProducts.map((product) => `$${product.precioNormal.toFixed(2)}`)}
+          images={recommendedProducts.map((product) => product.imagenProducto[0])}
         />
       </Container>
 

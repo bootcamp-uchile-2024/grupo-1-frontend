@@ -1,35 +1,48 @@
-import {useLocation} from 'react-router-dom'
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import './ProductDetailPage.css';
 
-export default function PlantasDatailPage() {
-    const location = useLocation();
-    const { plantas } = location.state || {};  
-    
+const PlantasDetailPage: React.FC = () => {
+  const location = useLocation();
+  const { plantas } = location.state || {};
 
-    if (!plantas) {
-        return <div>No se encontró el producto.</div>;
-    }
+  if (!plantas) {
+    return <div>No se encontró el producto.</div>;
+  }
 
-    
+  return (
+    <div className="detail-container">
+      <div className="detail-header">
+        <h2>Detalle de Producto</h2>
+      </div>
 
-    return(
-        <>
-        <h2>Detalle de Planta</h2>
-        <div className='product-card-det'>
-            <div>
-                <h3>{plantas.nombreProducto}</h3>
-                <img src={plantas.imagenProducto[0]} alt=""/>
-            </div>
-            <div>
-            </div>
-            <div>
-                <p>precio: ${plantas.precioNormal}</p>
-                <p>{plantas.descripcionProducto}</p>
-            </div>
+      <div className="detail-content">
+        {/* Imagen del producto */}
+        <div className="detail-image">
+          <img src={plantas.imagenProducto[0]} alt={plantas.nombreProducto} />
         </div>
-        </>
-    );
-}
 
+        {/* Información del producto */}
+        <div className="detail-info">
+          <h3 className="product-name">{plantas.nombreProducto}</h3>
+          <p className="product-category">{plantas.categoria?.nombreCategoria}</p>
+          <p className="product-description">{plantas.descripcionProducto}</p>
+          <p className="product-price">
+            <strong>Precio:</strong> ${plantas.precioNormal}
+          </p>
+          <p className="product-stock">
+            <strong>Stock disponible:</strong> {plantas.stock}
+          </p>
+
+          {/* Botón de agregar al carrito */}
+          <button className="add-to-cart-button">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PlantasDetailPage;
 
 
 
