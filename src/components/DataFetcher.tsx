@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../CartContext';
-import './ProductCard.css'; // Archivo CSS para las tarjetas de productos
+import './ProductCard.css';
 
 interface Product {
   id: number;
