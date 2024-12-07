@@ -3,13 +3,18 @@ import './ProductCarousel.css';
 import { Link } from 'react-router-dom';
 
 interface ProductCarouselProps {
-  products: string[];
-  prices: string[];
-  images: string[];
-  id: string[];
+  products: string;
+  prices: string;
+  images: string;
+  id?: string[]; // Hacemos id opcional
 }
 
-const ProductCarousel: React.FC<ProductCarouselProps> = ({ products, prices, images, id }) => {
+const ProductCarousel: React.FC<ProductCarouselProps> = ({
+  products,
+  prices,
+  images,
+  id = [],
+}) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -31,10 +36,10 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({ products, prices, ima
   const handleDragging = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging || !carouselRef.current) return;
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const walk = (clientX - startX) * 1.5; // Ajuste de sensibilidad
+    const walk = (clientX - startX) * 1.5;
     carouselRef.current.scrollLeft = scrollLeft - walk;
   };
-  console.log(id)
+
   return (
     <div
       className="carousel-container"
@@ -55,7 +60,9 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({ products, prices, ima
             <div className="product-info">
               <p className="product-price">{prices[index]}</p>
               <p className="product-name">{product}</p>
-              <Link to={`/productos/plantas/getbyid/${id[index]}`}><button className="view-product-button">Ver Producto</button></Link>
+              <Link to={`/productos/plantas/getbyid/${id?.[index] || ''}`}>
+                <button className="view-product-button">Ver Producto</button>
+              </Link>
             </div>
           </div>
         ))}

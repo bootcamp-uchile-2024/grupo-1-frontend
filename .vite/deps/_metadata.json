@@ -1,0 +1,94 @@
+{
+  "hash": "a610221c",
+  "configHash": "ec6d0357",
+  "lockfileHash": "3955be06",
+  "browserHash": "110cd78e",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "42063c8b",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "d4be316d",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "bc7b3cc5",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "9284a6ba",
+      "needsInterop": false
+    },
+    "react-bootstrap": {
+      "src": "../../node_modules/react-bootstrap/esm/index.js",
+      "file": "react-bootstrap.js",
+      "fileHash": "8f5559cf",
+      "needsInterop": false
+    },
+    "@mui/icons-material": {
+      "src": "../../node_modules/@mui/icons-material/esm/index.js",
+      "file": "@mui_icons-material.js",
+      "fileHash": "faa2bf98",
+      "needsInterop": false
+    },
+    "bootstrap/dist/js/bootstrap.bundle.min.js": {
+      "src": "../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "file": "bootstrap_dist_js_bootstrap__bundle__min__js.js",
+      "fileHash": "c0ae68a1",
+      "needsInterop": true
+    },
+    "@mui/icons-material/ArrowBackIos": {
+      "src": "../../node_modules/@mui/icons-material/esm/ArrowBackIos.js",
+      "file": "@mui_icons-material_ArrowBackIos.js",
+      "fileHash": "7bfd4d92",
+      "needsInterop": false
+    },
+    "@mui/icons-material/ArrowForwardIos": {
+      "src": "../../node_modules/@mui/icons-material/esm/ArrowForwardIos.js",
+      "file": "@mui_icons-material_ArrowForwardIos.js",
+      "fileHash": "1f0e6e87",
+      "needsInterop": false
+    },
+    "@mui/icons-material/AddShoppingCart": {
+      "src": "../../node_modules/@mui/icons-material/esm/AddShoppingCart.js",
+      "file": "@mui_icons-material_AddShoppingCart.js",
+      "fileHash": "508416b7",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-NBOJBX4X": {
+      "file": "chunk-NBOJBX4X.js"
+    },
+    "chunk-3DUD3MFP": {
+      "file": "chunk-3DUD3MFP.js"
+    },
+    "chunk-K7ICPZRK": {
+      "file": "chunk-K7ICPZRK.js"
+    },
+    "chunk-GGQF6CKI": {
+      "file": "chunk-GGQF6CKI.js"
+    },
+    "chunk-UKAGDHFJ": {
+      "file": "chunk-UKAGDHFJ.js"
+    },
+    "chunk-TUX7A2JK": {
+      "file": "chunk-TUX7A2JK.js"
+    },
+    "chunk-4SFRHSJ3": {
+      "file": "chunk-4SFRHSJ3.js"
+    },
+    "chunk-EQCVQC35": {
+      "file": "chunk-EQCVQC35.js"
+    }
+  }
+}

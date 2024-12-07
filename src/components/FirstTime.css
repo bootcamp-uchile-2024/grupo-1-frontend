@@ -1,0 +1,16 @@
+.first-time {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .first-time-content {
+    flex: 1;
+  }
+  
+  .first-time-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  
