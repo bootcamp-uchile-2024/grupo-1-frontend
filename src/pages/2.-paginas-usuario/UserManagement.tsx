@@ -17,7 +17,7 @@ const UserManagement: React.FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://16.171.43.137:4000/usuarios');
+        const response = await fetch('http://13.53.40.69:4000//usuarios');
         if (!response.ok) {
           throw new Error('Error al obtener los usuarios');
         }

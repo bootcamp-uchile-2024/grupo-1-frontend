@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCart } from '../CartContext';
 import './ProductCard.css';
+import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
   id: number;
@@ -47,6 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <h3>{nombreProducto}</h3>
         <p>${precio.toLocaleString()}</p>
         <p>{categoria}</p>
+        <Link to={`/productos/plantas/getbyid/${id}`}><button>Detalles</button></Link>
         <button className="view-product-button" onClick={handleAddToCart}>
           Agregar al carrito
         </button>

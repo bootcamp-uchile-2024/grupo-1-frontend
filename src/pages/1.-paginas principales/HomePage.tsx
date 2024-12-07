@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const fetchCatalog = async () => {
       try {
-        const response = await fetch('http://16.171.43.137:4000/productos/catalogo?page=1&size=200');
+        const response = await fetch('http://13.53.40.69:4000/productos/catalogo?page=1&size=200');
         if (!response.ok) {
           throw new Error(`Error al obtener el catálogo: ${response.statusText}`);
         }

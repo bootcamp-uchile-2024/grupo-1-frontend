@@ -25,11 +25,11 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
   const [error, setError] = useState<string | null>(null);
 
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
-    plantas: 'http://16.171.43.137:4000/productos/plantas/get',
-    maceteros: 'http://16.171.43.137:4000/productos/maceteros/get',
-    fertilizantes: 'http://16.171.43.137:4000/productos/fertilizantes/get',
-    sustratos: 'http://16.171.43.137:4000/productos/sustratos/get',
-    controlPlagas: 'http://16.171.43.137:4000/productos/catalogo',
+    plantas: 'http://13.53.40.69:4000/productos/plantas/get',
+    maceteros: 'http://13.53.40.69:4000/productos/maceteros/get',
+    fertilizantes: 'http://13.53.40.69:4000/productos/fertilizantes/get',
+    sustratos: 'http://13.53.40.69:4000/productos/sustratos/get',
+    controlPlagas: 'http://13.53.40.69:4000/productos/catalogo',
   };
 
   const buildUrlWithFilters = () => {
@@ -68,7 +68,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
         }));
 
         setProducts(mappedProducts);
-      } catch (error) {
+      } catch (_error) {
         setError('No se pudieron cargar los productos.');
       } finally {
         setLoading(false);
