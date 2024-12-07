@@ -4,6 +4,7 @@ import ProductCarousel from '../../components/ProductCarousel';
 import ImageCarousel from '../../components/ImageCarousel';
 
 interface Product {
+  id: string;
   nombreProducto: string;
   precioNormal: number;
   imagenProducto: string[];
@@ -29,6 +30,7 @@ const HomePage: React.FC = () => {
 
         // Tipar explícitamente el `map` y el objeto `item`
         const products: Product[] = result.data.map((item: any) => ({
+          id: item.id,
           nombreProducto: item.nombreProducto,
           precioNormal: item.precioNormal,
           imagenProducto: item.imagenes?.map((img: { urlImagen: string }) => img.urlImagen) || [],
@@ -75,17 +77,18 @@ const HomePage: React.FC = () => {
         <ProductCarousel
           products={featuredProducts.map((product: Product) => product.nombreProducto)}
           prices={featuredProducts.map((product: Product) => `$${product.precioNormal.toFixed(2)}`)}
-          images={featuredProducts.map((product: Product) => product.imagenProducto[0])}
-        />
+          images={featuredProducts.map((product: Product) => product.imagenProducto[0])} 
+          id={featuredProducts.map((product: Product) => product.id)}        />
 
         {/* Productos Recomendados */}
         <h2 className="my-4">Recomendados para ti</h2>
         <ProductCarousel
           products={recommendedProducts.map((product: Product) => product.nombreProducto)}
           prices={recommendedProducts.map((product: Product) => `$${product.precioNormal.toFixed(2)}`)}
-          images={recommendedProducts.map((product: Product) => product.imagenProducto[0])}
-        />
+          images={recommendedProducts.map((product: Product) => product.imagenProducto[0])} 
+          id={featuredProducts.map((product: Product) => product.id+8)}        />
       </Container>
+
 
       {/* Footer */}
       <footer className="text-center mt-5 py-4"></footer>

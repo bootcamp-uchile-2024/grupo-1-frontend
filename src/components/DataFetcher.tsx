@@ -56,7 +56,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
 
         const data = await response.json();
         const mappedProducts = data.data.map((item: any) => ({
-          id: item.producto.id,
+          id: item.id,
           nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
           imagenProducto: item.producto.imagenes[0]?.urlImagen || '',

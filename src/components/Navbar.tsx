@@ -33,7 +33,7 @@ const Navbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
                 <li><Link to="/maceteros" className="dropdown-item">Maceteros</Link></li>
                 <li><Link to="/fertilizantes" className="dropdown-item">Fertilizantes</Link></li>
                 <li><Link to="/sustratos" className="dropdown-item">Sustratos</Link></li>
-                <li><Link to="/control-de-plagas" className="dropdown-item">Control de Plagas</Link></li>
+                {/* <li><Link to="/control-de-plagas" className="dropdown-item">Control de Plagas</Link></li> */}
               </ul>
             </li>
             <li className="nav-item">

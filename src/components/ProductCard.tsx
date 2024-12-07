@@ -29,6 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       precio,
       imagenProducto,
       categoria,
+      id
     });
   };
 
@@ -48,7 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <h3>{nombreProducto}</h3>
         <p>${precio.toLocaleString()}</p>
         <p>{categoria}</p>
-        <Link to={`/productos/plantas/getbyid/${id}`}><button>Detalles</button></Link>
+        <Link to={`/productos/${categoria}/getbyid/${id}`}><button>Detalles</button></Link>
         <button className="view-product-button" onClick={handleAddToCart}>
           Agregar al carrito
         </button>

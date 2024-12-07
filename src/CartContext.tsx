@@ -7,6 +7,7 @@ interface Product {
   stock: number;
   precio: number;
   imagenProducto: string;
+  categoria:string
 }
 
 interface CartContextType {

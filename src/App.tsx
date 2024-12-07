@@ -24,6 +24,7 @@ import UserManagement from './pages/2.-paginas-usuario/UserManagement';
 import ProductManagement from './pages/2.-paginas-usuario/ProductManagement';
 import CreateProduct from './pages/3.-productos/CreateProduct';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SustratosDetailPage from './pages/4.-detalle-productos/SustratosDetailPage';
 
 function App() {
   return (
@@ -38,10 +39,17 @@ function App() {
               throw new Error('Function not implemented.');
             } }/>} />
             <Route path="maceteros" element={<MaceterosPage />} />
-            <Route path="detalle-maceteros" element={<MaceterosDetailPage />} />
+            <Route path="/productos/maceteros/getbyid/:id" element={<MaceterosDetailPage toggleSidebar={function (): void {
+              throw new Error('Function not implemented.');
+            } } />} />
             <Route path="fertilizantes" element={<FertilizantesPage />} />
-            <Route path="detalle-fertilizantes" element={<FertilizantesDetailPage />} />
+            <Route path="/productos/fertilizantes/getbyid/:id" element={<FertilizantesDetailPage toggleSidebar={function (): void {
+              throw new Error('Function not implemented.');
+            } } />} />
             <Route path="sustratos" element={<SustratosPage />} />
+            <Route path="/productos/sustratos/getbyid/:id" element={<SustratosDetailPage toggleSidebar={function (): void {
+              throw new Error('Function not implemented.');
+            } } />} />
             <Route path="control-de-plagas" element={<ControlPlagasPage />} />
             <Route path="detalle-plagas" element={<ControlPlagasDetailPage />} />
             <Route path="quienes-somos" element={<AboutPage />} />

@@ -47,7 +47,7 @@ const PlantasPage: React.FC = () => {
                     />
                   ))}
                 </div>
-
+                
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}

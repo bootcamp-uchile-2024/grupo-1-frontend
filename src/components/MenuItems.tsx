@@ -13,10 +13,10 @@ export const MenuItems = [
     title: 'Fertilizantes',
     path: '/fertilizantes',
     cName: 'dropdown-item'
-  },
-  {
-    title: 'Sustratos',
-    path: '/sustratos',
-    cName: 'dropdown-item'
   }
+  // {
+  //   title: 'Sustratos',
+  //   path: '/sustratos',
+  //   cName: 'dropdown-item'
+  // }
 ];

@@ -2,12 +2,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../../CartContext";
+
   
   interface DataFetcherProps {
     toggleSidebar: () => void;
   }
   
-  const DataFetcher: React.FC<DataFetcherProps> = ({ }) => {
+  const DataFetcher: React.FC<DataFetcherProps> = ({}) => {
     const {id} = useParams<{id:string}>();
     const [planta, setPlanta] = useState<any>();
     const [loading, setLoading] = useState<boolean>(true);
@@ -58,10 +59,13 @@ import { useCart } from "../../CartContext";
         id: planta.id,
         stock: planta.producto.stock,
         precio: planta.producto.precioNormal,
-        imagenProducto: planta.producto.imagenes[0].urlImagen
+        imagenProducto: planta.producto.imagenes[0].urlImagen,
+        categoria: planta.producto.categoria
       })
     }
     
+
+  
     return (
       <>
         <h2>Productos</h2>
@@ -85,6 +89,8 @@ import { useCart } from "../../CartContext";
   
                 <button onClick={handleAddToCart}>Agregar al carrito</button>
               </li>
+                
+          
         </ul>
       </>
     );
