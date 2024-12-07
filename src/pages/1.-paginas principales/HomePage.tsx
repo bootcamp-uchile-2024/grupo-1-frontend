@@ -7,6 +7,7 @@ import FirstTime from '../../components/FirstTime';
 import PetFriendly from '../../components/PetFriendly';
 
 interface Product {
+  id: string;
   nombreProducto: string;
   precioNormal: number;
   imagenProducto: string[];
@@ -29,6 +30,7 @@ const HomePage: React.FC = () => {
 
         const result = await response.json();
         const products: Product[] = result.data.map((item: any) => ({
+          id: item.id,
           nombreProducto: item.nombreProducto,
           precioNormal: item.precioNormal,
           imagenProducto: item.imagenes?.map((img: { urlImagen: string }) => img.urlImagen) || [],
@@ -68,6 +70,7 @@ const HomePage: React.FC = () => {
           products={featuredProducts.map((product: Product) => product.nombreProducto)}
           prices={featuredProducts.map((product: Product) => `$${product.precioNormal.toFixed(2)}`)}
           images={featuredProducts.map((product: Product) => product.imagenProducto[0])}
+          id={featuredProducts.map((product: Product) => product.id)}
         />
 
         <h2 className="my-4">Recomendados para ti</h2>
@@ -75,6 +78,7 @@ const HomePage: React.FC = () => {
           products={recommendedProducts.map((product: Product) => product.nombreProducto)}
           prices={recommendedProducts.map((product: Product) => `$${product.precioNormal.toFixed(2)}`)}
           images={recommendedProducts.map((product: Product) => product.imagenProducto[0])}
+          id={featuredProducts.map((product: Product) => product.id)}
         />
       </Container>
 

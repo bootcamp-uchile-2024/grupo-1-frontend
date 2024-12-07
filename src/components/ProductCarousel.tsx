@@ -6,14 +6,14 @@ interface ProductCarouselProps {
   products: string[];
   prices: string[];
   images: string[];
-  id?: string[]; // Hacemos id opcional
+  id: string[];
 }
 
 const ProductCarousel: React.FC<ProductCarouselProps> = ({
   products,
   prices,
   images,
-  id = [],
+  id,
 }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -32,7 +32,10 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   const stopDragging = () => {
     setIsDragging(false);
   };
-
+  console.log(products)
+  console.log(prices)
+  console.log(images)
+  console.log(id)
   const handleDragging = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging || !carouselRef.current) return;
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
@@ -60,7 +63,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
             <div className="product-info">
               <p className="product-price">{prices[index]}</p>
               <p className="product-name">{product}</p>
-              <Link to={`/productos/plantas/getbyid/${id?.[index] || ''}`}>
+              <Link to={`/productos/plantas/getbyid/${id[index]}`}>
                 <button className="view-product-button">Ver Producto</button>
               </Link>
             </div>
