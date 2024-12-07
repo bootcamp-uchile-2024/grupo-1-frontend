@@ -3,9 +3,9 @@ import './ProductCarousel.css';
 import { Link } from 'react-router-dom';
 
 interface ProductCarouselProps {
-  products: string;
-  prices: string;
-  images: string;
+  products: string[];
+  prices: string[];
+  images: string[];
   id?: string[]; // Hacemos id opcional
 }
 
