@@ -5,6 +5,7 @@ import ImageSlider from '../../components/ImageSlider';
 import Difficulty from '../../components/Difficulty';
 import FirstTime from '../../components/FirstTime';
 import PetFriendly from '../../components/PetFriendly';
+import CareBanner from '../../components/CareBanner';
 
 interface Product {
   id: string;
@@ -84,6 +85,7 @@ const HomePage: React.FC = () => {
 
       <Difficulty />
       <FirstTime />
+      <CareBanner/>
       <PetFriendly />
     </div>
   );

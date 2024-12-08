@@ -1,11 +1,11 @@
 import {
+  require_react_dom
+} from "./chunk-TUX7A2JK.js";
+import {
   _extends,
   require_jsx_runtime,
   require_prop_types
 } from "./chunk-UKAGDHFJ.js";
-import {
-  require_react_dom
-} from "./chunk-TUX7A2JK.js";
 import {
   require_react
 } from "./chunk-4SFRHSJ3.js";

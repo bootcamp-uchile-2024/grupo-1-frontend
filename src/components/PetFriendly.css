@@ -1,16 +1,74 @@
-.pet-friendly {
+/* Contenedor principal */
+.pet-friendly-container {
     display: flex;
-    align-items: center;
-    padding: 20px;
-    gap: 20px;
+    justify-content: flex-end; /* Tarjeta alineada a la derecha */
+    align-items: center; /* Centrar verticalmente */
+    width: 100%;
+    height: 100%;
+    max-width: 3440px;
+    min-height: 400px; /* Altura mínima */
+    background-image: url('/home/Frame 616.png'); /* Imagen de fondo */
+    background-size: cover; /* Cubrir todo el contenedor */
+    background-position: center; /* Centrar la imagen */
+    background-repeat: no-repeat;
+    padding: 32px;
+    border-radius: var(--Radiusradius-m); /* Bordes redondeados generales */
   }
   
-  .pet-friendly-content {
-    flex: 1;
+  /* Tarjeta */
+  .pet-friendly-card {
+    width: 531px; /* Ancho fijo */
+    height: 298px; /* Alto fijo */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    border-radius: var(--Radiusradius-m); /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar contenido verticalmente */
+    align-items: center; /* Centrar contenido horizontalmente */
+    gap: 16px; /* Espaciado entre elementos */
+    text-align: center; /* Centrar texto */
+    padding: 16px;
+    margin-right: 32px; /* Separación de la tarjeta con el borde derecho */
   }
   
-  .pet-friendly-image img {
-    max-width: 100%;
-    height: auto;
+  /* Título */
+  .pet-friendly-title {
+    width: 414px; /* Ancho fijo */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 36px;
+    color: #46561E;
+  }
+  
+  /* Descripción */
+  .pet-friendly-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #576B20;
+  }
+  
+  /* Botón */
+  .discover-button {
+    width: 200px; /* Ancho ajustable */
+    height: 41px; /* Alto ajustable */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background-color: #46561E; /* Color del botón */
+    border: none;
+    border-radius: 4px 0px 0px 0px; /* Bordes personalizados */
+    padding: var(--Paddingpadding-s);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .discover-button:hover {
+    background-color: #E6805C;
+    transform: scale(1.05);
   }
   

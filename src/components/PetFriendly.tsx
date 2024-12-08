@@ -3,16 +3,15 @@ import './PetFriendly.css';
 
 const PetFriendly: React.FC = () => {
   return (
-    <section className="pet-friendly">
-      <div className="pet-friendly-content">
-        <h2>Somos Petfriendly</h2>
-        <p>Encuentra las plantas ideales para tu hogar y tus mascotas</p>
-        <button>Descubre más</button>
+    <div className="pet-friendly-container">
+      <div className="pet-friendly-card">
+        <h1 className="pet-friendly-title">¡Somos PetFriendly!</h1>
+        <p className="pet-friendly-description">
+          Encuentra las plantas ideales para tu hogar y tus mascotas.
+        </p>
+        <button className="discover-button">Descubre más</button>
       </div>
-      <div className="pet-friendly-image">
-        <img src="/path/to/pet-friendly.png" alt="Somos Petfriendly" />
-      </div>
-    </section>
+    </div>
   );
 };
 
