@@ -32,10 +32,6 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   const stopDragging = () => {
     setIsDragging(false);
   };
-  console.log(products)
-  console.log(prices)
-  console.log(images)
-  console.log(id)
   const handleDragging = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging || !carouselRef.current) return;
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;

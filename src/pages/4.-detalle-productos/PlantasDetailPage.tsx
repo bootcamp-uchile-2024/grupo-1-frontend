@@ -21,7 +21,7 @@ import { useCart } from "../../CartContext";
         try{
             if(!id) return;
             try {
-                const response = await fetch(`http://13.53.40.69:4000/productos/plantas/getbyid/${id}`);
+                const response = await fetch(`http://16.171.28.106:4000/productos/plantas/getbyid/${id}`);
                 if (!response.ok) {
                   throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
                 }
@@ -71,10 +71,12 @@ import { useCart } from "../../CartContext";
         <h2>Productos</h2>
         {loading && <p>Cargando...</p>}
         {error && <p>Error: {error}</p>}
-        <ul>
-        <li key={planta?.id}>
-                <h3>{planta?.nombrePlanta}</h3>
-                <h4>{planta?.nombreCientifico}</h4>
+        <div className="product-card">
+          <ul>
+            <li key={planta?.id}>
+              <h3>{planta?.nombrePlanta}</h3>
+              <h4>{planta?.nombreCientifico}</h4>
+              <div className="product-image">
                 {planta?.producto.imagenes.length > 0 && (
                   <img
                     src={planta?.producto.imagenes[0].urlImagen}
@@ -82,16 +84,17 @@ import { useCart } from "../../CartContext";
                     style={{ width: '100px', height: '100px' }}
                   />
                 )}
+              </div>
+              <div className="product-info">
                 <p><strong>Descripción:</strong> {planta?.producto.descripcionProducto}</p>
                 <p><strong>Precio:</strong> ${planta?.producto.precioNormal.toFixed(2)}</p>
                 <p><strong>Categoría:</strong> {planta?.producto.categoria.nombreCategoria}</p>
                 <p><strong>Stock:</strong> {planta?.producto.stock}</p>
-  
-                <button onClick={handleAddToCart}>Agregar al carrito</button>
+              </div>
+              <button className="view-product-button" onClick={handleAddToCart}>Agregar al carrito</button>
               </li>
-                
-          
-        </ul>
+          </ul>
+        </div>
       </>
     );
   };
