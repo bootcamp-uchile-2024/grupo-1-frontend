@@ -1,48 +1,84 @@
-/* Estilos para la barra de navegación */
+/* Navbar General */
 .navbar {
-  background-color: #ffffff;      /* Fondo blanco para la barra */
-  padding: 10px 20px;             /* Espaciado interno */
+  background-color: #ffffff;
+  padding: 10px 20px;
 }
 
 .navbar-brand {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #576B20;                 /* Color verde para el logo */
+  color: #46561E;
   text-decoration: none;
 }
 
 .navbar-nav {
   display: flex;
   align-items: center;
-  gap: 20px;                      /* Espaciado entre los enlaces */
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
+  gap: 15px;
 }
 
 .nav-link {
-  color: #46561E;                 /* Color de los enlaces */
+  color: #46561E;
   font-weight: 500;
-  text-decoration: none;          /* Elimina el subrayado */
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #576B20;                 /* Color verde al pasar el mouse */
+  color: #576B20;
 }
 
-/* Botón de carrito con ícono de Material UI */
-.cart-link {
-  background: transparent;
-  border: none;
-  color: #46561E;                 /* Color consistente con el tema general */
+/* Buscador */
+.search-container {
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
+  width: 490px;
+}
+
+.search-form {
+  display:flex;
+  align-items: center;
+  width: 490px; 
+  height: 44px;
+  min-width: 200px;
+  border: 2px solid #FFDBCF; 
+  border-radius: 8px; 
+  overflow: hidden;
+}
+
+.search-button {
+  width: 50px; 
+  background-color: #6D3B31; 
+  color: white; 
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1.5rem; 
+}
+
+.search-button:hover {
+  background-color: #4A2C24; 
+}
+
+/* Input de búsqueda */
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 1rem;
+  color: #6D6D6D;
+  background-color: #FFFAF8;
+}
+
+
+/* Carrito */
+.cart-link {
   position: relative;
+  color: #46561E;
   transition: color 0.3s ease;
 }
 
@@ -50,28 +86,36 @@
   color: #576B20;
 }
 
-/* Notificación del carrito (contador) */
 .cart-notification {
-  background-color: #dc3545;      /* Rojo para destacar el contador */
-  color: #ffffff;
-  border-radius: 50%;
-  padding: 4px 8px;
-  font-size: 0.75rem;
   position: absolute;
   top: -8px;
   right: -8px;
+  background-color: #dc3545;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  padding: 4px 8px;
 }
 
-/* Dropdown de productos */
+
+.hover-dropdown:hover .dropdown-menu {
+  display: block; 
+  margin-top: 0;
+}
+
+
 .dropdown-menu {
   background-color: #ffffff;
-  border: 1px solid #cccccc;
+  border: 1px solid #fff;
   border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .dropdown-item {
   color: #46561E;
   font-size: 1rem;
+  padding: 8px 16px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import ProductCarousel from '../../components/ProductCarousel';
-import ImageSlider from '../../components/ImageSlider'; 
+import ImageSlider from '../../components/ImageSlider';
 import Difficulty from '../../components/Difficulty';
 import FirstTime from '../../components/FirstTime';
 import PetFriendly from '../../components/PetFriendly';
@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const fetchCatalog = async () => {
       try {
-        const response = await fetch('http://16.171.28.106:4000/productos/catalogo?page=1&size=200');
+        const response = await fetch('http://3.142.12.50:4000/productos/catalogo?page=1&size=200');
         if (!response.ok) {
           throw new Error(`Error al obtener el catálogo: ${response.statusText}`);
         }
@@ -65,6 +65,7 @@ const HomePage: React.FC = () => {
       {/* Nuevo Slider */}
       <ImageSlider />
 
+      {/* Productos Destacados */}
       <Container>
         <h2 className="my-4">Productos destacados</h2>
         <ProductCarousel
@@ -74,18 +75,20 @@ const HomePage: React.FC = () => {
           id={featuredProducts.map((product: Product) => product.id)}
         />
 
+        {/* Productos Recomendados */}
         <h2 className="my-4">Recomendados para ti</h2>
         <ProductCarousel
           products={recommendedProducts.map((product: Product) => product.nombreProducto)}
           prices={recommendedProducts.map((product: Product) => `$${product.precioNormal.toFixed(2)}`)}
           images={recommendedProducts.map((product: Product) => product.imagenProducto[0])}
-          id={featuredProducts.map((product: Product) => product.id)}
+          id={recommendedProducts.map((product: Product) => product.id)}
         />
       </Container>
 
+      {/* Otros Componentes */}
       <Difficulty />
       <FirstTime />
-      <CareBanner/>
+      <CareBanner />
       <PetFriendly />
     </div>
   );

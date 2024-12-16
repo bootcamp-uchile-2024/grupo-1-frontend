@@ -25,11 +25,11 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
   const [error, setError] = useState<string | null>(null);
 
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
-    plantas: 'http://16.171.28.106:4000/productos/plantas/get',
-    maceteros: 'http://16.171.28.106:4000/productos/maceteros/get',
-    fertilizantes: 'http://16.171.28.106:4000/productos/fertilizantes/get',
-    sustratos: 'http://16.171.28.106:4000/productos/sustratos/get',
-    controlPlagas: 'http://16.171.28.106:4000/productos/catalogo',
+    plantas: 'http://3.142.12.50:4000/productos/plantas/get',
+    maceteros: 'http://3.142.12.50:4000/productos/maceteros/get',
+    fertilizantes: 'http://3.142.12.50:4000/productos/fertilizantes/get',
+    sustratos: 'http://3.142.12.50:4000/productos/sustratos/get',
+    controlPlagas: 'http://3.142.12.50:4000/productos/catalogo',
   };
 
   const buildUrlWithFilters = () => {

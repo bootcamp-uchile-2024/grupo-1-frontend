@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { useCart } from "../../CartContext";
 
   
-  interface DataFetcherProps {
-    toggleSidebar: () => void;
-  }
+interface DataFetcherProps {
+  toggleSidebar?: () => void; 
+}
   
   const DataFetcher: React.FC<DataFetcherProps> = ({}) => {
     const {id} = useParams<{id:string}>();
@@ -21,7 +21,7 @@ import { useCart } from "../../CartContext";
         try{
             if(!id) return;
             try {
-                const response = await fetch(`http://16.171.28.106:4000/productos/plantas/getbyid/${id}`);
+                const response = await fetch(`http://3.142.12.50:4000/productos/plantas/getbyid/${id}`);
                 if (!response.ok) {
                   throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
                 }

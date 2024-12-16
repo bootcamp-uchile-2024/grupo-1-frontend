@@ -25,6 +25,7 @@ import ProductManagement from './pages/2.-paginas-usuario/ProductManagement';
 import CreateProduct from './pages/3.-productos/CreateProduct';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SustratosDetailPage from './pages/4.-detalle-productos/SustratosDetailPage';
+import SearchResultsPage from './pages/4.-detalle-productos/SearchResultsPage'; 
 
 function App() {
   return (
@@ -33,39 +34,26 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<HomePage />} />
-            {/* <Route path="detalle-plantas" element={<PlantasDetailPage />} /> */}
             <Route path="plantas" element={<PlantasPage />} />
-            <Route path="/productos/plantas/getbyid/:id" element={<PlantasDetailPage toggleSidebar={function (): void {
-              throw new Error('Function not implemented.');
-            } }/>} />
+            <Route path="buscar" element={<SearchResultsPage />} /> {/* Nueva ruta */}
+            <Route path="/productos/plantas/getbyid/:id" element={<PlantasDetailPage />} />
             <Route path="maceteros" element={<MaceterosPage />} />
-            <Route path="/productos/maceteros/getbyid/:id" element={<MaceterosDetailPage toggleSidebar={function (): void {
-              throw new Error('Function not implemented.');
-            } } />} />
+            <Route path="/productos/maceteros/getbyid/:id" element={<MaceterosDetailPage />} />
             <Route path="fertilizantes" element={<FertilizantesPage />} />
-            <Route path="/productos/fertilizantes/getbyid/:id" element={<FertilizantesDetailPage toggleSidebar={function (): void {
-              throw new Error('Function not implemented.');
-            } } />} />
+            <Route path="/productos/fertilizantes/getbyid/:id" element={<FertilizantesDetailPage />} />
             <Route path="sustratos" element={<SustratosPage />} />
-            <Route path="/productos/sustratos/getbyid/:id" element={<SustratosDetailPage toggleSidebar={function (): void {
-              throw new Error('Function not implemented.');
-            } } />} />
+            <Route path="/productos/sustratos/getbyid/:id" element={<SustratosDetailPage />} />
             <Route path="control-de-plagas" element={<ControlPlagasPage />} />
-            <Route path="detalle-plagas" element={<ControlPlagasDetailPage />} />
+            <Route path="carrito" element={<CartPage />} />
             <Route path="quienes-somos" element={<AboutPage />} />
             <Route path="contacto" element={<ContactPage />} />
             <Route path="formulario-usuario" element={<UserForm />} />
-            <Route path="carrito" element={<CartPage />} />
             <Route path="gestion-usuarios" element={<UserManagement />} />
             <Route path="gestion-productos" element={<ProductManagement />} />
             <Route path="create-product" element={<CreateProduct />} />
-
-            {/* Rutas protegidas */}
             <Route path="admin" element={<PrivateRoute roles={["admin"]}><AdminPage /></PrivateRoute>}>
               <Route index element={<ProductForm />} />
             </Route>
-
-            {/* Ruta de Login */}
             <Route path="login" element={<LogInPage />} />
           </Route>
         </Routes>
