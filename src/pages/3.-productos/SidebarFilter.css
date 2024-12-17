@@ -121,3 +121,24 @@
 .search-button:hover {
   background-color: #46561E;
 }
+
+.clear-filters-button {
+  background-color: transparent;
+  color: var(--Semantic-Text-primary-subheadline, #728C24);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.apply-filters-button {
+  background-color: #728C24;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
