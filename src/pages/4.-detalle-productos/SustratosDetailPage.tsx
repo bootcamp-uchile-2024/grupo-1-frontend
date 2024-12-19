@@ -20,7 +20,7 @@ import { useCart } from "../../CartContext";
         try{
             if(!id) return;
             try {
-                const response = await fetch(`http://16.171.28.106:4000/productos/sustratos/getbyid/${id}`);
+                const response = await fetch(`http://3.142.12.50:4000/productos/sustratos/getbyid/${id}`);
                 if (!response.ok) {
                   throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
                 }

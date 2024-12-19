@@ -38,11 +38,17 @@ function App() {
             <Route path="buscar" element={<SearchResultsPage />} /> {/* Nueva ruta */}
             <Route path="/productos/plantas/getbyid/:id" element={<PlantasDetailPage />} />
             <Route path="maceteros" element={<MaceterosPage />} />
-            <Route path="/productos/maceteros/getbyid/:id" element={<MaceterosDetailPage />} />
+            <Route path="/productos/maceteros/getbyid/:id" element={<MaceterosDetailPage toggleSidebar={function (): void {
+              throw new Error('Function not implemented.');
+            } } />} />
             <Route path="fertilizantes" element={<FertilizantesPage />} />
-            <Route path="/productos/fertilizantes/getbyid/:id" element={<FertilizantesDetailPage />} />
+            <Route path="/productos/fertilizantes/getbyid/:id" element={<FertilizantesDetailPage toggleSidebar={function (): void {
+              throw new Error('Function not implemented.');
+            } } />} />
             <Route path="sustratos" element={<SustratosPage />} />
-            <Route path="/productos/sustratos/getbyid/:id" element={<SustratosDetailPage />} />
+            <Route path="/productos/sustratos/getbyid/:id" element={<SustratosDetailPage toggleSidebar={function (): void {
+              throw new Error('Function not implemented.');
+            } } />} />
             <Route path="control-de-plagas" element={<ControlPlagasPage />} />
             <Route path="carrito" element={<CartPage />} />
             <Route path="quienes-somos" element={<AboutPage />} />

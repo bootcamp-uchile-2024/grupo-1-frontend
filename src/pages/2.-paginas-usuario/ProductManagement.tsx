@@ -11,13 +11,13 @@ interface Product {
 }
 
 const ProductManagement: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [productos, setProductos] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
 
-  const API_URL = `http://16.171.43.137:4000/productos/catalogo?page=${page}&size=200`;
+  const API_URL = `http://3.142.12.50:4000/productos/catalogo?page=${page}&size=200`;
 
   const fetchProducts = async () => {
     try {
@@ -27,21 +27,12 @@ const ProductManagement: React.FC = () => {
         throw new Error('Error al obtener los productos');
       }
 
-      const data = await response.json();
+      const productos = await response.json();
+      console.log('Productos:', productos); // Inspeccionar la respuesta
+      console.log(typeof productos)
 
-      console.log('Respuesta de la API:', data); // Inspeccionar la respuesta
+      setProductos(productos)
 
-      // Verificar si la respuesta es un array o si los productos están dentro de una propiedad
-      if (Array.isArray(data)) {
-        setProducts(data);
-        setTotalPages(1); // Ajustar según lo que la API devuelva, si hay paginación
-      } else if (data.products && Array.isArray(data.products)) {
-        // Si los productos están dentro de una propiedad llamada 'products'
-        setProducts(data.products);
-        setTotalPages(Math.ceil(data.total / 200)); // Si la API devuelve un total de productos
-      } else {
-        throw new Error('Los productos no están disponibles');
-      }
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -52,20 +43,20 @@ const ProductManagement: React.FC = () => {
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     fetchProducts();
   }, [page]);
 
   const handleDelete = async (idProducto: number) => {
     try {
-      const response = await fetch(`http://16.171.43.137:4000/productos/catalogo/${idProducto}`, {
+      const response = await fetch(`http://3.142.12.50:4000/productos/create${idProducto}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
         throw new Error('Error al eliminar el producto');
       }
-      setProducts(prevProducts => prevProducts.filter(product => product.idProducto !== idProducto));
+      setProductos((prevProducts: any[]) => prevProducts.filter((product: { idProducto: number; }) => product.idProducto !== idProducto));
     } catch (err) {
       console.error(err);
     }
@@ -87,21 +78,15 @@ const ProductManagement: React.FC = () => {
         </Link>
       </div>
       <ul>
-        {Array.isArray(products) && products.length > 0 ? (
-          products.map(product => (
-            <li key={product.idProducto}>
-              <img src={product.imagenProducto[0]} alt={product.nombreProducto} style={{ width: '50px' }} />
-              <h3>{product.nombreProducto}</h3>
-              <p>Precio: ${product.precioNormal}</p>
-              <p>Descripción: {product.descripcionProducto}</p>
-              <p>Stock: {product.stock}</p>
-              <button onClick={() => handleEdit(product.idProducto)}>Editar</button>
-              <button onClick={() => handleDelete(product.idProducto)}>Eliminar</button>
-            </li>
-          ))
-        ) : (
-          <p>No hay productos disponibles.</p>
-        )}
+          <li key={productos?.data[0].id}>
+            <img src={productos?.data[0].imagenes[0].urlImagen} alt={productos.nombreProducto} style={{ width: '50px' }} />
+            <h3>{productos.nombreProducto}</h3>
+            <p>Precio: ${productos.precioNormal}</p>
+            <p>Descripción: {productos.descripcionProducto}</p>
+            <p>Stock: {productos.stock}</p>
+            <button onClick={() => handleEdit(productos.idProducto)}>Editar</button>
+            <button onClick={() => handleDelete(productos.idProducto)}>Eliminar</button>
+          </li>
       </ul>
       <div>
         <button onClick={() => setPage(prevPage => Math.max(prevPage - 1, 1))}>Anterior</button>

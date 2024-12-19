@@ -63,7 +63,7 @@ export default function UserForm() {
 
   const createUser = async (data: typeof formData) => {
     try {
-      const response = await fetch('https://plantopia.koyeb.app/usuarios', {
+      const response = await fetch('http://3.142.12.50:4000/usuarios/gestion/insert', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export default function UserForm() {
 
   const updateUser = async (data: typeof formData) => {
     try {
-      const response = await fetch(`https://plantopia.koyeb.app/usuarios${data.id}`, {
+      const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/update/${data.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

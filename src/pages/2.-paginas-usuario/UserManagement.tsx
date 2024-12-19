@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 interface User {
   id: number;
-  nombre: string;
+  rutUsuario: number;
+  nombres: string;
+  apellidos: string;
   email: string;
+  clave: string;
+  telefono: number;
+  direccion: string;
+  codigoPostal: number;
 }
 
 const UserManagement: React.FC = () => {
@@ -17,7 +23,7 @@ const UserManagement: React.FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://13.53.40.69:4000//usuarios');
+        const response = await fetch('http://3.142.12.50:4000/usuarios/gestion/list');
         if (!response.ok) {
           throw new Error('Error al obtener los usuarios');
         }
@@ -38,7 +44,7 @@ const UserManagement: React.FC = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`http://16.171.43.137:4000/usuarios/${id}`, {
+      const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/delete/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -55,7 +61,7 @@ const UserManagement: React.FC = () => {
 
     try {
       console.log('Creando usuario:', userData);  // Verificar que se están enviando los datos correctos
-      const response = await fetch('http://16.171.43.137:4000/usuarios', {
+      const response = await fetch('http://3.142.12.50:4000/usuarios/gestion/insert', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
@@ -82,7 +88,7 @@ const UserManagement: React.FC = () => {
     if (!userData) return;
 
     try {
-      const response = await fetch(`http://16.171.43.137:4000/usuarios/${userData.id}`, {
+      const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/update/${userData.rutUsuario}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
@@ -146,9 +152,25 @@ const UserManagement: React.FC = () => {
       >
         <input
           type="text"
-          name="nombre"
-          placeholder="Nombre"
-          value={userData?.nombre || ''}
+          name="nombres"
+          placeholder="Nombres"
+          value={userData?.nombres || ''}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="apellidos"
+          placeholder="Apellidos"
+          value={userData?.apellidos || ''}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="rutUsuario"
+          placeholder="Rut"
+          value={userData?.rutUsuario || ''}
           onChange={handleChange}
           required
         />
@@ -160,14 +182,52 @@ const UserManagement: React.FC = () => {
           onChange={handleChange}
           required
         />
+        <input
+          type="text"
+          name="clave"
+          placeholder="Clave"
+          value={userData?.clave || ''}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="telefono"
+          placeholder="Teléfono"
+          value={userData?.telefono || ''}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="direccion"
+          placeholder="Dirección"
+          value={userData?.direccion || ''}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="codigoPostal"
+          placeholder="Código Postal"
+          value={userData?.codigoPostal || ''}
+          onChange={handleChange}
+          required
+        />
         <button type="submit">{isEditing ? 'Actualizar' : 'Crear'}</button>
       </form>
 
       <ul>
         {currentUsers.map(user => (
           <li key={user.id}>
-            <h3>{user.nombre}</h3>
+            <p>Nombre: {user.nombres}</p>
+            <p>Apellidos: {user.apellidos}</p>
+            <p>Rut: {user.rutUsuario}</p>
             <p>Email: {user.email}</p>
+            <p>Clave: {user.clave}</p>
+            <p>Teléfono: {user.telefono}</p>
+            <p>Dirección: {user.direccion}</p>
+            <p>Código Postal: {user.codigoPostal}</p>
             <button onClick={() => handleDelete(user.id)}>Eliminar</button>
             <button onClick={() => setUserData(user)}>Editar</button>
           </li>
