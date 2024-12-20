@@ -62,7 +62,7 @@ const Navbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
         {/* Contenido */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
+
             <li className="nav-item"><Link to="/plantas" className="nav-link">Plantas</Link></li>
 
             {/* Menú desplegable con hover */}
