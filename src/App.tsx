@@ -26,6 +26,7 @@ import CreateProduct from './pages/3.-productos/CreateProduct';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SustratosDetailPage from './pages/4.-detalle-productos/SustratosDetailPage';
 import SearchResultsPage from './pages/4.-detalle-productos/SearchResultsPage'; 
+import PurchaseSuccessPage from './components/PurchaseSuccessPage';
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
               <Route index element={<ProductForm />} />
             </Route>
             <Route path="login" element={<LogInPage />} />
+            <Route path="/compra-exitosa" element={<PurchaseSuccessPage />} />
           </Route>
         </Routes>
       </Router>
