@@ -32,8 +32,8 @@ function App() {
     <CartProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<HomePage />} />
+          <Route element={<MainLayout />}>
+            <Route path='/' element={<HomePage />} />
             <Route path="plantas" element={<PlantasPage />} />
             <Route path="buscar" element={<SearchResultsPage />} /> {/* Nueva ruta */}
             <Route path="/productos/plantas/getbyid/:id" element={<PlantasDetailPage />} />
@@ -54,9 +54,9 @@ function App() {
             <Route path="quienes-somos" element={<AboutPage />} />
             <Route path="contacto" element={<ContactPage />} />
             <Route path="formulario-usuario" element={<UserForm />} />
-            <Route path="gestion-usuarios" element={<UserManagement />} />
-            <Route path="gestion-productos" element={<ProductManagement />} />
-            <Route path="create-product" element={<CreateProduct />} />
+            <Route path="gestion-usuarios" element={<PrivateRoute roles={["admin"]}><UserManagement /></PrivateRoute>} />
+            <Route path="gestion-productos" element={<PrivateRoute roles={["admin"]}><ProductManagement /></PrivateRoute>} />
+            <Route path="create-product" element={<PrivateRoute roles={["admin"]}><CreateProduct /></PrivateRoute>} />
             <Route path="admin" element={<PrivateRoute roles={["admin"]}><AdminPage /></PrivateRoute>}>
               <Route index element={<ProductForm />} />
             </Route>

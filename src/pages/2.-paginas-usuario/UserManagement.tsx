@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 interface User {
-  id: number;
+  id?: number;
   rutUsuario: number;
   nombres: string;
   apellidos: string;
   email: string;
-  clave: string;
+  clave?: string;
   telefono: number;
   direccion: string;
   codigoPostal: number;
@@ -42,7 +42,8 @@ const UserManagement: React.FC = () => {
     fetchUsers();
   }, []);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number | undefined) => {
+    if(!id) return;
     try {
       const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/delete/${id}`, {
         method: 'DELETE',
@@ -86,12 +87,14 @@ const UserManagement: React.FC = () => {
 
   const handleEdit = async () => {
     if (!userData) return;
-
+    let user = {...userData};
+    delete user.id
+    delete user.clave
     try {
       const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/update/${userData.rutUsuario}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(user),
       });
       if (!response.ok) {
         throw new Error('Error al actualizar el usuario');
@@ -214,7 +217,7 @@ const UserManagement: React.FC = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">{isEditing ? 'Actualizar' : 'Crear'}</button>
+        <button type="submit">{'Actualizar'}</button>
       </form>
 
       <ul>
