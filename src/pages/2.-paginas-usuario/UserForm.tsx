@@ -4,10 +4,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function UserForm() {
   const [formData, setFormData] = useState({
-    id: '',
+    rutUsuario: '',
     name: '',
+    lastname: '',
     email: '',
     password: '',
+    telefone: 0,
+    direccion: '',
+    idComuna: 0,
+    codigoPostal: '',
+    idPerfil: 2,
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -20,16 +26,26 @@ export default function UserForm() {
     const userData = location.state?.user; 
     if (userData) {
       setFormData({
-        id: userData.id,
+        rutUsuario: userData.rutUsuario,
         name: userData.name,
+        lastname: userData.lastname,
         email: userData.email,
-        password: '', 
+        password: '',
+        telefone: userData.telefone,
+        direccion: userData.direccion,
+        idComuna: userData.idComuna,
+        codigoPostal: userData.codigoPostal,
+        idPerfil: userData.idPerfil,
       });
       setIsEditing(true);
     }
   }, [location.state]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -82,7 +98,7 @@ export default function UserForm() {
 
   const updateUser = async (data: typeof formData) => {
     try {
-      const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/update/${data.id}`, {
+      const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/update/${data.rutUsuario}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +119,7 @@ export default function UserForm() {
     <form className="user-form" onSubmit={handleSubmit}>
       <h2>{isEditing ? 'Editar Usuario' : 'Crear Usuario'}</h2>
       <div className="form-group">
-        <label>Nombre</label>
+        <label>Nombres</label>
         <input
           type="text"
           name="name"
@@ -113,7 +129,28 @@ export default function UserForm() {
         />
         {errors.name && <p className="error-message">{errors.name}</p>}
       </div>
-
+      <div className="form-group">
+        <label>Apellidos</label>
+        <input
+          type="text"
+          name="lastname"
+          value={formData.lastname}
+          onChange={handleChange}
+          className={errors.lastname ? 'error' : ''}
+        />
+        {errors.lastname && <p className="error-message">{errors.lastname}</p>}
+      </div>
+      <div className="form-group">
+        <label>Cédula de Identidad</label>
+        <input
+          type="text"
+          name="rutUsuario"
+          value={formData.rutUsuario}
+          onChange={handleChange}
+          className={errors.rutUsuario ? 'error' : ''}
+        />
+        {errors.rutUsuario && <p className="error-message">{errors.rutUsuario}</p>}
+      </div>
       <div className="form-group">
         <label>Email</label>
         <input
@@ -125,7 +162,6 @@ export default function UserForm() {
         />
         {errors.email && <p className="error-message">{errors.email}</p>}
       </div>
-
       <div className="form-group">
         <label>Contraseña</label>
         <input
@@ -137,7 +173,49 @@ export default function UserForm() {
         />
         {errors.password && <p className="error-message">{errors.password}</p>}
       </div>
-
+      <div className="form-group">
+        <label>Teléfono</label>
+        <input
+          type="number"
+          name="telefone"
+          value={formData.telefone}
+          onChange={handleChange}
+          className={errors.telefone ? 'error' : ''}
+        />
+        {errors.telefone && <p className="error-message">{errors.telefone}</p>}
+      </div>
+      <div className="form-group">
+        <label>Dirección</label>
+        <input
+          type="text"
+          name="direccion"
+          value={formData.direccion}
+          onChange={handleChange}
+          className={errors.direccion ? 'error' : ''}
+        />
+        {errors.direccion && <p className="error-message">{errors.direccion}</p>}
+      </div>
+      <div className="form-group">
+        <label>Comuna</label>
+        <select name='idComuna' id='idComuna' value={formData.idComuna} onChange={handleSelectChange}>
+          <option value={0}>Seleccione una comuna</option>
+          <option value={1}>Santiago</option>
+          <option value={2}>Providencia</option>
+          <option value={3}>Las Condes</option>
+        </select>
+        {errors.idComuna && <p className="error-message">{errors.idComuna}</p>}
+      </div>
+      <div className="form-group">
+        <label>Código Postal</label>
+        <input
+          type="text"
+          name="codigoPostal"
+          value={formData.codigoPostal}
+          onChange={handleChange}
+          className={errors.codigoPostal ? 'error' : ''}
+        />
+        {errors.codigoPostal && <p className="error-message">{errors.codigoPostal}</p>}
+      </div>
       <button type="submit" className="submit-button">{isEditing ? 'Actualizar Usuario' : 'Crear Usuario'}</button>
     </form>
   );

@@ -80,7 +80,7 @@ export function LogInPage() {
         <div>
             <p>¿No tienes cuenta? </p>
             <Link to='/formulario-usuario'>
-                <button className='btn'>Subscribirse</button>
+                <button className='btn'>Regístrate</button>
             </Link>
         </div>
     </>

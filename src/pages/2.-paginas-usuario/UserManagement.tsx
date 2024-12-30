@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 interface User {
   id?: number;
-  rutUsuario: number;
+  rutUsuario?: number;
   nombres: string;
   apellidos: string;
   email: string;
@@ -10,6 +10,9 @@ interface User {
   telefono: number;
   direccion: string;
   codigoPostal: number;
+  comuna?: number;
+  perfil?: number;
+  Preferencias?: string;
 }
 
 const UserManagement: React.FC = () => {
@@ -90,6 +93,10 @@ const UserManagement: React.FC = () => {
     let user = {...userData};
     delete user.id
     delete user.clave
+    delete user.comuna
+    delete user.perfil
+    delete user.Preferencias
+    delete user.rutUsuario
     try {
       const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/update/${userData.rutUsuario}`, {
         method: 'PUT',
@@ -107,9 +114,11 @@ const UserManagement: React.FC = () => {
       );
       setUserData(null); // Limpia el formulario
       alert('Usuario actualizado exitosamente');
+      location.reload();
     } catch (err) {
       console.error(err);
     }
+  
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -169,14 +178,14 @@ const UserManagement: React.FC = () => {
           onChange={handleChange}
           required
         />
-        <input
+        {/* <input
           type="text"
           name="rutUsuario"
           placeholder="Rut"
           value={userData?.rutUsuario || ''}
           onChange={handleChange}
           required
-        />
+        /> */}
         <input
           type="email"
           name="email"

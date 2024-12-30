@@ -9,7 +9,7 @@ interface ProductCardProps {
   precio: number;
   stock: number;
   imagenProducto: string;
-  categoria: string;
+  categoria: {id: number, nombreCategoria: string};
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       stock,
       precio,
       imagenProducto,
-      categoria,
+      categoria: categoria.nombreCategoria,
       id
     });
   };
@@ -48,8 +48,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className="product-info">
         <h3>{nombreProducto}</h3>
         <p>${precio.toLocaleString()}</p>
-        <p>{categoria}</p>
-        <Link to={`/productos/${categoria}/getbyid/${id}`}><button>Detalles</button></Link>
+        <p>{categoria.nombreCategoria}</p>
+        <Link to={`/productos/${categoria.nombreCategoria}/getbyid/${id}`}><button>Detalles</button></Link>
         <button className="view-product-button" onClick={handleAddToCart}>
           Agregar al carrito
         </button>
