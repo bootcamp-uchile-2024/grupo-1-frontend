@@ -86,6 +86,7 @@ const Navbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
             <li className="nav-item"><Link to="/ofertas" className="nav-link">Ofertas</Link></li>
             <li className="nav-item"><Link to="/servicios" className="nav-link">Servicios</Link></li>
             <li className="nav-item"><Link to="/kits" className="nav-link">Kits</Link></li>
+            <li className="nav-item"><Link to="/admin" className="nav-link">Admin</Link></li>
 
             {/* Carrito */}
             <li className="nav-item">
