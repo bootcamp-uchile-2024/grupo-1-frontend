@@ -40,7 +40,7 @@ interface DataFetcherProps {
                 console.log('este es el producto: ', planta);
                 console.log(typeof planta);
                 
-                setPlanta(planta);
+                setPlanta(planta.data);
                 
               } catch (err) {
                 if (err instanceof Error) {
@@ -110,7 +110,7 @@ interface DataFetcherProps {
         categoria: planta.producto.categoria
       })
     }
-  
+    console.log(planta);
     return (
       <>
         <h2>Productos</h2>

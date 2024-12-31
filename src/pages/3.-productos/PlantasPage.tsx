@@ -35,8 +35,9 @@ const PlantasPage: React.FC = () => {
             return (
               <>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                  {paginatedProducts.map((product) => (
-                    <ProductCard
+                  {paginatedProducts.map((product) => {
+                      console.log(product)
+                      return(<ProductCard
                       key={product.id}
                       id={product.id}
                       nombreProducto={product.nombreProducto}
@@ -44,8 +45,9 @@ const PlantasPage: React.FC = () => {
                       stock={product.stock}
                       imagenProducto={product.imagenProducto}
                       categoria={product.categoria}
-                    />
-                  ))}
+                    />)
+
+                  })}
                 </div>
                 
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
