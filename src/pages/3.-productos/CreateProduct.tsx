@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const CreateProduct: React.FC = () => {
   const [formData, setFormData] = useState({
     nombreProducto: '',
-    imagenProducto: [],
-    imagen1: '' as any,
-    imagen2: '' as any,
-    imagen3: '' as any,
+    imagenes: [] as File[],
     descuento: '',
     precioNormal: '',
     stock: '',
@@ -22,19 +19,21 @@ const CreateProduct: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    console.log('formData:', formData);
-    const body = {...formData,imagenProducto:[formData.imagen1,formData.imagen2,formData.imagen3], precioNormal: parseInt(formData.precioNormal), stock: parseInt(formData.stock), idCategoria: parseInt(formData.idCategoria), descuento: parseInt(formData.descuento)};
-    delete body.imagen1;
-    delete body.imagen2;
-    delete body.imagen3;
-    console.log('body:', body);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const body = new FormData();
+    (Object.keys(formData) as (keyof typeof formData)[]).forEach((key) => {
+      if (key !== 'imagenes') {
+        body.append(key, formData[key].toString());
+      }
+    });
+    formData.imagenes.forEach((imagen: File) => {
+      body.append('imagenes', imagen);
+    });
     try {
-      const response = await fetch('http://3.142.12.50:4000/productos/create', {
+      const response = await fetch('http://3.142.12.50:4000/productos/newcreate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body,
       });
       if (!response.ok) {
         throw new Error('Error al crear el producto');
@@ -48,31 +47,23 @@ const CreateProduct: React.FC = () => {
       }
     }
   };
-  
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files![0];
-    const base64 = await convertFileToBase64(file);
-    setFormData({ ...formData, [event.target.name]: base64 });
-  }
-
-  const convertFileToBase64 = (file: File) => {
-    return new Promise((resolve, reject) => {
-      
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => resolve(fileReader.result as string);
-      fileReader.onerror = (error) => reject(error);
-    });
+    setFormData({ ...formData, imagenes: [...formData.imagenes, file] }); // Update state with the selected file
   };
-
   return (
     <div>
       <h2>Agregar Producto</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}
+        action='http://3.142.12.50:4000/productos/newcreate'
+        method='POST'
+        encType='multipart/form-data'      
+      >
         <div>
           <label>Nombre del Producto</label>
           <input
@@ -139,11 +130,11 @@ const CreateProduct: React.FC = () => {
           <input
             accept='image/*'
             type="file"
-            name="imagen1"
+            name="imagenes"
             onChange={handleFileUpload}
           />
         </div>
-        <div>
+        {/* <div>
           <label>Imagen 2</label>
           <input
             accept='image/*'
@@ -160,7 +151,7 @@ const CreateProduct: React.FC = () => {
             name="imagen3"
             onChange={handleFileUpload}
           />
-        </div>
+        </div> */}
 
         <button type="submit">Crear Producto</button>
       </form>
