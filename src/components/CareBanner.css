@@ -1,152 +1,182 @@
 /* Contenedor principal */
 .care-banner-container {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    width: 100%;
-    max-width: 1440px; /* Ancho máximo */
-    min-height: 397px; /* Altura mínima */
-    padding: 32px 64px; /* Espaciado interno */
-    background: linear-gradient(180deg, rgba(237, 238, 232, 0.6) 0%, rgba(201, 205, 186, 0.4) 100%);
-    border-radius: 0px 32px 0px 32px; /* Bordes redondeados */
-    border: 1px solid #C9D3A6; /* Color del borde */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    gap: 20px; /* Separación entre columnas */
-    margin: 32px auto 0 auto; /* Espaciado superior de 32px */
-  }  
-  
-  /* Sección izquierda */
-  .left-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Alinear elementos hacia el inicio */
-    gap: 16px;
-    flex: 1; /* Usar espacio disponible */
-    max-width: 50%; /* Limitar ancho al 50% */
-  }
-  
-  .care-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .care-info h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 36px;
-    color: #46561E;
-  }
-  
-  .care-info h1 span {
-    color: #E6805C;
-  }
-  
-  .care-info p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #576B20;
-  }
-  
-  /* Badge de cuidado */
-  .care-badge {
-    display: flex;
-    align-items: center;
-    background-color: #F5F8F3;
-    border-radius: 8px;
-    padding: 8px 12px;
-    gap: 8px;
-  }
-  
-  .badge-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #46561E;
-  }
-  
-  .badge-levels {
-    display: flex;
-    gap: 4px;
-  }
-  
-  .badge-levels span {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-color: #E5E5E5;
-    color: #46561E;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    line-height: 20px;
-    border-radius: 50%;
-  }
-  
-  .badge-levels span:first-child {
-    background-color: #576B20;
-    color: #FFFFFF;
-  }
-  
-  /* Botones */
-  .care-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 16px;
-  }
-  
-  .guide-button,
-  .beginner-button {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #46561E;
-    background-color: #F5F8F3;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    cursor: pointer;
-  }
-  
-  .guide-button:hover {
-    background-color: #576B20;
-    color: white;
-  }
-  
-  .beginner-button:hover {
-    background-color: #E6805C;
-    color: white;
-  }
-  
-  /* Sección derecha */
-  .right-section {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1; /* Usar espacio disponible */
-    max-width: 50%; /* Limitar ancho al 50% */
-  }
-  
-  .right-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .right-section li {
-    display: flex;
-    align-items: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #46561E;
-  }
-  
-  .check-icon {
-    color: #E6805C;
-    margin-right: 8px;
-  }
-  
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  width: 100%;
+  max-width: 1440px; /* Ancho máximo */
+  min-height: 397px; /* Altura mínima */
+  padding: 32px 64px; /* Espaciado interno */
+  background: linear-gradient(180deg, rgba(237, 238, 232, 0.6) 0%, rgba(201, 205, 186, 0.4) 100%);
+  border-radius: 0px 32px 0px 32px; /* Bordes redondeados */
+  border: 1px solid #C9D3A6; /* Color del borde */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  gap: 20px; /* Separación entre columnas */
+  margin: 32px auto 0 auto; /* Espaciado superior de 32px */
+  margin-bottom: 50px;
+}
+
+/* Sección de los iconos */
+.care-icons-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  width: 771px; /* Establecemos el ancho de la fila */
+  height: 60px; /* Establecemos la altura de la fila */
+  opacity: 1; /* Hacemos visible */
+}
+
+.care-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Aseguramos que cada ítem ocupe espacio proporcional */
+}
+
+.care-icon-item {
+  font-size: 40px;
+  color: #576b20;
+}
+
+.care-icon span {
+  font-size: 16px;
+  color: #46561e;
+  margin-top: 8px; /* Un poco de espacio entre el ícono y el texto */
+}
+
+/* Sección izquierda */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Alinear elementos hacia el inicio */
+  gap: 16px;
+  flex: 1; /* Usar espacio disponible */
+  max-width: 50%; /* Limitar ancho al 50% */
+}
+
+.care-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.care-info h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #46561e;
+}
+
+.care-info h1 span {
+  color: #e6805c;
+}
+
+.care-info p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #576b20;
+}
+
+/* Badge de cuidado */
+.care-badge {
+  display: flex;
+  align-items: center;
+  background-color: #f5f8f3;
+  border-radius: 8px;
+  padding: 8px 12px;
+  gap: 8px;
+}
+
+.badge-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #46561e;
+}
+
+.badge-levels {
+  display: flex;
+  gap: 4px;
+}
+
+.badge-levels span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #e5e5e5;
+  color: #46561e;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+}
+
+.badge-levels span:first-child {
+  background-color: #576b20;
+  color: #ffffff;
+}
+
+/* Botones */
+.care-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.guide-button,
+.beginner-button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #46561e;
+  background-color: #f5f8f3;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.guide-button:hover {
+  background-color: #576b20;
+  color: white;
+}
+
+.beginner-button:hover {
+  background-color: #e6805c;
+  color: white;
+}
+
+/* Sección derecha */
+.right-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1; /* Usar espacio disponible */
+  max-width: 50%; /* Limitar ancho al 50% */
+}
+
+.right-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.right-section li {
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #46561e;
+}
+
+.check-icon {
+  color: #e6805c;
+  margin-right: 8px;
+}

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import ProductCarousel from '../../components/ProductCarousel';
 import ImageSlider from '../../components/ImageSlider';
-import Difficulty from '../../components/Difficulty';
 import FirstTime from '../../components/FirstTime';
 import PetFriendly from '../../components/PetFriendly';
 import CareBanner from '../../components/CareBanner';
 import FeaturesSection from '../../components/FeatureSection';
+
 
 interface Product {
   id: string;
@@ -75,8 +75,13 @@ const HomePage: React.FC = () => {
           images={featuredProducts.map((product: Product) => product.imagenProducto[0])}
           id={featuredProducts.map((product: Product) => product.id)}
         />
+      </Container>
 
-        {/* Productos Recomendados */}
+      {/* CareBanner entre productos destacados y recomendados */}
+      <CareBanner />
+
+      {/* Productos Recomendados */}
+      <Container>
         <h2 className="my-4">Recomendados para ti</h2>
         <ProductCarousel
           products={recommendedProducts.map((product: Product) => product.nombreProducto)}
@@ -86,13 +91,8 @@ const HomePage: React.FC = () => {
         />
       </Container>
 
-
-
-
       {/* Otros Componentes */}
-      <Difficulty />
       <FirstTime />
-      <CareBanner />
       <PetFriendly />
       <FeaturesSection />
     </div>
