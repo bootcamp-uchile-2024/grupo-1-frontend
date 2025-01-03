@@ -1,0 +1,77 @@
+/* Contenedor principal del slider */
+.first-time-slider {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
+    background: linear-gradient(90deg, #F8F8F5 0%, #FFFFFF 100%);
+  }
+  
+  /* Texto estático */
+  .text-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .text-section h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 32px;
+  }
+  
+  .text-section .first-text {
+    color: #46561E; /* Color para "¿Es tu primera vez" */
+  }
+  
+  .text-section .highlighted-text {
+    color: #E6805C; /* Color para "comprando plantas?" */
+  }
+  
+  .text-section p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #576B20;
+    margin-top: 10px;
+  }
+  
+/* Imagen */
+.image-section img {
+    width: 100%; /* Ocupar el 100% del contenedor */
+    height: auto; /* Mantener proporciones */
+    max-width: none; /* Sin límite máximo de ancho */
+  }
+  
+  
+  /* Flechas de navegación */
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none; /* Sin fondo */
+    border: none;
+    color: #46561E; /* Color verde oscuro */
+    font-size: 2.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s ease;
+  }
+  
+  .slider-arrow:hover {
+    transform: translateY(-50%) scale(1.1); /* Escalar un 10% */
+  }
+  
+  .slider-arrow.left {
+    left: 10px; /* Ubicación de la flecha izquierda */
+  }
+  
+  .slider-arrow.right {
+    right: 10px; /* Ubicación de la flecha derecha */
+  }
+  

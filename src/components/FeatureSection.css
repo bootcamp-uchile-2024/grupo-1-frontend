@@ -1,0 +1,79 @@
+/* Contenedor principal de la sección de características */
+.features-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Tarjetas de características */
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 306px;
+    height: 310px;
+    padding: 32px 0px 0px 0px;
+    gap: 16px;
+    background-color: #f2efed;
+    border-radius: 0px 32px 0px 32px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+  }
+  
+  /* Estilos para el icono dentro del círculo */
+  .icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 126px;
+    height: 126px;
+    border-radius: 50%;
+    background-color: #f2f7de;
+    border: 1px solid #e0e0e0;
+    opacity: 1;
+  }
+  
+  /* Tamaño del icono */
+  .icon-container svg {
+    width: 91px;
+    height: 91px;
+    color: #576b20;
+    opacity: 1;
+  }
+  
+  /* Títulos de las tarjetas */
+  .feature-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #728c24;
+    text-align: center;
+  }
+  
+  /* Subtítulos de las tarjetas */
+  .feature-card p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #46561e;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  /* Efecto hover en el icono */
+.feature-card:hover .icon-circle {
+    transform: scale(1.1); /* Aumenta el tamaño del icono al hacer hover */
+  }
+
+  /* Efecto hover en la tarjeta */
+.feature-card:hover {
+    background-color: #FFFFFF; /* Cambia el fondo a blanco */
+    border: 3px solid #BCCF6F; /* Añade un borde verde claro */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Mantiene el sombreado */
+  }

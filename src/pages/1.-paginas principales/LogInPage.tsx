@@ -23,7 +23,7 @@ export function LogInPage() {
     });
 
     const [error, setError] = useState<boolean>(false);
-    const [validCredential, setValidCredential] = useState<boolean>(true);
+    const [validCredential, setValidCredential] = useState<boolean>(false);
 
     const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -80,7 +80,7 @@ export function LogInPage() {
         <div>
             <p>¿No tienes cuenta? </p>
             <Link to='/formulario-usuario'>
-                <button className='btn'>Subscribirse</button>
+                <button className='btn'>Regístrate</button>
             </Link>
         </div>
     </>

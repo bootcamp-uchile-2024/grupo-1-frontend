@@ -1,18 +1,3 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -35,25 +20,20 @@ h1 {
 }
 
 main {
-  display: block;
-  
   width: 100%;
   justify-content: center;
 }
 
 button {
+  background-color: #Eff4DD; 
+  color: #1F280B;
   border-radius: 8px;
-  border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #45a049;  /* Verde más oscuro al pasar el mouse */
+  color: #fff;
 }
 button:focus,
 button:focus-visible {
@@ -72,113 +52,22 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-/* * {
-  box-sizing: border-box;
+.carousel-item img {
+  object-fit: cover;
+  height: 100vh;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  height: 100%;
-}
-
-header {
-
-  padding: 50px;
-  background-color: aquamarine;
-  text-align: center;
-
-} */
-
-/* nav {
-  display: flex;
-  flex-direction: row;
-  background-color: grey;
-
-}
-
-nav a {
-  color: white;
-  padding: 14px 20px;
-  text-decoration: none;
-
-}
-
-.content {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-aside {
-  flex: 30px;
-  background-color: blueviolet;
-  padding: 20px;
-}
-
-section {
-  flex: 70%;
-  background-color: khaki;
-  padding: 20px;
-}
-
-footer {
-  padding: 20px;
-  background-color: palevioletred;
-  text-align: center;
-}
-
-@media screen and (max-width: 700px) {
-
-  nav,
-  .content {
-      flex-direction: column;
-  }
-} */
-
-/* nav {
-  background-color: #444;
-  color: white;
+.carousel-inner {
   width: 100%;
-} */
+  background-color: #fff;  /* Fondo blanco para el carrusel */
+}
 
-/* nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  width: 100%;
-  height: 100px;
-  margin: 0;
-} */
 
-/* nav ul li {
-  margin: 0 1rem;
-  align-content: center;
-} */
-
-/* nav ul li a {
-  color: white;
-  text-decoration: none;
-} */
 
 footer{
-  margin-top: 100px;
-  margin-bottom: 50px;
-  display: flex;
   justify-content: center;
 }
 
-/* @media(min-width:1024px){
-  nav{
-    display: flex;
-    width: 100%;
-    
-  }
-
-} */
 .header{
   margin-right: auto;
   align-self: center;

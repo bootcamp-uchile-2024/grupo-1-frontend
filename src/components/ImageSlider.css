@@ -1,0 +1,154 @@
+/* Contenedor principal del slider */
+.slider {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+  background: url('/home/main.png') center/cover no-repeat;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor del slide */
+.slider-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Tarjeta del texto */
+.slider-card {
+  width: 523px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  background: white;
+  border-radius: 0px 32px 0px 32px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  opacity: 0.9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.slider-card h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 52px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 10px;
+  color: #46561E;
+}
+
+.slider-card h1 span {
+  color: #DE6A50;
+}
+
+.slider-card p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 48px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 20px;
+  color: #576B20;
+}
+
+.slider-card .slider-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Hacer que el botón ocupe todo el ancho */
+  height: 50px; /* Altura fija */
+  min-width: 50px; /* Ancho mínimo */
+  padding: var(--Paddingpadding-sm); /* Espaciado interno */
+  gap: var(--Paddingpadding-sm); /* Espaciado entre texto e ícono */
+  background-color: #576B20; /* Fondo verde */
+  color: #E0EBAB; /* Texto blanco */
+  border: none;
+  border-radius: 4px 0px 0px 0px; /* Bordes redondeados en la parte superior izquierda */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  opacity: 1; /* Hacer visible el botón */
+}
+
+.slider-card .slider-button:hover {
+  background-color: #46561E; /* Color más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Efecto de agrandar ligeramente */
+}
+
+.cart-icon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+/* Imagen */
+.slider-image img {
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+  max-width: 100%; /* Asegura que la imagen no sobrepase el contenedor */
+  width: 668px; /* Ajustado según las necesidades */
+}
+
+/* Indicadores de puntos */
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #d3d3d3;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #576B20; /* Color activo */
+}
+
+.dot:hover {
+  background-color: #87A454;
+}
+
+/* Flechas de navegación */
+.slider-arrow {
+  position: absolute;
+  top: 50%; /* Centrar verticalmente */
+  transform: translateY(-50%);
+  background: none; /* Sin fondo */
+  border: none; /* Sin bordes */
+  color: white; /* Color blanco para las flechas */
+  font-size: 2.5rem; /* Tamaño base de las flechas */
+  cursor: pointer;
+  z-index: 10; /* Asegurar que las flechas estén por encima */
+  transition: transform 0.2s ease, color 0.2s ease; /* Efecto suave al interactuar */
+}
+
+.slider-arrow:hover {
+  transform: translateY(-50%) scale(1.1); /* Crecer un 10% */
+  color: white; /* Asegurar que el color siga siendo blanco */
+}
+
+.slider-arrow.left {
+  left: 10px; /* Ubicación de la flecha izquierda */
+}
+
+.slider-arrow.right {
+  right: 10px; /* Ubicación de la flecha derecha */
+}

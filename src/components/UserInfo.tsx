@@ -10,6 +10,7 @@ export function UserInfo() {
   // Función para hacer logout
   const handleLogout = () => {
     logout();  // Asume que logout limpia la sesión de usuario
+    // location.reload();
     navigate("/");  // Redirige al inicio
   };
 

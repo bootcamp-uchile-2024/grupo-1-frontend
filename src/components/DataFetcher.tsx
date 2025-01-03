@@ -1,153 +1,94 @@
 import React, { useState, useEffect } from 'react';
-import { useCart } from '../CartContext'; 
+import ProductCard from './ProductCard';
 
 interface Product {
+  id: number;
   nombreProducto: string;
   nombreCientifico?: string;
   imagenProducto: string;
   descuento?: number;
   precio: number;
-  coberturaDeDespacho?: string;
-  stock: number; 
+  stock: number;
   descripcionProducto: string;
   categoria: string;
-  habitat?: string;
-  luz?: string;
-  frecuenciaDeRiego?: string;
-  fertilizanteSugerido?: string;
-  humedadIdeal?: string;
-  temperaturaIdeal?: number;
-  toxicidadParaMascotas?: boolean;
-  tipoDeSuelo?: string;
-  dificultadDeCuidado?: string;
 }
 
 interface DataFetcherProps {
   tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas';
-  toggleSidebar: () => void; // Prop para abrir el sidebar
+  filters: Record<string, string | boolean>;
+  renderItem?: (products: Product[]) => JSX.Element; // Nueva propiedad para render personalizado
 }
 
-const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, toggleSidebar }) => {
+const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { addToCart, cartItems } = useCart();
 
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
-    plantas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Planta',
-    maceteros: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Macetero',
-    fertilizantes: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Fertilizante',
-    sustratos: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Sustrato',
-    controlPlagas: 'https://plantopia.koyeb.app/productos/catalogo/categoria?tipo=Control%20Plagas',
+    plantas: 'http://3.142.12.50:4000/productos/plantas/get',
+    maceteros: 'http://3.142.12.50:4000/productos/maceteros/get',
+    fertilizantes: 'http://3.142.12.50:4000/productos/fertilizantes/get',
+    sustratos: 'http://3.142.12.50:4000/productos/sustratos/get',
+    controlPlagas: 'http://3.142.12.50:4000/productos/catalogo',
+  };
+
+  const buildUrlWithFilters = () => {
+    const baseUrl = API_URLS[tipo];
+    const params = new URLSearchParams();
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== '') params.append(key, String(value));
+    });
+
+    params.append('page', '1'); // Paginación básica
+    params.append('size', '200'); // Tamaño máximo de elementos
+    return `${baseUrl}?${params.toString()}`;
   };
 
   useEffect(() => {
-    const fetchProductsData = async () => {
+    const fetchProducts = async () => {
       try {
-        const response = await fetch(API_URLS[tipo]); 
-        if (!response.ok) {
-          throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
-        }
-        const result: any[] = await response.json();
+        setLoading(true);
+        const urlWithFilters = buildUrlWithFilters();
+        const response = await fetch(urlWithFilters);
 
-        const mappedProducts = result.map((item) => ({
-          nombreProducto: item.nombreProducto,
+        if (!response.ok) throw new Error('Error al obtener los productos');
+
+        const data = await response.json();
+        const mappedProducts = data.data.map((item: any) => ({
+          id: item.id,
+          nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
-          imagenProducto: item.imagenProducto || [],
-          descuento: item.descuento,
-          precio: item.precioNormal, 
-          coberturaDeDespacho: item.coberturaDeDespacho ? item.coberturaDeDespacho[0] : undefined,
-          stock: item.stock,
-          descripcionProducto: item.descripcionProducto,
-          categoria: item.categoria,
-          habitat: item.habitat,
-          luz: item.luz,
-          frecuenciaDeRiego: item.frecuenciaDeRiego,
-          fertilizanteSugerido: item.fertilizantesSugeridos ? item.fertilizantesSugeridos[0] : undefined,
-          humedadIdeal: item.humedadIdeal,
-          temperaturaIdeal: item.temperaturaIdeal,
-          toxicidadParaMascotas: item.toxicidadMascotas,
-          tipoDeSuelo: item.tipoSuelo,
-          dificultadDeCuidado: item.dificultadDeCuidado,
+          imagenProducto: item.producto.imagenes[0]?.urlImagen || '',
+          descuento: item.producto.descuento,
+          precio: item.producto.precioNormal,
+          stock: item.producto.stock,
+          descripcionProducto: item.producto.descripcionProducto,
+          categoria: item.producto.categoria.nombreCategoria,
         }));
 
         setProducts(mappedProducts);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('Ocurrió un error desconocido');
-        }
+      } catch (_error) {
+        setError('No se pudieron cargar los productos.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProductsData();
-  }, [tipo]); // Dependencia del tipo
+    fetchProducts();
+  }, [tipo, filters]);
 
-  // Función para manejar la compra
-  const handlePurchase = (product: Product) => {
-    const existingProduct = cartItems.find(item => item.nombreProducto === product.nombreProducto);
-    const currentQuantity = existingProduct ? existingProduct.cantidad ?? 0 : 0;
+  if (loading) return <p>Cargando productos...</p>;
+  if (error) return <p>{error}</p>;
 
-    // Verificar si hay suficiente stock disponible
-    if (product.stock > currentQuantity) {
-      addToCart(product);
-      setProducts(prevProducts =>
-        prevProducts.map(p =>
-          p.nombreProducto === product.nombreProducto 
-            ? { ...p, stock: p.stock - 1 } 
-            : p
-        )
-      );
-      toggleSidebar(); // Abre el sidebar después de agregar el producto
-    } else {
-      alert('No hay suficiente stock disponible para este producto.');
-    }
-  };
-
-  return (
-    <div>
-      <h2>Productos</h2>
-      {loading && <p>Cargando...</p>}
-      {error && <p>Error: {error}</p>}
-      <ul>
-        {products.map((product, index) => {
-          const currentItem = cartItems.find(item => item.nombreProducto === product.nombreProducto);
-          const quantityInCart = currentItem ? currentItem.cantidad ?? 0 : 0;
-
-          function removeFromCart(_product: Product): void {
-            throw new Error('Function not implemented.');
-          }
-
-          return (
-            <li key={index}>
-              <h3>{product.nombreProducto}</h3>
-              {product.imagenProducto.length > 0 && (
-                <img 
-                  src={product.imagenProducto[0]} 
-                  alt={product.nombreProducto} 
-                  style={{ width: '100px', height: '100px' }} 
-                />
-              )}
-              <p><strong>Descripción:</strong> {product.descripcionProducto}</p>
-              <p><strong>Precio:</strong> ${product.precio.toFixed(2)}</p>
-              <p><strong>Categoría:</strong> {product.categoria}</p>
-              <p><strong>Stock:</strong> {product.stock}</p>
-
-              <button onClick={() => handlePurchase(product)}>Agregar al carrito</button>
-
-              {quantityInCart > 0 && (
-                <div>
-                  <span>Cantidad en el carrito: {quantityInCart}</span>
-                  <button onClick={() => removeFromCart(product)}>Eliminar del carrito</button>
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+  // Usar renderItem si está disponible, de lo contrario mostrar productos predeterminados
+  return renderItem ? (
+    renderItem(products)
+  ) : (
+    <div className="product-grid">
+      {products.map((product) => (
+        <ProductCard key={product.id} {...product} />
+      ))}
     </div>
   );
 };
