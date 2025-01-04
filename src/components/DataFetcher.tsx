@@ -14,7 +14,7 @@ interface Product {
 }
 
 interface DataFetcherProps {
-  tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas';
+  tipo: 'plantas' | 'maceteros' | 'fertilizantes' | 'sustratos' | 'controlPlagas' | 'catalogo';
   filters: Record<string, string | boolean>;
   renderItem?: (products: Product[]) => JSX.Element; // Nueva propiedad para render personalizado
 }
@@ -23,13 +23,15 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [productos, setProductos] = useState<any>();
 
   const API_URLS: Record<DataFetcherProps['tipo'], string> = {
     plantas: 'http://3.142.12.50:4000/productos/plantas/get',
     maceteros: 'http://3.142.12.50:4000/productos/maceteros/get',
     fertilizantes: 'http://3.142.12.50:4000/productos/fertilizantes/get',
     sustratos: 'http://3.142.12.50:4000/productos/sustratos/get',
-    controlPlagas: 'http://3.142.12.50:4000/productos/catalogo',
+    catalogo: 'http://3.142.12.50:4000/productos/catalogo',
+    controlPlagas: ''
   };
 
   const buildUrlWithFilters = () => {
@@ -50,13 +52,15 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
       try {
         setLoading(true);
         const urlWithFilters = buildUrlWithFilters();
+        console.log(urlWithFilters);
         const response = await fetch(urlWithFilters);
 
         if (!response.ok) throw new Error('Error al obtener los productos');
 
         const data = await response.json();
+        console.log(data);
         const mappedProducts = data.data.map((item: any) => ({
-          id: item.id,
+          id: item.producto.id,
           nombreProducto: item.producto.nombreProducto,
           nombreCientifico: item.nombreCientifico || undefined,
           imagenProducto: item.producto.imagenes[0]?.urlImagen || '',
@@ -94,3 +98,4 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
 };
 
 export default DataFetcher;
+

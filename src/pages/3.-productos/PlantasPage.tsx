@@ -39,24 +39,16 @@ const PlantasPage: React.FC = () => {
                   {paginatedProducts.map((product) => {
                     console.log(product);
                     return (
-                      <ProductCard
-                        key={product.id}
-                        id={product.id}
-                        nombreProducto={product.nombreProducto}
-                        precio={product.precio}
-                        stock={product.stock}
-                        imagenProducto={product.imagenProducto}
-                        categoria={product.categoria}
-                      >
-                        {/* Envolvimos la imagen en un Link para que redirija al detalle del producto */}
-                        <Link to={`/productos/plantas/getbyid/${product.id}`}>
-                          <img
-                            src={product.imagenProducto[0]} // Asegúrate de que esta propiedad esté bien definida
-                            alt={product.nombreProducto}
-                            style={{ width: '100%', height: 'auto', cursor: 'pointer' }}
-                          />
-                        </Link>
-                      </ProductCard>
+                      
+                        <ProductCard
+                          id={product.id}
+                          nombreProducto={product.nombreProducto}
+                          precio={product.precio}
+                          stock={product.stock}
+                          imagenProducto={product.imagenProducto}
+                          categoria={product.categoria}
+                        />
+                      
                     );
                   })}
                 </div>

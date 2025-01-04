@@ -48,26 +48,27 @@ const ProductManagement: React.FC = () => {
     fetchProducts();
   }, [page]);
 
-  const handleDelete = async (idProducto: number) => {
+  const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`http://3.142.12.50:4000/productos/create${idProducto}`, {
-        method: 'DELETE',
+      const response = await fetch(`http://3.142.12.50:4000/productos/${id}/deshabilitar`, {
+        method: 'PATCH',
       });
       if (!response.ok) {
         throw new Error('Error al eliminar el producto');
       }
-      setProductos((prevProducts: any[]) => prevProducts.filter((product: { idProducto: number; }) => product.idProducto !== idProducto));
+      setProductos((prevProducts: any[]) => prevProducts.filter((product: { id: number; }) => product.id !== id));
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleEdit = (idProducto: number) => {
-    window.location.href = `/edit-product/${idProducto}`;
-  };
+  // const handleEdit = (id: number) => {
+  //   window.location.href = `/edit-product/${id}`;
+  // };
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error: {error}</p>;
+  console.log(productos);
 
   return (
     <div>
@@ -78,15 +79,22 @@ const ProductManagement: React.FC = () => {
         </Link>
       </div>
       <ul>
-          <li key={productos?.data[0].id}>
-            <img src={productos?.data[0].imagenes[0].urlImagen} alt={productos.nombreProducto} style={{ width: '50px' }} />
+        {productos?.data.map((productos: any) => (
+          <li key={productos?.id}>
+            <img src={
+              productos?.imagenes[0]?.urlImagen?.includes('uploads')
+              ? `http://3.142.12.50:4000${productos?.imagenes[0]?.urlImagen}`
+              : productos?.imagenes[0]?.urlImagen
+              // productos?.imagenes[0]?.urlImagen
+              } 
+              alt={productos.nombreProducto} 
+              style={{ width: '50px' }} />
             <h3>{productos.nombreProducto}</h3>
             <p>Precio: ${productos.precioNormal}</p>
             <p>Descripción: {productos.descripcionProducto}</p>
             <p>Stock: {productos.stock}</p>
-            <button onClick={() => handleEdit(productos.idProducto)}>Editar</button>
-            <button onClick={() => handleDelete(productos.idProducto)}>Eliminar</button>
-          </li>
+            <button onClick={() => handleDelete(productos.id)}>Eliminar</button>
+          </li>))}
       </ul>
       <div>
         <button onClick={() => setPage(prevPage => Math.max(prevPage - 1, 1))}>Anterior</button>
