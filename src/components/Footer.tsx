@@ -41,12 +41,6 @@ const Footer: React.FC = () => {
             <a href="#">Agenda con un experto</a>
             <a href="#">Guías de cuidado</a>
           </div>
-
-          {/* Barra de búsqueda */}
-          <div className="footer-search">
-            <Search />
-            <input type="text" placeholder="Busca aquí" />
-          </div>
         </div>
       </div>
 

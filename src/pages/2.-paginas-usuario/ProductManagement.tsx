@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './ProductManagement.css';
 
 interface Product {
   idProducto: number;
@@ -26,13 +27,8 @@ const ProductManagement: React.FC = () => {
       if (!response.ok) {
         throw new Error('Error al obtener los productos');
       }
-
       const productos = await response.json();
-      console.log('Productos:', productos); // Inspeccionar la respuesta
-      console.log(typeof productos)
-
-      setProductos(productos)
-
+      setProductos(productos);
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -43,7 +39,7 @@ const ProductManagement: React.FC = () => {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     fetchProducts();
   }, [page]);
@@ -56,50 +52,64 @@ const ProductManagement: React.FC = () => {
       if (!response.ok) {
         throw new Error('Error al eliminar el producto');
       }
-      setProductos((prevProducts: any[]) => prevProducts.filter((product: { id: number; }) => product.id !== id));
+      setProductos((prevProducts: any[]) =>
+        prevProducts.filter((product: { id: number }) => product.id !== id)
+      );
     } catch (err) {
       console.error(err);
     }
   };
 
-  // const handleEdit = (id: number) => {
-  //   window.location.href = `/edit-product/${id}`;
-  // };
-
-  if (loading) return <p>Cargando...</p>;
-  if (error) return <p>Error: {error}</p>;
-  console.log(productos);
+  if (loading) return <p className="loading-message">Cargando...</p>;
+  if (error) return <p className="error-message">Error: {error}</p>;
 
   return (
-    <div>
-      <h2>Gestión de Productos</h2>
-      <div>
+    <div className="product-management-container">
+      <h2 className="product-management-title">Gestión de Productos</h2>
+      <div className="add-product-container">
         <Link to="/create-product">
-          <button>Agregar Producto</button>
+          <button className="add-product-button">Agregar Producto</button>
         </Link>
       </div>
-      <ul>
-        {productos?.data.map((productos: any) => (
-          <li key={productos?.id}>
-            <img src={
-              productos?.imagenes[0]?.urlImagen?.includes('uploads')
-              ? `http://3.142.12.50:4000${productos?.imagenes[0]?.urlImagen}`
-              : productos?.imagenes[0]?.urlImagen
-              // productos?.imagenes[0]?.urlImagen
-              } 
-              alt={productos.nombreProducto} 
-              style={{ width: '50px' }} />
-            <h3>{productos.nombreProducto}</h3>
-            <p>Precio: ${productos.precioNormal}</p>
-            <p>Descripción: {productos.descripcionProducto}</p>
-            <p>Stock: {productos.stock}</p>
-            <button onClick={() => handleDelete(productos.id)}>Eliminar</button>
-          </li>))}
+      <ul className="product-list">
+        {productos?.data.map((producto: any) => (
+          <li key={producto?.id} className="product-item">
+            <img
+  src={
+    producto?.imagenes[0]?.urlImagen?.includes('uploads')
+      ? `http://3.142.12.50:4000${producto?.imagenes[0]?.urlImagen}`
+      : producto?.imagenes[0]?.urlImagen
+  }
+  alt={producto.nombreProducto}
+  className="product-management-image"
+/>  
+            <h3 className="product-name">{producto.nombreProducto}</h3>
+            <p className="product-price">Precio: ${producto.precioNormal}</p>
+            <p className="product-description">{producto.descripcionProducto}</p>
+            <p className="product-stock">Stock: {producto.stock}</p>
+            <button
+              onClick={() => handleDelete(producto.id)}
+              className="delete-product-button"
+            >
+              Eliminar
+            </button>
+          </li>
+        ))}
       </ul>
-      <div>
-        <button onClick={() => setPage(prevPage => Math.max(prevPage - 1, 1))}>Anterior</button>
-        <span>{`Página ${page} de ${totalPages}`}</span>
-        <button onClick={() => setPage(prevPage => Math.min(prevPage + 1, totalPages))}>Siguiente</button>
+      <div className="pagination-container">
+        <button
+          onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
+          className="pagination-button"
+        >
+          Anterior
+        </button>
+        <span className="pagination-info">{`Página ${page} de ${totalPages}`}</span>
+        <button
+          onClick={() => setPage((prevPage) => Math.min(prevPage + 1, totalPages))}
+          className="pagination-button"
+        >
+          Siguiente
+        </button>
       </div>
     </div>
   );
