@@ -1,135 +1,159 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface Product {
-  nombreProducto: string;
-  precioNormal: number;
-  descripcionProducto: string;
-  imagenProducto: string[];
-  stock: number;
-}
-
 const CreateProduct: React.FC = () => {
-  const [productData, setProductData] = useState<Product>({
+  const [formData, setFormData] = useState({
     nombreProducto: '',
-    precioNormal: 0,
+    imagenes: [] as File[],
+    descuento: '',
+    precioNormal: '',
+    stock: '',
     descripcionProducto: '',
-    imagenProducto: [],
-    stock: 0,
+    idCategoria: '',
+    activo: 1,
   });
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // Para redirigir después de crear un producto
-
-  // Maneja el cambio de valor en los campos del formulario
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setProductData(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Maneja el cambio en el campo de imágenes
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setProductData(prevState => ({
-      ...prevState,
-      imagenProducto: value.split(',').map(url => url.trim()), // Convierte las URLs separadas por coma en un array
-    }));
-  };
-
-  // Maneja el envío del formulario para crear el producto
-  const handleCreate = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-
+    const body = new FormData();
+    (Object.keys(formData) as (keyof typeof formData)[]).forEach((key) => {
+      if (key !== 'imagenes') {
+        body.append(key, formData[key].toString());
+      }
+    });
+    formData.imagenes.forEach((imagen: File) => {
+      body.append('imagenes', imagen);
+    });
     try {
-      const response = await fetch('http://3.142.12.50:4000/productos/create', {
+      const response = await fetch('http://3.142.12.50:4000/productos/newcreate', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productData),
+        body,
       });
-
       if (!response.ok) {
         throw new Error('Error al crear el producto');
       }
-
-      const result = await response.json();
-      console.log(result); // Verifica el producto creado
-      alert('Producto creado exitosamente');
-      navigate('/product-management'); // Redirige a la página de gestión de productos
+      navigate('/gestion-productos');
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
       } else {
         setError('Error desconocido');
       }
-    } finally {
-      setLoading(false);
     }
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
+    setFormData({ ...formData, imagenes: [...formData.imagenes, file] }); // Update state with the selected file
+  };
   return (
     <div>
-      <h2>Crear Producto</h2>
-      <form onSubmit={handleCreate}>
+      <h2>Agregar Producto</h2>
+      <form onSubmit={handleSubmit}
+        action='http://3.142.12.50:4000/productos/newcreate'
+        method='POST'
+        encType='multipart/form-data'      
+      >
         <div>
-          <label>Nombre del Producto:</label>
+          <label>Nombre del Producto</label>
           <input
             type="text"
             name="nombreProducto"
-            value={productData.nombreProducto}
+            value={formData.nombreProducto}
             onChange={handleChange}
-            required
           />
         </div>
         <div>
-          <label>Precio Normal:</label>
+          <label>Precio</label>
           <input
             type="number"
             name="precioNormal"
-            value={productData.precioNormal}
+            value={formData.precioNormal}
             onChange={handleChange}
-            required
           />
         </div>
         <div>
-          <label>Descripción:</label>
+          <label>Descuento</label>
+          <input
+            type="number"
+            name="descuento"
+            value={formData.descuento}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Descripción</label>
           <input
             type="text"
             name="descripcionProducto"
-            value={productData.descripcionProducto}
+            value={formData.descripcionProducto}
             onChange={handleChange}
-            required
           />
         </div>
         <div>
-          <label>Imagen(es) del Producto (separadas por comas):</label>
-          <input
-            type="text"
-            name="imagenProducto"
-            value={productData.imagenProducto.join(', ')} // Para manejar múltiples imágenes
-            onChange={handleImageChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Stock:</label>
+          <label>Stock</label>
           <input
             type="number"
             name="stock"
-            value={productData.stock}
+            value={formData.stock}
             onChange={handleChange}
-            required
           />
         </div>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Creando...' : 'Crear Producto'}
-        </button>
+        <div className="form-group">
+        <label>Categoría</label>
+        <select name='idCategoria' id='idCategoria' value={formData.idCategoria} onChange={handleSelectChange}>
+          <option value='0'>Seleccione...</option>
+          <option value='1'>Plantas</option>
+          <option value='2'>Control de Plagas</option>
+          <option value='3'>Maceteros</option>
+          <option value='4'>Sustratos</option>
+          <option value='5'>Fertilizantes</option>
+          <option value='6'>Servicio</option>
+          <option value='7'>Decoración</option>
+          <option value='8'>Accesorios</option>
+          <option value='9'>Semillas</option>
+          <option value='10'>Otros</option>
+        </select>
+        </div>
+        <div>
+          <label>Imagen 1</label>
+          <input
+            accept='image/*'
+            type="file"
+            name="imagenes"
+            onChange={handleFileUpload}
+          />
+        </div>
+        {/* <div>
+          <label>Imagen 2</label>
+          <input
+            accept='image/*'
+            type="file"
+            name="imagen2"
+            onChange={handleFileUpload}
+          />
+        </div>
+        <div>
+          <label>Imagen 3</label>
+          <input
+            accept='image/*'
+            type="file"
+            name="imagen3"
+            onChange={handleFileUpload}
+          />
+        </div> */}
+
+        <button type="submit">Crear Producto</button>
       </form>
       {error && <p>Error: {error}</p>}
     </div>

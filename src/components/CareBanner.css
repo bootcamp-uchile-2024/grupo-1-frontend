@@ -1,30 +1,36 @@
 /* Contenedor principal */
 .care-banner-container {
   display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  max-width: 1440px; /* Ancho máximo */
-  min-height: 397px; /* Altura mínima */
-  padding: 32px 64px; /* Espaciado interno */
+  max-width: 1376px;
+  min-height: 250px;
+  max-height: 340px;
+  padding: 32px 0;
+  gap: 32px;
   background: linear-gradient(180deg, rgba(237, 238, 232, 0.6) 0%, rgba(201, 205, 186, 0.4) 100%);
-  border-radius: 0px 32px 0px 32px; /* Bordes redondeados */
-  border: 1px solid #C9D3A6; /* Color del borde */
+  border-radius: 0px 32px 0px 32px;
+  border: 1px solid #C9D3A6;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  gap: 20px; /* Separación entre columnas */
-  margin: 32px auto 0 auto; /* Espaciado superior de 32px */
-  margin-bottom: 50px;
+  margin: 32px auto;
 }
 
-/* Sección de los iconos */
+/* Sección izquierda */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 846px;
+  padding: 0 32px;
+  gap: 16px;
+}
+
+/* Contenedor de iconos */
 .care-icons-container {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 20px;
-  width: 771px; /* Establecemos el ancho de la fila */
-  height: 60px; /* Establecemos la altura de la fila */
-  opacity: 1; /* Hacemos visible */
 }
 
 .care-icon {
@@ -32,7 +38,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%; /* Aseguramos que cada ítem ocupe espacio proporcional */
+  background-color: #FCFDFC; /* Fondo de la caja */
+  width: auto; /* Permitir ajustar al contenido */
+  max-width: 110px; /* Ancho máximo */
+  height: 60px; /* Altura fija */
+  min-width: 42px; /* Ancho mínimo */
+  min-height: 42px; /* Altura mínima */
+  padding: 12px; /* Padding interno */
+  gap: var(--Paddingpadding-s); /* Espaciado entre ícono y texto */
+  border-radius: 0px var(--Radiusradius-s) var(--Radiusradius-s) var(--Radiusradius-s); /* Bordes redondeados */
+  border: 1px solid transparent; /* Borde (si es necesario) */
+  opacity: 1; /* Asegurar visibilidad */
+  border-radius: 0px 8px 8px 8px;
 }
 
 .care-icon-item {
@@ -43,31 +60,16 @@
 .care-icon span {
   font-size: 16px;
   color: #46561e;
-  margin-top: 8px; /* Un poco de espacio entre el ícono y el texto */
 }
 
-/* Sección izquierda */
-.left-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Alinear elementos hacia el inicio */
-  gap: 16px;
-  flex: 1; /* Usar espacio disponible */
-  max-width: 50%; /* Limitar ancho al 50% */
-}
-
-.care-info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
+/* Información principal */
 .care-info h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 28px;
   font-weight: 700;
   line-height: 36px;
   color: #46561e;
+  text-align: left;
 }
 
 .care-info h1 span {
@@ -78,55 +80,14 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
   color: #576b20;
-}
-
-/* Badge de cuidado */
-.care-badge {
-  display: flex;
-  align-items: center;
-  background-color: #f5f8f3;
-  border-radius: 8px;
-  padding: 8px 12px;
-  gap: 8px;
-}
-
-.badge-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #46561e;
-}
-
-.badge-levels {
-  display: flex;
-  gap: 4px;
-}
-
-.badge-levels span {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-color: #e5e5e5;
-  color: #46561e;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  line-height: 20px;
-  border-radius: 50%;
-}
-
-.badge-levels span:first-child {
-  background-color: #576b20;
-  color: #ffffff;
+  text-align: left;
 }
 
 /* Botones */
 .care-buttons {
   display: flex;
   gap: 12px;
-  margin-top: 16px;
 }
 
 .guide-button,
@@ -156,9 +117,11 @@
 .right-section {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  width: 530px;
+  padding: 16px 32px;
   gap: 12px;
-  flex: 1; /* Usar espacio disponible */
-  max-width: 50%; /* Limitar ancho al 50% */
+  border-left: 1px solid #C9D3A6;
 }
 
 .right-section ul {

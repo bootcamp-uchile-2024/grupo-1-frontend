@@ -1,0 +1,102 @@
+/* Encapsular estilos bajo la clase raíz */
+.product-management-container {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título */
+  .product-management-title {
+    font-size: 2rem;
+    text-align: center;
+    color: #576B20;
+    margin-bottom: 20px;
+  }
+  
+  /* Botón Agregar Producto */
+  .product-management-add-button button {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #576B20;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .product-management-add-button button:hover {
+    background-color: #6A7F30;
+    transform: scale(1.05);
+  }
+  
+  /* Lista de productos */
+  .product-management-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .product-management-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #ffffff;
+  }
+  
+  /* Imagen */
+  .product-management-item img {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+  
+  /* Botón de eliminar */
+  .product-management-item button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #d9534f;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+  }
+  
+  .product-management-item button:hover {
+    background-color: #c9302c;
+  }
+  
+  /* Paginación */
+  .product-management-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .product-management-pagination button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #576B20;
+    border: none;
+    border-radius: 32px;
+  }
+  
+  .product-management-pagination span {
+    font-size: 1rem;
+    color: #333;
+  }

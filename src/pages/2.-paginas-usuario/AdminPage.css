@@ -1,0 +1,62 @@
+/* Contenedor principal */
+.admin-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilo del título */
+  .admin-title {
+    font-size: 2rem;
+    color: #576B20; /* Mismo color que el botón */
+    margin-bottom: 20px;
+  }
+  
+  /* Lista de botones */
+  .admin-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .admin-list-item {
+    margin: 15px 0;
+  }
+  
+  /* Estilo de los botones */
+  .admin-button {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #DAEA98; /* Color del texto por defecto */
+    background-color: #576B20; /* Fondo verde oscuro */
+    padding: 10px 20px;
+    border-radius: 32px; /* Bordes redondeados */
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  }
+  
+  /* Efecto hover */
+  .admin-button:hover {
+    background-color: #6A7F30; /* Fondo más claro */
+    color: #FFFFFF; /* Texto blanco al hacer hover */
+    transform: scale(1.05);
+  }
+  
+  /* Responsivo */
+  @media (max-width: 600px) {
+    .admin-title {
+      font-size: 1.5rem;
+    }
+  
+    .admin-button {
+      font-size: 1rem;
+      padding: 8px 16px;
+    }
+  }

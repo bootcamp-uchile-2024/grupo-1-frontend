@@ -98,4 +98,3 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ tipo, filters, renderItem }) 
 };
 
 export default DataFetcher;
-
