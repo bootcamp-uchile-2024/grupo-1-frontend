@@ -49,7 +49,10 @@ const ProductManagement: React.FC = () => {
     try {
       const response = await fetch(`http://3.142.12.50:4000/productos/${id}/deshabilitar`, {
         method: 'PATCH',
-        body: JSON.stringify({ activo: 0 }),
+        body: JSON.stringify({ "activo": 0 }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
       if (!response.ok) {
         throw new Error('Error al eliminar el producto');
@@ -57,6 +60,7 @@ const ProductManagement: React.FC = () => {
       setProductos((prevProducts: any[]) =>
         prevProducts.filter((product: { id: number }) => product.id !== id)
       );
+      location.reload();
     } catch (err) {
       console.error(err);
     }

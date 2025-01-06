@@ -45,6 +45,7 @@ const ProductDetailPage: React.FC = () => {
     const fetchCatalog = async () => {
       try {
         const response = await fetch('http://3.142.12.50:4000/productos/catalogo?page=1&size=200');
+        console.log(response);
         if (!response.ok) {
           throw new Error(`Error al obtener el catálogo: ${response.statusText}`);
         }
