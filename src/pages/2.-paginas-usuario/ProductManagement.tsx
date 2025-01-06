@@ -45,9 +45,11 @@ const ProductManagement: React.FC = () => {
   }, [page]);
 
   const handleDelete = async (id: number) => {
+    console.log(id);
     try {
       const response = await fetch(`http://3.142.12.50:4000/productos/${id}/deshabilitar`, {
         method: 'PATCH',
+        body: JSON.stringify({ activo: 0 }),
       });
       if (!response.ok) {
         throw new Error('Error al eliminar el producto');

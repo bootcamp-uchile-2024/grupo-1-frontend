@@ -47,9 +47,10 @@ const UserManagement: React.FC = () => {
   }, []);
 
   const handleDelete = async (id: number | undefined) => {
+    console.log(id?.toString());
     if (!id) return;
     try {
-      const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/delete/${id}`, {
+      const response = await fetch(`http://3.142.12.50:4000/usuarios/gestion/delete/${id.toString()}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
