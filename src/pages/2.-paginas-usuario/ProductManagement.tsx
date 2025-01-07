@@ -81,14 +81,14 @@ const ProductManagement: React.FC = () => {
         {productos?.data.map((producto: any) => (
           <li key={producto?.id} className="product-item">
             <img
-  src={
-    producto?.imagenes[0]?.urlImagen?.includes('uploads')
-      ? `http://3.142.12.50:4000${producto?.imagenes[0]?.urlImagen}`
-      : producto?.imagenes[0]?.urlImagen
-  }
-  alt={producto.nombreProducto}
-  className="product-management-image"
-/>  
+              src={
+                producto?.imagenes[0]?.urlImagen?.includes('uploads')
+                  ? `http://3.142.12.50:4000${producto?.imagenes[0]?.urlImagen}`
+                  : producto?.imagenes[0]?.urlImagen
+              }
+              alt={producto.nombreProducto}
+              className="product-management-image"
+            />  
             <h3 className="product-name">{producto.nombreProducto}</h3>
             <p className="product-price">Precio: ${producto.precioNormal}</p>
             <p className="product-description">{producto.descripcionProducto}</p>

@@ -32,14 +32,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
       id
     });
   };
-
+  
 
 
   return (
     <div className="product-card">
       <div className="product-image">
-        <img src={imagenProducto} alt={nombreProducto} />
-
+        <img src={imagenProducto.includes('uploads/productos') ? `http://3.142.12.50:4000${imagenProducto}` : imagenProducto} alt={imagenProducto} />
       </div>
       <div className="product-info">
         {/* El nombre de la planta ahora es un enlace */}

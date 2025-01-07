@@ -100,7 +100,7 @@ const ProductDetailPage: React.FC = () => {
         <div className="detail-image">
           {planta?.producto.imagenes?.length > 0 && (
             <img
-              src={planta?.producto.imagenes[0]?.urlImagen}
+              src={planta?.producto.imagenes[0]?.urlImagen?.includes('uploads/productos') ? `http://3.142.12.50:4000${planta?.producto.imagenes[0]?.urlImagen}` : planta?.producto.imagenes[0]?.urlImagen}
               alt={planta?.nombrePlanta}
             />
           )}
