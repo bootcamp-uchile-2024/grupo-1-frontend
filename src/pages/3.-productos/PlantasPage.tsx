@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SidebarFilters from './SidebarFilter';
 import DataFetcher from '../../components/DataFetcher';
 import ProductCard from '../../components/ProductCard';
-import { Link } from 'react-router-dom'; // Asegúrate de importar Link para usarlo
 
 const PlantasPage: React.FC = () => {
   const [filters, setFilters] = useState<Record<string, string | boolean>>({});
@@ -39,16 +38,15 @@ const PlantasPage: React.FC = () => {
                   {paginatedProducts.map((product) => {
                     console.log(product);
                     return (
-                      
-                        <ProductCard
-                          id={product.id}
-                          nombreProducto={product.nombreProducto}
-                          precio={product.precio}
-                          stock={product.stock}
-                          imagenProducto={product.imagenProducto}
-                          categoria={product.categoria}
-                        />
-                      
+
+                      <ProductCard
+                        id={product.id}
+                        nombreProducto={product.nombreProducto}
+                        precio={product.precio}
+                        stock={product.stock}
+                        imagenProducto={product.imagenProducto}
+                        categoria={product.categoria} />
+
                     );
                   })}
                 </div>
@@ -72,8 +70,9 @@ const PlantasPage: React.FC = () => {
                 </div>
               </>
             );
-          }}
-        />
+          } } toggleSidebar={function (): void {
+            throw new Error('Function not implemented.');
+          } }        />
       </div>
     </div>
   );

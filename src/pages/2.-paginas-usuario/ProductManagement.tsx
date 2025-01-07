@@ -2,21 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductManagement.css';
 
-interface Product {
-  idProducto: number;
-  nombreProducto: string;
-  precioNormal: number;
-  descripcionProducto: string;
-  imagenProducto: string[];
-  stock: number;
-}
 
 const ProductManagement: React.FC = () => {
   const [productos, setProductos] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
+  const [totalPages] = useState<number>(1);
 
   const API_URL = `http://3.142.12.50:4000/productos/catalogo?page=${page}&size=200`;
 

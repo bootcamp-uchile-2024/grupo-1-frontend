@@ -19,11 +19,11 @@ const PetFriendly: React.FC = () => {
       {/* Sección derecha - ProductCard */}
       <div className="right-section">
         <ProductCard
-          id="1"  // Aquí va el ID dinámico del producto
+          id={1}  // Aquí va el ID dinámico del producto
           nombreProducto="Caladium Mediana"  // Nombre del producto
           precio={23990}  // Precio del producto
           stock={10}  // Stock disponible
-          imagenProducto={["https://mygarden.com.co/wp-content/uploads/2020/05/CALADIUM-1.png"]}  // Imagen del producto
+          imagenProducto="https://mygarden.com.co/wp-content/uploads/2020/05/CALADIUM-1.png"  // Imagen del producto
           categoria="Planta PetFriendly"  // Categoría
         />
       </div>

@@ -11,7 +11,7 @@ const ParentComponent: React.FC = () => {
 
   return (
     <div>
-      <DataFetcher tipo="controlPlagas" toggleSidebar={handleToggleSidebar} />
+      <DataFetcher tipo="controlPlagas" toggleSidebar={handleToggleSidebar} filters={{}} />
       { }
       <SidebarCart show={showSidebar} toggleSidebar={handleToggleSidebar} />
     </div>

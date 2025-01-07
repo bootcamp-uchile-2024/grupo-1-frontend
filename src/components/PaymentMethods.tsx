@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './PaymentMethods.css'; // Archivo CSS para los estilos
 
 interface PaymentMethodsProps {

@@ -5,7 +5,7 @@ import PaymentMethods from '../../components/PaymentMethods'; // Importa el comp
 import './CartPage.css';
 
 const CartPage: React.FC = () => {
-  const { cartItems, incrementProduct, decrementProduct, getTotal, removeFromCart } = useCart();
+  const { cartItems, incrementProduct, decrementProduct, removeFromCart } = useCart();
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const navigate = useNavigate(); // Inicializa el hook useNavigate
 

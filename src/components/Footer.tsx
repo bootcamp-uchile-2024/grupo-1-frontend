@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import { Search, Facebook, Instagram, Email } from '@mui/icons-material';
+import { Facebook, Instagram, Email } from '@mui/icons-material';
 
 const Footer: React.FC = () => {
   return (

@@ -17,7 +17,9 @@ const SustratosPage: React.FC = () => {
       {/* Contenido principal */}
       <div style={{ marginLeft: '20px', flex: 1 }}>
         <h1>Catálogo de Sustratos</h1>
-        <DataFetcher tipo="sustratos" filters={filters} />
+        <DataFetcher tipo="sustratos" filters={filters} toggleSidebar={function (): void {
+          throw new Error('Function not implemented.');
+        } } />
       </div>
     </div>
   );

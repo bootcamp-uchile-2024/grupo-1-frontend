@@ -18,7 +18,9 @@ const MaceterosPage: React.FC = () => {
         <h1>Catálogo de Maceteros</h1>
         
         {/* DataFetcher */}
-        <DataFetcher tipo="maceteros" filters={filters} />
+        <DataFetcher tipo="maceteros" filters={filters} toggleSidebar={function (): void {
+          throw new Error('Function not implemented.');
+        } } />
       </div>
     </div>
   );

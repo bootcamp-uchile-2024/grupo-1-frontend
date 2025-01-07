@@ -17,7 +17,9 @@ const FertilizantesPage: React.FC = () => {
       {/* Contenido principal */}
       <div style={{ marginLeft: '20px', flex: 1 }}>
         <h1>Catálogo de Fertilizantes</h1>
-        <DataFetcher tipo="fertilizantes" filters={filters} />
+        <DataFetcher tipo="fertilizantes" filters={filters} toggleSidebar={function (): void {
+          throw new Error('Function not implemented.');
+        } } />
       </div>
     </div>
   );
